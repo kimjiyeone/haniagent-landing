@@ -6,8 +6,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/hanitek-logo_f6aa8a8a.svg";
+import Logo from "./Logo";
 
 const navItems = [
   { label: "기능 소개", href: "#features" },
@@ -35,16 +34,10 @@ export default function Header() {
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-[68px]">
-        {/* Logo */}
         <a href="#" className="flex items-center gap-2 group shrink-0">
-          <img
-            src={LOGO_URL}
-            alt="하니에이전트 로고"
-            className="h-7 md:h-8 w-auto"
-          />
+          <Logo className="h-7 md:h-8 w-auto" />
         </a>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => (
             <a
@@ -57,7 +50,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a
             href="https://www.haniagent.kr/auth/login"
@@ -75,7 +67,6 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* Mobile Menu Toggle */}
         <button
           className="md:hidden p-2 text-[#333]"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -85,7 +76,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Nav */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

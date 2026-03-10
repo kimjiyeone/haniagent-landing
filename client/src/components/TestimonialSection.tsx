@@ -1,7 +1,5 @@
 /*
- * Design: hanitek.kr 스타일 — 원장님 리뷰 카드
- * tiro.ooo 참고: 3열 리뷰 카드
- * 틸(#00B6C5) 포인트
+ * Design: hanitek.kr + tiro.ooo 스타일 — 원장님 리뷰 (압축)
  */
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
@@ -29,54 +27,46 @@ const testimonials = [
 
 export default function TestimonialSection() {
   return (
-    <section id="testimonials" className="py-20 md:py-28">
+    <section id="testimonials" className="py-14 md:py-18">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-8"
         >
-          <span className="inline-block text-xs font-bold text-hani bg-hani/10 px-3 py-1 rounded-full mb-4 tracking-wide">
+          <span className="inline-block text-xs font-bold text-hani bg-hani/10 px-3 py-1 rounded-full mb-3 tracking-wide">
             REVIEWS
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#333] tracking-tight">
             원장님들의 이야기
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
-            하니에이전트를 도입한 한의원 원장님들의 실제 경험입니다.
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-7 border border-[#eee] hover:shadow-lg hover:shadow-hani/5 transition-all"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="bg-white rounded-xl p-5 border border-[#eee] hover:shadow-md transition-all"
             >
-              {/* Stars */}
-              <div className="flex gap-0.5 mb-4">
+              <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: 5 }).map((_, si) => (
-                  <Star key={si} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  <Star key={si} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-
-              <p className="text-sm text-[#555] leading-relaxed mb-6">
-                "{t.quote}"
-              </p>
-
-              <div className="flex items-center gap-3 pt-4 border-t border-[#f0f0f0]">
-                <div className="w-9 h-9 rounded-full bg-hani/10 text-hani font-bold text-sm flex items-center justify-center">
+              <p className="text-sm text-[#555] leading-relaxed mb-4">"{t.quote}"</p>
+              <div className="flex items-center gap-2.5 pt-3 border-t border-[#f0f0f0]">
+                <div className="w-8 h-8 rounded-full bg-hani/10 text-hani font-bold text-xs flex items-center justify-center">
                   {t.avatar}
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-[#333]">{t.name}</div>
-                  <div className="text-xs text-muted-foreground">{t.role}</div>
+                  <div className="text-[11px] text-muted-foreground">{t.role}</div>
                 </div>
               </div>
             </motion.div>
