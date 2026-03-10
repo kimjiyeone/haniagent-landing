@@ -1,6 +1,7 @@
 /*
- * Design: Clinical Dashboard — Modern SaaS
- * Pricing: 간결한 가격 정보 + 무료 체험 유도
+ * Design: hanitek.kr 스타일 — 가격 안내 섹션
+ * hanitek.kr 참고: 틸 배경 가격 섹션
+ * tiro.ooo 참고: 깔끔한 가격 카드
  */
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -43,7 +44,7 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="py-20 md:py-28">
+    <section id="pricing" className="py-20 md:py-28 bg-[#00B6C5]">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,11 +53,13 @@ export default function PricingSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <span className="text-sm font-semibold text-hani-green tracking-wide uppercase">Pricing</span>
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-extrabold text-hani-slate tracking-tight">
+          <span className="inline-block text-xs font-bold text-white/80 bg-white/15 px-3 py-1 rounded-full mb-4 tracking-wide">
+            PRICING
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
             합리적인 가격으로 시작하세요
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
+          <p className="mt-4 text-white/75 max-w-lg mx-auto">
             무료 플랜으로 먼저 체험하고, 한의원에 맞는 플랜을 선택하세요.
           </p>
         </motion.div>
@@ -69,41 +72,53 @@ export default function PricingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`rounded-2xl p-7 md:p-8 border transition-all ${
+              className={`rounded-2xl p-7 md:p-8 transition-all ${
                 plan.highlighted
-                  ? "bg-white border-hani-green/30 shadow-lg shadow-hani-green/10 relative"
-                  : "bg-white border-border/50 hover:shadow-md"
+                  ? "bg-white shadow-xl shadow-black/10 relative"
+                  : "bg-white/10 backdrop-blur-sm border border-white/20"
               }`}
             >
               {plan.highlighted && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold text-white bg-hani-green px-3 py-1 rounded-full">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold text-white bg-[#333] px-3 py-1 rounded-full">
                   추천
                 </span>
               )}
 
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-hani-slate">{plan.name}</h3>
+                <h3 className={`text-lg font-bold ${plan.highlighted ? "text-[#333]" : "text-white"}`}>
+                  {plan.name}
+                </h3>
                 <div className="mt-3 flex items-baseline gap-1">
-                  <span className="text-4xl font-extrabold text-hani-slate">{plan.price}</span>
-                  {plan.period && <span className="text-sm text-muted-foreground">{plan.period}</span>}
+                  <span className={`text-4xl font-extrabold ${plan.highlighted ? "text-[#333]" : "text-white"}`}>
+                    {plan.price}
+                  </span>
+                  {plan.period && (
+                    <span className={`text-sm ${plan.highlighted ? "text-muted-foreground" : "text-white/70"}`}>
+                      {plan.period}
+                    </span>
+                  )}
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground">{plan.description}</p>
+                <p className={`mt-2 text-sm ${plan.highlighted ? "text-muted-foreground" : "text-white/70"}`}>
+                  {plan.description}
+                </p>
               </div>
 
               <ul className="space-y-3 mb-8">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm">
-                    <Check className="w-4 h-4 text-hani-green shrink-0 mt-0.5" />
-                    <span className="text-foreground/80">{f}</span>
+                    <Check className={`w-4 h-4 shrink-0 mt-0.5 ${plan.highlighted ? "text-hani" : "text-white/80"}`} />
+                    <span className={plan.highlighted ? "text-[#555]" : "text-white/85"}>
+                      {f}
+                    </span>
                   </li>
                 ))}
               </ul>
 
               <Button
-                className={`w-full rounded-xl h-11 font-semibold ${
+                className={`w-full rounded-full h-11 font-semibold ${
                   plan.highlighted
-                    ? "bg-hani-green hover:bg-hani-green-dark text-white shadow-sm"
-                    : "bg-muted hover:bg-muted/80 text-foreground"
+                    ? "bg-hani hover:bg-hani-dark text-white"
+                    : "bg-white text-[#00B6C5] hover:bg-white/90"
                 }`}
                 onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
               >

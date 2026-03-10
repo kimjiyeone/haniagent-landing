@@ -1,6 +1,6 @@
 /*
- * Design: Clinical Dashboard — Modern SaaS
- * CTA: 최종 전환 유도 섹션
+ * Design: hanitek.kr 스타일 — 최종 CTA 섹션
+ * 틸(#00B6C5) 그라데이션 배경
  */
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-hani-green via-hani-green to-hani-green-dark px-8 py-14 md:px-16 md:py-20 text-center"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#00B6C5] via-[#00A5B3] to-[#008E9B] px-8 py-14 md:px-16 md:py-20 text-center"
         >
           {/* Background pattern */}
           <div className="absolute inset-0 opacity-10">
@@ -38,7 +38,7 @@ export default function CTASection() {
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button
                 size="lg"
-                className="bg-white text-hani-green hover:bg-white/90 font-bold px-8 h-12 rounded-xl shadow-lg shadow-black/10"
+                className="bg-white text-[#00B6C5] hover:bg-white/90 font-bold px-8 h-12 rounded-full shadow-lg shadow-black/10"
                 onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
               >
                 무료로 시작하기
@@ -47,7 +47,7 @@ export default function CTASection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 font-medium px-8 h-12 rounded-xl bg-transparent"
+                className="border-white/30 text-white hover:bg-white/10 font-medium px-8 h-12 rounded-full bg-transparent"
                 onClick={() => window.open("https://www.haniagent.kr/main", "_blank")}
               >
                 서비스 둘러보기

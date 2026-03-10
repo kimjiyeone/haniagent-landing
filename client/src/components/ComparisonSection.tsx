@@ -1,6 +1,6 @@
 /*
- * Design: Clinical Dashboard — Modern SaaS
- * Comparison: 하니에이전트 도입 전/후 비교
+ * Design: hanitek.kr 스타일 — 도입 전/후 비교
+ * 틸(#00B6C5) 포인트 컬러
  */
 import { motion } from "framer-motion";
 import { X, Check } from "lucide-react";
@@ -16,7 +16,7 @@ const rows = [
 
 export default function ComparisonSection() {
   return (
-    <section id="comparison" className="py-20 md:py-28">
+    <section id="comparison" className="py-20 md:py-28 bg-[#f8f8f8]">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -25,8 +25,10 @@ export default function ComparisonSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <span className="text-sm font-semibold text-hani-green tracking-wide uppercase">Before & After</span>
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-extrabold text-hani-slate tracking-tight">
+          <span className="inline-block text-xs font-bold text-hani bg-hani/10 px-3 py-1 rounded-full mb-4 tracking-wide">
+            BEFORE & AFTER
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#333] tracking-tight">
             도입 전과 후, 이렇게 달라집니다
           </h2>
         </motion.div>
@@ -38,15 +40,15 @@ export default function ComparisonSection() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto"
         >
-          <div className="bg-white rounded-2xl border border-border/50 overflow-hidden shadow-sm">
+          <div className="bg-white rounded-2xl border border-[#eee] overflow-hidden shadow-sm">
             {/* Table header */}
-            <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-border/50">
+            <div className="grid grid-cols-[1fr_1fr_1fr] border-b border-[#eee]">
               <div className="p-4 md:p-5 text-sm font-bold text-muted-foreground" />
               <div className="p-4 md:p-5 text-center">
-                <span className="text-sm font-bold text-red-500/80">도입 전</span>
+                <span className="text-sm font-bold text-[#999]">도입 전</span>
               </div>
-              <div className="p-4 md:p-5 text-center bg-hani-green/5">
-                <span className="text-sm font-bold text-hani-green">하니에이전트</span>
+              <div className="p-4 md:p-5 text-center bg-hani/5">
+                <span className="text-sm font-bold text-hani">하니에이전트</span>
               </div>
             </div>
 
@@ -54,18 +56,18 @@ export default function ComparisonSection() {
             {rows.map((row, i) => (
               <div
                 key={row.item}
-                className={`grid grid-cols-[1fr_1fr_1fr] ${i < rows.length - 1 ? "border-b border-border/30" : ""} hover:bg-muted/20 transition-colors`}
+                className={`grid grid-cols-[1fr_1fr_1fr] ${i < rows.length - 1 ? "border-b border-[#f0f0f0]" : ""} hover:bg-[#fafafa] transition-colors`}
               >
                 <div className="p-4 md:p-5 flex items-center">
-                  <span className="text-sm font-semibold text-hani-slate">{row.item}</span>
+                  <span className="text-sm font-semibold text-[#333]">{row.item}</span>
                 </div>
                 <div className="p-4 md:p-5 flex items-center gap-2">
-                  <X className="w-4 h-4 text-red-400 shrink-0" />
+                  <X className="w-4 h-4 text-[#ccc] shrink-0" />
                   <span className="text-sm text-muted-foreground">{row.before}</span>
                 </div>
-                <div className="p-4 md:p-5 flex items-center gap-2 bg-hani-green/5">
-                  <Check className="w-4 h-4 text-hani-green shrink-0" />
-                  <span className="text-sm text-foreground font-medium">{row.after}</span>
+                <div className="p-4 md:p-5 flex items-center gap-2 bg-hani/5">
+                  <Check className="w-4 h-4 text-hani shrink-0" />
+                  <span className="text-sm text-[#333] font-medium">{row.after}</span>
                 </div>
               </div>
             ))}
@@ -86,8 +88,8 @@ export default function ComparisonSection() {
             { value: "<20%", label: "SOAP 수정율 목표" },
             { value: "80%+", label: "카톡 발송율 목표" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center bg-white rounded-xl p-5 border border-border/50">
-              <div className="text-2xl md:text-3xl font-extrabold text-hani-green">{stat.value}</div>
+            <div key={stat.label} className="text-center bg-white rounded-xl p-5 border border-[#eee]">
+              <div className="text-2xl md:text-3xl font-extrabold text-hani">{stat.value}</div>
               <div className="mt-1 text-xs text-muted-foreground">{stat.label}</div>
             </div>
           ))}

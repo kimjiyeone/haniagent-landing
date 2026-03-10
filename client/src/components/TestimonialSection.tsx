@@ -1,6 +1,7 @@
 /*
- * Design: Clinical Dashboard — Modern SaaS
- * Testimonials: 한의원 원장님들의 후기 (예상 시나리오 기반)
+ * Design: hanitek.kr 스타일 — 원장님 리뷰 카드
+ * tiro.ooo 참고: 3열 리뷰 카드
+ * 틸(#00B6C5) 포인트
  */
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
@@ -28,7 +29,7 @@ const testimonials = [
 
 export default function TestimonialSection() {
   return (
-    <section id="testimonials" className="py-20 md:py-28 bg-muted/30">
+    <section id="testimonials" className="py-20 md:py-28">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,8 +38,10 @@ export default function TestimonialSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <span className="text-sm font-semibold text-hani-green tracking-wide uppercase">Testimonials</span>
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-extrabold text-hani-slate tracking-tight">
+          <span className="inline-block text-xs font-bold text-hani bg-hani/10 px-3 py-1 rounded-full mb-4 tracking-wide">
+            REVIEWS
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#333] tracking-tight">
             원장님들의 이야기
           </h2>
           <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
@@ -54,7 +57,7 @@ export default function TestimonialSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-7 border border-border/50 hover:shadow-lg hover:shadow-black/5 transition-all"
+              className="bg-white rounded-2xl p-7 border border-[#eee] hover:shadow-lg hover:shadow-hani/5 transition-all"
             >
               {/* Stars */}
               <div className="flex gap-0.5 mb-4">
@@ -63,16 +66,16 @@ export default function TestimonialSection() {
                 ))}
               </div>
 
-              <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+              <p className="text-sm text-[#555] leading-relaxed mb-6">
                 "{t.quote}"
               </p>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-border/30">
-                <div className="w-9 h-9 rounded-full bg-hani-green/10 text-hani-green font-bold text-sm flex items-center justify-center">
+              <div className="flex items-center gap-3 pt-4 border-t border-[#f0f0f0]">
+                <div className="w-9 h-9 rounded-full bg-hani/10 text-hani font-bold text-sm flex items-center justify-center">
                   {t.avatar}
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-hani-slate">{t.name}</div>
+                  <div className="text-sm font-semibold text-[#333]">{t.name}</div>
                   <div className="text-xs text-muted-foreground">{t.role}</div>
                 </div>
               </div>

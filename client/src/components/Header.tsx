@@ -1,20 +1,19 @@
 /*
- * Design: Clinical Dashboard — Modern SaaS
- * Header: 고정 상단 네비게이션, 스크롤 시 배경 블러 효과
- * Brand: 하니 그린(#22C55E) 포인트, 슬레이트 텍스트
+ * Design: hanitek.kr 스타일 — 틸(#00B6C5) 브랜드, 깔끔한 SaaS
+ * tiro.ooo 참고: 상단 고정 네비게이션, 로그인 + CTA
  */
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/hanitek-logo_f6aa8a8a.svg";
+
 const navItems = [
-  { label: "문제", href: "#problem" },
-  { label: "핵심 기능", href: "#features" },
-  { label: "비교", href: "#comparison" },
-  { label: "후기", href: "#testimonials" },
-  { label: "가격", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "기능 소개", href: "#features" },
+  { label: "원장님 리뷰", href: "#testimonials" },
+  { label: "가격 안내", href: "#pricing" },
+  { label: "자주 묻는 질문", href: "#faq" },
 ];
 
 export default function Header() {
@@ -31,19 +30,18 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 backdrop-blur-xl border-b border-border shadow-sm"
+          ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm"
           : "bg-transparent"
       }`}
     >
-      <div className="container flex items-center justify-between h-16 md:h-18">
+      <div className="container flex items-center justify-between h-16 md:h-[68px]">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-hani-green rounded-lg flex items-center justify-center text-white font-bold text-sm transition-transform group-hover:scale-105">
-            H
-          </div>
-          <span className="font-bold text-lg text-foreground tracking-tight">
-            하니에이전트
-          </span>
+        <a href="#" className="flex items-center gap-2 group shrink-0">
+          <img
+            src={LOGO_URL}
+            alt="하니에이전트 로고"
+            className="h-7 md:h-8 w-auto"
+          />
         </a>
 
         {/* Desktop Nav */}
@@ -52,7 +50,7 @@ export default function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
+              className="px-3.5 py-2 text-sm font-medium text-[#333] hover:text-hani transition-colors rounded-lg"
             >
               {item.label}
             </a>
@@ -65,21 +63,21 @@ export default function Header() {
             href="https://www.haniagent.kr/auth/login"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium text-[#333] hover:text-hani transition-colors"
           >
             로그인
           </a>
           <Button
-            className="bg-hani-green hover:bg-hani-green-dark text-white font-semibold px-5 rounded-lg shadow-none"
+            className="bg-hani hover:bg-hani-dark text-white font-semibold px-5 rounded-full shadow-none text-sm"
             onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
           >
-            무료로 시작하기
+            무료 체험하기
           </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden p-2 text-foreground"
+          className="md:hidden p-2 text-[#333]"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="메뉴 열기"
         >
@@ -101,7 +99,7 @@ export default function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors"
+                  className="px-3 py-2.5 text-sm font-medium text-[#333] hover:text-hani hover:bg-hani-light/50 rounded-lg transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
@@ -112,15 +110,15 @@ export default function Header() {
                   href="https://www.haniagent.kr/auth/login"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-2.5 text-sm font-medium text-muted-foreground"
+                  className="px-3 py-2.5 text-sm font-medium text-[#333]"
                 >
                   로그인
                 </a>
                 <Button
-                  className="bg-hani-green hover:bg-hani-green-dark text-white font-semibold rounded-lg"
+                  className="bg-hani hover:bg-hani-dark text-white font-semibold rounded-full"
                   onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
                 >
-                  무료로 시작하기
+                  무료 체험하기
                 </Button>
               </div>
             </nav>

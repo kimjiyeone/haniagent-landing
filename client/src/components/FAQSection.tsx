@@ -1,6 +1,6 @@
 /*
- * Design: Clinical Dashboard — Modern SaaS
- * FAQ: 자주 묻는 질문 아코디언
+ * Design: hanitek.kr 스타일 — FAQ 아코디언
+ * 틸(#00B6C5) 포인트
  */
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -35,16 +35,16 @@ const faqs = [
 
 function FAQItem({ faq, isOpen, toggle }: { faq: typeof faqs[0]; isOpen: boolean; toggle: () => void }) {
   return (
-    <div className="border-b border-border/40 last:border-b-0">
+    <div className="border-b border-[#eee] last:border-b-0">
       <button
         onClick={toggle}
         className="w-full flex items-center justify-between py-5 text-left group"
       >
-        <span className="text-sm md:text-base font-semibold text-hani-slate pr-4 group-hover:text-hani-green transition-colors">
+        <span className="text-sm md:text-base font-semibold text-[#333] pr-4 group-hover:text-hani transition-colors">
           {faq.q}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-muted-foreground shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`w-5 h-5 text-[#999] shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
       <div
@@ -60,7 +60,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-muted/30">
+    <section id="faq" className="py-20 md:py-28 bg-[#f8f8f8]">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -69,8 +69,10 @@ export default function FAQSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <span className="text-sm font-semibold text-hani-green tracking-wide uppercase">FAQ</span>
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-extrabold text-hani-slate tracking-tight">
+          <span className="inline-block text-xs font-bold text-hani bg-hani/10 px-3 py-1 rounded-full mb-4 tracking-wide">
+            FAQ
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#333] tracking-tight">
             자주 묻는 질문
           </h2>
         </motion.div>
@@ -80,7 +82,7 @@ export default function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto bg-white rounded-2xl border border-border/50 px-7 md:px-8"
+          className="max-w-2xl mx-auto bg-white rounded-2xl border border-[#eee] px-7 md:px-8"
         >
           {faqs.map((faq, i) => (
             <FAQItem

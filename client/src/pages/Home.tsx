@@ -6,6 +6,7 @@ import FeatureSection from "@/components/FeatureSection";
 import ComparisonSection from "@/components/ComparisonSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import PricingSection from "@/components/PricingSection";
+import SecuritySection from "@/components/SecuritySection";
 import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -22,6 +23,7 @@ export default function Home() {
         <ComparisonSection />
         <TestimonialSection />
         <PricingSection />
+        <SecuritySection />
         <FAQSection />
         <CTASection />
       </main>
