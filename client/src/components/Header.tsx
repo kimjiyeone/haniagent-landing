@@ -1,18 +1,13 @@
-/*
- * Design: hanitek.kr 스타일 — 틸(#00B6C5) 브랜드, 깔끔한 SaaS
- * tiro.ooo 참고: 상단 고정 네비게이션, 로그인 + CTA
- */
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 
 const navItems = [
-  { label: "기능 소개", href: "#features" },
-  { label: "원장님 리뷰", href: "#testimonials" },
-  { label: "가격 안내", href: "#pricing" },
-  { label: "자주 묻는 질문", href: "#faq" },
+  { label: "기능", href: "#features" },
+  { label: "가격", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export default function Header() {
@@ -20,7 +15,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -28,14 +23,12 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm"
-          : "bg-transparent"
+        scrolled ? "bg-white/95 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.06)]" : "bg-transparent"
       }`}
     >
-      <div className="container flex items-center justify-between h-16 md:h-[68px]">
-        <a href="#" className="flex items-center gap-2 group shrink-0">
-          <Logo className="h-7 md:h-8 w-auto" />
+      <div className="container flex items-center justify-between h-[60px]">
+        <a href="#" className="flex items-center gap-2 shrink-0">
+          <Logo className="h-7 w-auto" />
         </a>
 
         <nav className="hidden md:flex items-center gap-1">
@@ -43,7 +36,7 @@ export default function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="px-3.5 py-2 text-sm font-medium text-[#333] hover:text-hani transition-colors rounded-lg"
+              className="px-4 py-2 text-[14px] font-medium text-[#555] hover:text-[#111] transition-colors"
             >
               {item.label}
             </a>
@@ -55,24 +48,24 @@ export default function Header() {
             href="https://www.haniagent.kr/auth/login"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-[#333] hover:text-hani transition-colors"
+            className="text-[14px] font-medium text-[#555] hover:text-[#111] transition-colors"
           >
             로그인
           </a>
           <Button
-            className="bg-hani hover:bg-hani-dark text-white font-semibold px-5 rounded-full shadow-none text-sm"
+            className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none"
             onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
           >
-            무료 체험하기
+            도입 문의
           </Button>
         </div>
 
         <button
           className="md:hidden p-2 text-[#333]"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="메뉴 열기"
+          aria-label="메뉴"
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
@@ -82,33 +75,25 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-border overflow-hidden"
+            className="md:hidden bg-white border-t border-[#f0f0f0] overflow-hidden"
           >
             <nav className="container py-4 flex flex-col gap-1">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="px-3 py-2.5 text-sm font-medium text-[#333] hover:text-hani hover:bg-hani-light/50 rounded-lg transition-colors"
+                  className="px-3 py-2.5 text-[14px] font-medium text-[#555] hover:text-[#111] rounded-lg transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
                 </a>
               ))}
-              <div className="mt-3 pt-3 border-t border-border flex flex-col gap-2">
-                <a
-                  href="https://www.haniagent.kr/auth/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-2.5 text-sm font-medium text-[#333]"
-                >
-                  로그인
-                </a>
+              <div className="mt-3 pt-3 border-t border-[#f0f0f0] flex flex-col gap-2">
                 <Button
-                  className="bg-hani hover:bg-hani-dark text-white font-semibold rounded-full"
+                  className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg"
                   onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
                 >
-                  무료 체험하기
+                  도입 문의
                 </Button>
               </div>
             </nav>

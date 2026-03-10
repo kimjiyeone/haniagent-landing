@@ -1,87 +1,67 @@
-/*
- * Design: hanitek.kr 스타일 — 문제 인식 섹션 (압축)
- * 틸(#00B6C5) 포인트, 깔끔한 카드 레이아웃
- */
 import { motion } from "framer-motion";
-import { UserX, RefreshCw, Eye } from "lucide-react";
 
 const problems = [
   {
-    icon: UserX,
-    title: "직원이 까먹는다",
-    description: "\"1주 뒤에 오세요\" 했는데 아무도 안 챙기면 환자는 안 옵니다. 리마인드 누락이 곧 매출 누락입니다.",
+    emoji: "📋",
+    title: "차트 작성에 매일 1시간",
+    desc: "진료 끝나고 기억에 의존해 차트를 쓰면 정확도가 떨어지고, 시간은 늘어납니다.",
   },
   {
-    icon: RefreshCw,
+    emoji: "🔄",
     title: "직원이 바뀌면 리셋",
-    description: "새 직원 교육에 원장님 시간이 소모됩니다. 환자 관리 품질이 사람에 따라 달라집니다.",
+    desc: "새 직원 교육에 원장 시간 소모. 그동안 환자 관리 누락이 발생합니다.",
   },
   {
-    icon: Eye,
-    title: "원장이 다 봐야 한다",
-    description: "교육, 점검, 확인을 원장이 직접 해야 합니다. 진료에 집중할 여력이 없고, 성장이 멈춥니다.",
+    emoji: "📞",
+    title: "리마인드 누락 → 환자 이탈",
+    desc: "\"다음 주에 오세요\" 했는데 아무도 안 챙기면, 환자는 그냥 안 옵니다.",
   },
 ];
 
 export default function ProblemSection() {
   return (
-    <section id="problem" className="py-14 md:py-18">
+    <section className="py-16 md:py-20 bg-[#fafafa]">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10"
-        >
-          <span className="inline-block text-xs font-bold text-hani bg-hani/10 px-3 py-1 rounded-full mb-3 tracking-wide">
-            PROBLEM
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#333] tracking-tight">
-            직원 역량에 의존하는 한의원 운영,
-            <br className="hidden sm:block" />
-            이 문제를 겪고 계시지 않나요?
-          </h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-          {problems.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-white rounded-xl p-5 border border-[#eee] hover:border-hani/30 transition-all hover:shadow-md group"
-            >
-              <div className="w-10 h-10 rounded-lg bg-hani/10 flex items-center justify-center mb-3 transition-transform group-hover:scale-110">
-                <p.icon className="w-5 h-5 text-hani" />
-              </div>
-              <h3 className="text-base font-bold text-[#333] mb-1.5">{p.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Solution teaser */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10"
+        >
+          <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold text-[#111] tracking-tight">
+            이런 문제, 겪고 계시지 않나요?
+          </h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-5 max-w-3xl mx-auto">
+          {problems.map((p, i) => (
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="bg-white rounded-xl p-6 border border-[#eee]"
+            >
+              <div className="text-2xl mb-3">{p.emoji}</div>
+              <h3 className="text-[15px] font-bold text-[#111] mb-2">{p.title}</h3>
+              <p className="text-[13px] text-[#777] leading-relaxed">{p.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Solution one-liner */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4, delay: 0.3 }}
           className="mt-8 text-center"
         >
-          <div className="inline-flex items-center gap-3 bg-hani/5 rounded-xl px-5 py-3.5 border border-hani/15">
-            <div className="w-8 h-8 rounded-full bg-hani/10 flex items-center justify-center shrink-0">
-              <svg className="w-4 h-4 text-hani" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-              </svg>
-            </div>
-            <p className="text-sm font-medium text-[#333] text-left">
-              <span className="text-hani font-bold">하니에이전트:</span>{" "}
-              원장이 말한 다음 방문 시점을 시스템이 자동으로 챙겨, 직원이 바뀌어도 환자가 다시 옵니다.
-            </p>
-          </div>
+          <p className="inline-block text-[14px] text-[#555] bg-white border border-[#e8e8e8] rounded-full px-6 py-2.5">
+            <span className="text-[#00B6C5] font-bold">하니에이전트</span>가 이 모든 문제를 해결합니다
+          </p>
         </motion.div>
       </div>
     </section>

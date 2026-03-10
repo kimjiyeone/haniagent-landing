@@ -1,6 +1,3 @@
-/*
- * Design: hanitek.kr 스타일 — FAQ 아코디언 (압축)
- */
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -8,15 +5,15 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "기존 EMR과 호환되나요?",
-    a: "네, 웹 브라우저에서 동작하며 생성된 SOAP 차트를 복사하여 기존 EMR에 붙여넣기만 하면 됩니다.",
+    a: "네, 웹 브라우저에서 동작하며 생성된 SOAP 차트를 복사하여 기존 EMR에 붙여넣기만 하면 됩니다. 별도 연동 없이 어떤 EMR에서도 사용 가능합니다.",
   },
   {
     q: "녹음 데이터는 안전한가요?",
-    a: "모든 음성 데이터는 AES-256 암호화로 전송·저장되며, 녹음 원본은 차트 생성 후 자동 삭제됩니다.",
+    a: "모든 음성 데이터는 AES-256 암호화로 전송·저장되며, 녹음 원본은 차트 생성 후 자동 삭제됩니다. 국내 서버에서만 처리됩니다.",
   },
   {
     q: "AI 차트의 정확도는 어느 정도인가요?",
-    a: "한의학 용어에 특화된 모델을 사용하며, 원장님이 확정하기 전까지 실장에게 전달되지 않습니다.",
+    a: "한의학 용어에 특화된 모델을 사용하며, 원장님이 확정하기 전까지 실장에게 전달되지 않습니다. 확정 전 수정도 가능합니다.",
   },
   {
     q: "카카오 알림톡 발송 비용은 별도인가요?",
@@ -30,15 +27,15 @@ const faqs = [
 
 function FAQItem({ faq, isOpen, toggle }: { faq: typeof faqs[0]; isOpen: boolean; toggle: () => void }) {
   return (
-    <div className="border-b border-[#eee] last:border-b-0">
+    <div className="border-b border-[#f0f0f0] last:border-b-0">
       <button onClick={toggle} className="w-full flex items-center justify-between py-4 text-left group">
-        <span className="text-sm font-semibold text-[#333] pr-4 group-hover:text-hani transition-colors">
+        <span className={`text-[14px] font-semibold pr-4 transition-colors ${isOpen ? "text-[#111]" : "text-[#555] group-hover:text-[#111]"}`}>
           {faq.q}
         </span>
         <ChevronDown className={`w-4 h-4 text-[#999] shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-32 pb-4" : "max-h-0"}`}>
-        <p className="text-sm text-muted-foreground leading-relaxed pr-8">{faq.a}</p>
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-40 pb-4" : "max-h-0"}`}>
+        <p className="text-[13px] text-[#777] leading-relaxed pr-8">{faq.a}</p>
       </div>
     </div>
   );
@@ -48,29 +45,29 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-14 md:py-18 bg-[#f8f8f8]">
+    <section id="faq" className="py-16 md:py-20 bg-[#fafafa]">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-center mb-10"
         >
-          <span className="inline-block text-xs font-bold text-hani bg-hani/10 px-3 py-1 rounded-full mb-3 tracking-wide">
+          <p className="text-[13px] text-[#00B6C5] font-semibold mb-3 tracking-wide uppercase">
             FAQ
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#333] tracking-tight">
+          </p>
+          <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold text-[#111] tracking-tight">
             자주 묻는 질문
           </h2>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto bg-white rounded-xl border border-[#eee] px-5 md:px-6"
+          className="max-w-xl mx-auto bg-white rounded-xl border border-[#e8e8e8] px-6"
         >
           {faqs.map((faq, i) => (
             <FAQItem

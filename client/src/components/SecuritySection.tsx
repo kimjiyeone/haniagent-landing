@@ -1,53 +1,52 @@
-/*
- * Design: hanitek.kr 스타일 — 보안 섹션 (다크 배경, 압축)
- */
 import { motion } from "framer-motion";
 import { Shield, Lock, Server, Eye } from "lucide-react";
 
 const items = [
-  { icon: Lock, title: "데이터 암호화", desc: "AES-256 암호화로 전송 및 저장" },
-  { icon: Server, title: "국내 서버 운영", desc: "의료 데이터 국내 서버에서만 처리" },
-  { icon: Eye, title: "접근 권한 분리", desc: "원장/실장 역할별 권한 분리" },
-  { icon: Shield, title: "녹음 원본 자동 삭제", desc: "차트 생성 후 원본 즉시 삭제" },
+  { icon: Lock, title: "AES-256 암호화", desc: "모든 데이터 전송·저장 시 암호화" },
+  { icon: Server, title: "국내 서버", desc: "의료 데이터 국내에서만 처리" },
+  { icon: Eye, title: "권한 분리", desc: "원장/실장 역할별 접근 제어" },
+  { icon: Shield, title: "녹음 원본 삭제", desc: "차트 생성 후 즉시 자동 삭제" },
 ];
 
 export default function SecuritySection() {
   return (
-    <section className="py-14 md:py-18 bg-[#333]">
+    <section className="py-14 md:py-16 border-t border-[#eee]">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="flex flex-col md:flex-row items-center gap-8 max-w-3xl mx-auto"
         >
-          <span className="inline-block text-xs font-bold text-[#00B6C5] bg-[#00B6C5]/15 px-3 py-1 rounded-full mb-3 tracking-wide">
-            SECURITY
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-            의료 데이터, 안전하게 보호합니다
-          </h2>
-        </motion.div>
+          <div className="shrink-0 text-center md:text-left">
+            <p className="text-[13px] text-[#00B6C5] font-semibold mb-1 uppercase tracking-wide">Security</p>
+            <h3 className="text-[20px] md:text-[22px] font-extrabold text-[#111]">
+              의료 데이터,
+              <br />
+              안전하게 보호합니다
+            </h3>
+          </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
-          {items.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="bg-white/5 rounded-xl p-4 border border-white/10 hover:border-[#00B6C5]/30 transition-all group text-center"
-            >
-              <div className="w-10 h-10 rounded-lg bg-[#00B6C5]/15 flex items-center justify-center mb-3 mx-auto group-hover:scale-110 transition-transform">
-                <item.icon className="w-5 h-5 text-[#00B6C5]" />
-              </div>
-              <h3 className="text-sm font-bold text-white mb-1">{item.title}</h3>
-              <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
+          <div className="grid grid-cols-2 gap-3 flex-1">
+            {items.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+                className="flex items-start gap-3 p-3 rounded-lg bg-[#fafafa] border border-[#eee]"
+              >
+                <item.icon className="w-4 h-4 text-[#00B6C5] shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-[12px] font-bold text-[#111]">{item.title}</p>
+                  <p className="text-[11px] text-[#999]">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
