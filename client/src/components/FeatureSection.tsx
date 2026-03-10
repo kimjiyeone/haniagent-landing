@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
-import { Mic, Inbox, Bell, FileCheck } from "lucide-react";
+import { Mic, Inbox, Bell, FileCheck, BarChart3, Brain } from "lucide-react";
 
 const MOCKUP_RECORDING = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/mockup-feature-recording-b6TpcxFp3Ew5K6bKpLcGJT.webp";
 const MOCKUP_INBOX = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/mockup-feature-inbox-QkmQEAeeSthqqVFZwYqu8C.webp";
 const MOCKUP_KAKAO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/mockup-feature-kakao-iQQkeGpQtQHC6LYJZ3uQ8m.webp";
 const MOCKUP_EMR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/mockup-feature-emr-ajuHnKrayGQH3fYisrANmk.webp";
+const MOCKUP_DASHBOARD = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/mockup-dashboard-aKHJ343dLGuWd3TttNK5Sk.webp";
+const MOCKUP_AI_FEEDBACK = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/mockup-ai-feedback-4qFzgNyPdaMeiMPFU8GH7t.webp";
 
 const features = [
   {
@@ -38,6 +40,22 @@ const features = [
     desc: "확정된 SOAP 차트가 EMR 복붙 대기열에 자동 정렬됩니다. 어떤 EMR에도 호환되며, 이중 입력이 사라집니다.",
     image: MOCKUP_EMR,
     bullets: ["자동 대기열 정렬", "어떤 EMR에도 호환", "이중 입력 제거"],
+  },
+  {
+    icon: BarChart3,
+    label: "경영지표 대시보드",
+    title: "재진율, 매출, 환자 현황.\n숫자로 한눈에 파악합니다.",
+    desc: "재진율 추이, 일일 환자 수, 환자 유형 분포, 월 매출 변화를 실시간 대시보드로 확인합니다. 데이터 기반 의사결정이 가능해집니다.",
+    image: MOCKUP_DASHBOARD,
+    bullets: ["재진율 · 매출 실시간 추적", "환자 유형별 분포 분석", "데이터 기반 경영 의사결정"],
+  },
+  {
+    icon: Brain,
+    label: "AI 상담 피드백",
+    title: "환자 유형을 AI가 분석하고,\n맞춤 소통 팁을 제안합니다.",
+    desc: "상담 내용을 바탕으로 환자 유형(급성/만성/스트레스성 등)을 자동 분류하고, 환자별 맞춤 치료 접근법과 커뮤니케이션 팁을 AI가 제안합니다.",
+    image: MOCKUP_AI_FEEDBACK,
+    bullets: ["환자 유형 자동 분류", "맞춤 치료 접근법 제안", "환자 만족도 분석"],
   },
 ];
 
