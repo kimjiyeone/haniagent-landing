@@ -1,13 +1,14 @@
 /*
  * Design: hanitek.kr 스타일 — 중앙 정렬 히어로, 틸 브랜드 컬러
  * tiro.ooo 참고: 이탤릭 서브헤드 + 볼드 메인 헤드 + 제품 스크린샷
- * 핵심 메시지: "직원이 바뀌어도 한의원은 그대로 운영됩니다"
+ * 이미지: 실제 haniagent.kr 서비스 스크린샷 사용
  */
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/hero-product-mockup-QMWWMqVSqvgssme2UVW2ok.png";
+// 실제 서비스 스크린샷 — 원장 뷰 SOAP 차트 상세 (가장 핵심적인 화면)
+const HERO_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/screenshot-soap-chart_1de1545c.webp";
 
 export default function HeroSection() {
   return (
@@ -95,7 +96,7 @@ export default function HeroSection() {
           ))}
         </motion.div>
 
-        {/* Hero Product Image — large screenshot like tiro.ooo */}
+        {/* Hero Product Image — 실제 서비스 스크린샷 (tiro.ooo처럼 브라우저 프레임 안에) */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,12 +105,28 @@ export default function HeroSection() {
         >
           <div className="relative mx-auto max-w-4xl">
             <div className="absolute -inset-4 bg-gradient-to-b from-[#00B6C5]/8 via-[#00B6C5]/3 to-transparent rounded-3xl blur-2xl" />
-            <img
-              src={HERO_IMAGE}
-              alt="하니에이전트 제품 화면 — 환자 관리 대시보드와 녹음 기능"
-              className="relative w-full rounded-2xl shadow-2xl shadow-black/10 border border-[#e5e5e5]"
-              loading="eager"
-            />
+            {/* Browser frame */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/10 border border-[#e0e0e0] bg-white">
+              {/* Browser top bar */}
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-[#f5f5f5] border-b border-[#e5e5e5]">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28C840]" />
+                </div>
+                <div className="flex-1 mx-4">
+                  <div className="bg-white rounded-md px-3 py-1 text-[11px] text-[#999] text-center border border-[#e5e5e5]">
+                    haniagent.kr
+                  </div>
+                </div>
+              </div>
+              <img
+                src={HERO_IMAGE}
+                alt="하니에이전트 실제 서비스 화면 — 원장 뷰 SOAP 차트 자동 생성"
+                className="w-full"
+                loading="eager"
+              />
+            </div>
           </div>
         </motion.div>
 

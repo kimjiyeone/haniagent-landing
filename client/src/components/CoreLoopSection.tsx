@@ -2,9 +2,13 @@
  * Design: hanitek.kr 스타일 — 코어 루프 시각화
  * 녹음→차트→알림→재방문 4단계 스텝
  * 틸(#00B6C5) 브랜드 컬러 통일
+ * 하단에 실제 서비스 타임라인 스크린샷 추가
  */
 import { motion } from "framer-motion";
 import { Mic, FileCheck, Bell, RotateCcw } from "lucide-react";
+
+// 실제 타임라인 스크린샷
+const TIMELINE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/screenshot-main-timeline_bc991307.webp";
 
 const steps = [
   {
@@ -105,6 +109,39 @@ export default function CoreLoopSection() {
             ))}
           </div>
         </div>
+
+        {/* 실제 타임라인 스크린샷 — 코어 루프가 실제로 작동하는 모습 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-16 max-w-2xl mx-auto"
+        >
+          <p className="text-center text-sm text-muted-foreground mb-4">
+            실제 하니에이전트 타임라인 — 코어 루프가 자동으로 돌아가는 모습
+          </p>
+          <div className="rounded-xl overflow-hidden shadow-lg border border-[#e0e0e0] bg-white">
+            <div className="flex items-center gap-2 px-3 py-2 bg-[#f5f5f5] border-b border-[#e5e5e5]">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+              </div>
+              <div className="flex-1 mx-3">
+                <div className="bg-white rounded-md px-2.5 py-0.5 text-[10px] text-[#999] text-center border border-[#e5e5e5]">
+                  haniagent.kr/main
+                </div>
+              </div>
+            </div>
+            <img
+              src={TIMELINE_IMG}
+              alt="하니에이전트 실제 타임라인 — 접수, 녹음, 차트 확정, 카톡 발송 자동 기록"
+              className="w-full"
+              loading="lazy"
+            />
+          </div>
+        </motion.div>
 
         {/* Role summary */}
         <motion.div
