@@ -1,19 +1,26 @@
 /*
- * 실장 온보딩 튜토리얼 페이지
- * Design: hanitek.kr 틸(#00B6C5) 브랜드 컬러, 깔끔한 SaaS 톤
- * 7 Steps: 환영 → 퀵 체크인 → 신규 등록 → 인박스 태스크 → 카톡 복사 → EMR 복붙 → 완료
+ * Stage 2: 실장 실전 가이드
+ * 전체 플로우(Stage 1)를 이해한 후 진행하는 실전 체험 가이드
+ * 
+ * 6 Steps:
+ * 1. 환영 + 업무 요약
+ * 2. 퀵 체크인 + 신규 등록
+ * 3. 인박스 태스크 처리
+ * 4. 카톡 복사 → 카카오톡 발송
+ * 5. EMR 복붙
+ * 6. 완료 + 하루 루틴 체크리스트
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, UserPlus, Inbox, Copy, FileText, CheckCircle2,
   ArrowRight, Clock, MessageSquare, ClipboardCheck,
-  ChevronDown, AlertCircle, RefreshCw
+  ChevronDown, AlertCircle, RefreshCw, AlertTriangle, Edit3
 } from "lucide-react";
 import Logo from "@/components/Logo";
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 6;
 
 /* ─── Shared Components ─── */
 function PulseRing({ color = "#00B6C5" }: { color?: string }) {
@@ -82,7 +89,7 @@ function Toast({ message, show }: { message: string; show: boolean }) {
 }
 
 function ProgressBar({ step }: { step: number }) {
-  const stepNames = ["환영", "퀵 체크인", "신규 등록", "인박스 태스크", "카톡 복사", "EMR 복붙", "완료"];
+  const stepNames = ["업무 요약", "체크인 + 신규 등록", "인박스 처리", "카톡 복사", "EMR 복붙", "완료"];
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#f0f0f0]">
       <div className="h-1 bg-[#e5e7eb]">
@@ -94,48 +101,43 @@ function ProgressBar({ step }: { step: number }) {
         />
       </div>
       <div className="container flex items-center justify-between h-12">
-        <a href="/" className="flex items-center gap-2">
+        <a href="/tutorial" className="flex items-center gap-2">
           <Logo className="h-5 w-auto" />
+          <span className="text-[11px] text-[#bbb] font-medium hidden sm:inline">실장 실전 가이드</span>
         </a>
         <span className="text-[12px] text-[#999] font-medium">
-          Step {step}/{TOTAL_STEPS} — {stepNames[step - 1]}
+          {step}/{TOTAL_STEPS} — {stepNames[step - 1]}
         </span>
       </div>
     </div>
   );
 }
 
-/* ─── Step 1: Welcome ─── */
+/* ─── Step 1: 환영 + 업무 요약 ─── */
 function StepWelcome({ onNext }: { onNext: () => void }) {
   const roles = [
-    { icon: Search, label: "체크인", desc: "환자 도착 시 검색 → 체크인" },
-    { icon: Inbox, label: "인박스", desc: "태스크 확인 및 처리" },
-    { icon: MessageSquare, label: "카톡 복사", desc: "알림 내용 복사 → 발송" },
-    { icon: ClipboardCheck, label: "EMR 복붙", desc: "차트 복사 → EMR 입력" },
+    { icon: Search, label: "체크인", desc: "환자 도착 → 이름 검색 → 탭" },
+    { icon: Inbox, label: "인박스", desc: "태스크 순서대로 처리" },
+    { icon: MessageSquare, label: "카톡 복사", desc: "내용 복사 → 카톡 앱에서 발송" },
+    { icon: ClipboardCheck, label: "EMR 복붙", desc: "SOAP 복사 → EMR에 붙여넣기" },
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
       className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5"
     >
       <div className="max-w-md w-full text-center">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.4 }}
-        >
+        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }}>
           <Logo className="h-8 w-auto mx-auto mb-6" />
         </motion.div>
 
         <h1 className="text-[28px] md:text-[32px] font-extrabold text-[#111] leading-tight">
-          실장님, 환영합니다
+          실장님, 실전 가이드입니다
         </h1>
         <p className="mt-3 text-[15px] text-[#888]">
-          실장님이 하실 일은 딱 <span className="text-[#00B6C5] font-bold">4가지</span>입니다
+          실제 화면을 체험하며 <span className="text-[#00B6C5] font-bold">4가지</span> 업무를 익힙니다
         </p>
 
         <div className="mt-8 grid grid-cols-2 gap-3">
@@ -157,9 +159,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
           className="mt-5 bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3"
         >
           <p className="text-[13px] font-bold text-[#00B6C5] text-center">
@@ -169,9 +169,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
         </motion.div>
 
         <motion.button
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.4 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
           onClick={onNext}
           className="mt-6 w-full h-12 bg-[#00B6C5] hover:bg-[#00a3b1] text-white font-bold rounded-xl text-[15px] transition-colors flex items-center justify-center gap-2"
         >
@@ -183,14 +181,17 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 2: 퀵 체크인 체험 ─── */
+/* ─── Step 2: 퀵 체크인 + 신규 등록 ─── */
 function StepCheckin({ onNext }: { onNext: () => void }) {
+  const [phase, setPhase] = useState<"search" | "found" | "checkedIn" | "newBtn" | "newForm" | "newFilling" | "newDone">("search");
   const [typed, setTyped] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [checkedIn, setCheckedIn] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [toastMsg, setToastMsg] = useState("");
+  const [nameTyped, setNameTyped] = useState("");
+  const [phoneTyped, setPhoneTyped] = useState("");
   const target = "김서연";
 
+  // Auto-type search
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
@@ -199,126 +200,42 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
         i++;
       } else {
         clearInterval(interval);
-        setTimeout(() => setShowDropdown(true), 300);
+        setTimeout(() => setPhase("found"), 300);
       }
     }, 150);
     return () => clearInterval(interval);
   }, []);
 
   const handleCheckin = () => {
-    setCheckedIn(true);
+    setPhase("checkedIn");
+    setToastMsg("✅ 김서연 체크인 완료 → 원장님 화면에 환자가 나타났습니다");
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
-    setTimeout(onNext, 1800);
+    setTimeout(() => setPhase("newBtn"), 2000);
   };
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.4 }}
-      className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5"
-    >
-      <div className="max-w-md w-full">
-        <TooltipBubble text="체크인이 모든 것의 시작입니다. 체크인해야 원장님이 녹음을 시작할 수 있어요" duration={3500} />
-
-        <h2 className="text-[20px] font-extrabold text-[#111] mb-1">퀵 체크인</h2>
-        <p className="text-[13px] text-[#999] mb-5">기존 환자를 검색하여 체크인합니다</p>
-
-        {/* Search bar */}
-        <div className="relative mb-4">
-          <div className="flex items-center gap-2 bg-white border-2 border-[#00B6C5] rounded-xl px-4 h-12">
-            <Search size={16} className="text-[#00B6C5]" />
-            <span className="text-[15px] text-[#111] font-medium">{typed}</span>
-            <motion.span
-              animate={{ opacity: [1, 0] }}
-              transition={{ duration: 0.5, repeat: Infinity }}
-              className="w-0.5 h-5 bg-[#00B6C5]"
-            />
-          </div>
-
-          {/* Autocomplete dropdown */}
-          <AnimatePresence>
-            {showDropdown && !checkedIn && (
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#e8e8e8] rounded-xl shadow-lg overflow-hidden z-10"
-              >
-                <motion.button
-                  onClick={handleCheckin}
-                  className="relative w-full px-4 py-3 flex items-center gap-3 hover:bg-[#f8fafb] transition-colors text-left"
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <PulseRing />
-                  <div className="w-8 h-8 rounded-full bg-[#e8f7f8] flex items-center justify-center">
-                    <span className="text-[12px] font-bold text-[#00B6C5]">김</span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[14px] font-bold text-[#111]">김서연</p>
-                    <p className="text-[11px] text-[#999]">010-1234-5678 · Active</p>
-                  </div>
-                  <span className="text-[11px] font-semibold text-[#00B6C5] bg-[#e8f7f8] px-2 py-1 rounded-lg">체크인</span>
-                </motion.button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {showDropdown && !checkedIn && (
-          <BounceArrow text="김서연 환자를 탭하여 체크인하세요" />
-        )}
-
-        <div className="mt-4 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
-          <p className="text-[11px] text-[#999] leading-relaxed">
-            <span className="font-semibold text-[#666]">참고:</span> 체크인하면 원장님 화면에 환자가 나타나고, 
-            기존 대기 태스크(예: 예약 확인)가 자동으로 완료 처리됩니다.
-          </p>
-        </div>
-      </div>
-
-      <Toast message="✅ 김서연 체크인 완료 → 원장님 화면에 환자가 나타났습니다" show={showToast} />
-    </motion.div>
-  );
-}
-
-/* ─── Step 3: 신규 환자 등록 ─── */
-function StepNewPatient({ onNext }: { onNext: () => void }) {
-  const [phase, setPhase] = useState<"button" | "form" | "filling" | "done">("button");
-  const [showToast, setShowToast] = useState(false);
-  const [nameTyped, setNameTyped] = useState("");
-  const [phoneTyped, setPhoneTyped] = useState("");
-  const [symptomTyped, setSymptomTyped] = useState("");
-
-  const typeText = (text: string, setter: (v: string) => void, delay: number) => {
-    return new Promise<void>((resolve) => {
-      let i = 0;
-      const interval = setInterval(() => {
-        if (i < text.length) {
-          setter(text.slice(0, i + 1));
-          i++;
-        } else {
-          clearInterval(interval);
-          resolve();
-        }
-      }, delay);
-    });
-  };
-
-  const handleOpenForm = async () => {
-    setPhase("form");
+  const handleNewOpen = async () => {
+    setPhase("newForm");
     setTimeout(async () => {
-      setPhase("filling");
-      await typeText("박민수", setNameTyped, 100);
-      await typeText("010-9876-5432", setPhoneTyped, 60);
-      await typeText("어깨 통증", setSymptomTyped, 100);
+      setPhase("newFilling");
+      // Auto-type name
+      const name = "박민수";
+      for (let i = 0; i <= name.length; i++) {
+        await new Promise(r => setTimeout(r, 100));
+        setNameTyped(name.slice(0, i));
+      }
+      // Auto-type phone
+      const phone = "010-9876-5432";
+      for (let i = 0; i <= phone.length; i++) {
+        await new Promise(r => setTimeout(r, 60));
+        setPhoneTyped(phone.slice(0, i));
+      }
     }, 500);
   };
 
   const handleRegister = () => {
-    setPhase("done");
+    setPhase("newDone");
+    setToastMsg("✅ 박민수 Lite 환자카드 생성 + 체크인 완료");
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
     setTimeout(onNext, 1800);
@@ -326,115 +243,169 @@ function StepNewPatient({ onNext }: { onNext: () => void }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.4 }}
-      className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5"
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
+      className="flex flex-col items-center min-h-[calc(100vh-60px)] px-5 py-8"
     >
       <div className="max-w-md w-full">
-        <TooltipBubble text="처음 오신 환자는 이렇게 등록해주세요" duration={3000} />
+        <h2 className="text-[20px] font-extrabold text-[#111] mb-1">체크인 + 신규 등록</h2>
+        <p className="text-[13px] text-[#999] mb-5">기존 환자 체크인과 신규 환자 등록을 체험합니다</p>
 
-        <h2 className="text-[20px] font-extrabold text-[#111] mb-1">신규 환자 등록</h2>
-        <p className="text-[13px] text-[#999] mb-5">처음 방문한 환자를 등록하고 체크인합니다</p>
+        {/* Part 1: 기존 환자 체크인 */}
+        {(phase === "search" || phase === "found" || phase === "checkedIn") && (
+          <>
+            <TooltipBubble text="체크인이 모든 것의 시작입니다. 체크인해야 원장님이 녹음을 시작할 수 있어요" duration={3500} />
 
-        {/* Search bar with +신규 button */}
-        <div className="flex gap-2 mb-5">
-          <div className="flex-1 flex items-center gap-2 bg-[#fafafa] border border-[#e8e8e8] rounded-xl px-4 h-11">
-            <Search size={14} className="text-[#bbb]" />
-            <span className="text-[13px] text-[#ccc]">환자 검색...</span>
-          </div>
-          <motion.button
-            onClick={phase === "button" ? handleOpenForm : undefined}
-            className={`relative flex items-center gap-1.5 h-11 px-4 rounded-xl text-[13px] font-bold transition-colors ${
-              phase === "button"
-                ? "bg-[#00B6C5] text-white"
-                : "bg-[#e8e8e8] text-[#999]"
-            }`}
-            whileTap={phase === "button" ? { scale: 0.95 } : {}}
-          >
-            {phase === "button" && <PulseRing />}
-            <UserPlus size={14} />
-            +신규
-          </motion.button>
-        </div>
+            <p className="text-[13px] font-bold text-[#333] mb-3">1. 기존 환자 체크인</p>
 
-        {/* Registration form */}
-        {phase !== "button" && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white border border-[#e8e8e8] rounded-2xl p-5 shadow-[0_2px_16px_rgba(0,0,0,0.04)]"
-          >
-            <p className="text-[15px] font-bold text-[#111] mb-4">신규 환자 등록</p>
-
-            <div className="space-y-3 mb-5">
-              <div>
-                <label className="text-[11px] font-semibold text-[#888] mb-1 block">이름</label>
-                <div className="h-10 bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 flex items-center">
-                  <span className="text-[14px] text-[#111]">{nameTyped}</span>
-                  {phase === "filling" && nameTyped.length < 3 && (
-                    <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }} className="w-0.5 h-4 bg-[#00B6C5] ml-0.5" />
-                  )}
-                </div>
+            {/* Search bar */}
+            <div className="relative mb-4">
+              <div className="flex items-center gap-2 bg-white border-2 border-[#00B6C5] rounded-xl px-4 h-12">
+                <Search size={16} className="text-[#00B6C5]" />
+                <span className="text-[15px] text-[#111] font-medium">{typed}</span>
+                {phase === "search" && (
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.5, repeat: Infinity }}
+                    className="w-0.5 h-5 bg-[#00B6C5]"
+                  />
+                )}
               </div>
-              <div>
-                <label className="text-[11px] font-semibold text-[#888] mb-1 block">전화번호</label>
-                <div className="h-10 bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 flex items-center">
-                  <span className="text-[14px] text-[#111]">{phoneTyped}</span>
-                  {phase === "filling" && nameTyped.length >= 3 && phoneTyped.length < 13 && (
-                    <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }} className="w-0.5 h-4 bg-[#00B6C5] ml-0.5" />
-                  )}
-                </div>
-              </div>
-              <div>
-                <label className="text-[11px] font-semibold text-[#888] mb-1 block">주증</label>
-                <div className="h-10 bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 flex items-center">
-                  <span className="text-[14px] text-[#111]">{symptomTyped}</span>
-                  {phase === "filling" && phoneTyped.length >= 13 && symptomTyped.length < 5 && (
-                    <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }} className="w-0.5 h-4 bg-[#00B6C5] ml-0.5" />
-                  )}
-                </div>
-              </div>
+
+              {/* Autocomplete dropdown */}
+              <AnimatePresence>
+                {phase === "found" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                    className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#e8e8e8] rounded-xl shadow-lg overflow-hidden z-10"
+                  >
+                    <motion.button
+                      onClick={handleCheckin}
+                      className="relative w-full px-4 py-3 flex items-center gap-3 hover:bg-[#f8fafb] transition-colors text-left"
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <PulseRing />
+                      <div className="w-8 h-8 rounded-full bg-[#e8f7f8] flex items-center justify-center">
+                        <span className="text-[12px] font-bold text-[#00B6C5]">김</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-[14px] font-bold text-[#111]">김서연</p>
+                        <p className="text-[11px] text-[#999]">010-1234-5678 · Active</p>
+                      </div>
+                      <span className="text-[11px] font-semibold text-[#00B6C5] bg-[#e8f7f8] px-2 py-1 rounded-lg">체크인</span>
+                    </motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            <motion.button
-              onClick={symptomTyped.length >= 4 ? handleRegister : undefined}
-              className={`relative w-full h-11 rounded-xl text-[14px] font-bold transition-colors flex items-center justify-center gap-2 ${
-                symptomTyped.length >= 4
-                  ? "bg-[#00B6C5] hover:bg-[#00a3b1] text-white"
-                  : "bg-[#e8e8e8] text-[#ccc] cursor-not-allowed"
-              }`}
-              whileTap={symptomTyped.length >= 4 ? { scale: 0.97 } : {}}
-            >
-              {symptomTyped.length >= 4 && <PulseRing />}
-              <UserPlus size={14} />
-              등록 + 체크인
-            </motion.button>
-          </motion.div>
+            {phase === "found" && <BounceArrow text="김서연 환자를 탭하여 체크인하세요" />}
+
+            {phase === "checkedIn" && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                className="bg-green-50 border border-green-200 rounded-xl p-3 text-center"
+              >
+                <CheckCircle2 size={16} className="text-green-500 mx-auto mb-1" />
+                <p className="text-[13px] font-semibold text-green-600">체크인 완료!</p>
+                <p className="text-[11px] text-[#888] mt-1">다음: 신규 환자 등록 체험</p>
+              </motion.div>
+            )}
+          </>
         )}
 
-        {phase === "button" && <BounceArrow text="+신규 버튼을 눌러보세요" />}
-        {symptomTyped.length >= 4 && phase !== "done" && <BounceArrow text="등록 + 체크인 버튼을 눌러보세요" />}
+        {/* Part 2: 신규 환자 등록 */}
+        {(phase === "newBtn" || phase === "newForm" || phase === "newFilling" || phase === "newDone") && (
+          <>
+            <p className="text-[13px] font-bold text-[#333] mb-3">2. 신규 환자 등록</p>
+
+            <div className="flex gap-2 mb-5">
+              <div className="flex-1 flex items-center gap-2 bg-[#fafafa] border border-[#e8e8e8] rounded-xl px-4 h-11">
+                <Search size={14} className="text-[#bbb]" />
+                <span className="text-[13px] text-[#ccc]">환자 검색...</span>
+              </div>
+              <motion.button
+                onClick={phase === "newBtn" ? handleNewOpen : undefined}
+                className={`relative flex items-center gap-1.5 h-11 px-4 rounded-xl text-[13px] font-bold transition-colors ${
+                  phase === "newBtn" ? "bg-[#00B6C5] text-white" : "bg-[#e8e8e8] text-[#999]"
+                }`}
+                whileTap={phase === "newBtn" ? { scale: 0.95 } : {}}
+              >
+                {phase === "newBtn" && <PulseRing />}
+                <UserPlus size={14} />
+                +신규
+              </motion.button>
+            </div>
+
+            {phase === "newBtn" && <BounceArrow text="+신규 버튼을 눌러보세요" />}
+
+            {/* Registration form */}
+            {(phase === "newForm" || phase === "newFilling" || phase === "newDone") && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+                className="bg-white border border-[#e8e8e8] rounded-2xl p-5 shadow-[0_2px_16px_rgba(0,0,0,0.04)]"
+              >
+                <p className="text-[15px] font-bold text-[#111] mb-4">신규 환자 등록</p>
+                <div className="space-y-3 mb-5">
+                  <div>
+                    <label className="text-[11px] font-semibold text-[#888] mb-1 block">이름</label>
+                    <div className="h-10 bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 flex items-center">
+                      <span className="text-[14px] text-[#111]">{nameTyped}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-semibold text-[#888] mb-1 block">전화번호</label>
+                    <div className="h-10 bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 flex items-center">
+                      <span className="text-[14px] text-[#111]">{phoneTyped}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <motion.button
+                  onClick={phoneTyped.length >= 13 ? handleRegister : undefined}
+                  className={`relative w-full h-11 rounded-xl text-[14px] font-bold transition-colors flex items-center justify-center gap-2 ${
+                    phoneTyped.length >= 13
+                      ? "bg-[#00B6C5] hover:bg-[#00a3b1] text-white"
+                      : "bg-[#e8e8e8] text-[#ccc] cursor-not-allowed"
+                  }`}
+                  whileTap={phoneTyped.length >= 13 ? { scale: 0.97 } : {}}
+                >
+                  {phoneTyped.length >= 13 && <PulseRing />}
+                  <UserPlus size={14} />
+                  등록 + 체크인
+                </motion.button>
+              </motion.div>
+            )}
+
+            {phoneTyped.length >= 13 && phase !== "newDone" && (
+              <BounceArrow text="등록 + 체크인 버튼을 눌러보세요" />
+            )}
+          </>
+        )}
+
+        <div className="mt-4 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
+          <p className="text-[11px] text-[#999] leading-relaxed">
+            <span className="font-semibold text-[#666]">참고:</span> 체크인하면 원장님 화면에 환자가 나타나고,
+            기존 대기 태스크(예: 예약 확인)가 자동으로 완료 처리됩니다.
+            신규 등록 시 Lite 배지가 부여됩니다.
+          </p>
+        </div>
       </div>
 
-      <Toast message="✅ 박민수 Lite 환자카드 생성 + 체크인 완료" show={showToast} />
+      <Toast message={toastMsg} show={showToast} />
     </motion.div>
   );
 }
 
-/* ─── Step 4: 인박스 태스크 처리 ─── */
+/* ─── Step 3: 인박스 태스크 처리 ─── */
 function StepInbox({ onNext }: { onNext: () => void }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
       className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5"
     >
       <div className="max-w-md w-full">
-        <TooltipBubble text="원장님이 진료 후 확정하면, 여기에 태스크가 자동으로 나타납니다" duration={3500} />
+        <TooltipBubble text="원장님이 확정하면 여기에 태스크가 자동으로 나타납니다" duration={3500} />
 
         <h2 className="text-[20px] font-extrabold text-[#111] mb-1">인박스</h2>
         <p className="text-[13px] text-[#999] mb-5">원장님이 확정한 태스크를 처리합니다</p>
@@ -456,12 +427,13 @@ function StepInbox({ onNext }: { onNext: () => void }) {
 
         {/* Task cards */}
         <div className="space-y-3">
-          {/* Task 2 - 이준호 overdue */}
+          {/* Overdue task */}
           <div className="bg-white border-2 border-red-200 rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">
               <AlertCircle size={14} className="text-red-400" />
               <span className="text-[13px] font-bold text-[#111]">이준호</span>
               <span className="text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">지남</span>
+              <span className="text-[10px] font-semibold text-[#888] bg-[#f0f0f0] px-1.5 py-0.5 rounded">Lite</span>
             </div>
             <p className="text-[12px] text-[#888] mb-3">T2 리마인드 · 목 통증 · 3월 9일 예정</p>
             <div className="flex gap-2">
@@ -471,14 +443,21 @@ function StepInbox({ onNext }: { onNext: () => void }) {
             </div>
           </div>
 
-          {/* Task 1 - 김서연 */}
+          {/* Today's task */}
           <div className="bg-white border border-[#e8e8e8] rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">
               <Inbox size={14} className="text-[#00B6C5]" />
               <span className="text-[13px] font-bold text-[#111]">김서연</span>
               <span className="text-[10px] font-bold text-[#00B6C5] bg-[#e8f7f8] px-1.5 py-0.5 rounded">오늘</span>
+              <span className="text-[10px] font-semibold text-[#00B6C5] bg-[#e8f7f8] px-1.5 py-0.5 rounded">Active</span>
             </div>
-            <p className="text-[12px] text-[#888] mb-3">T1 예약관리 · 허리 통증 · 1주 후 권장</p>
+            <p className="text-[12px] text-[#888] mb-2">T1 예약관리 · 허리 통증 · 1주 후 권장</p>
+            {/* 원장 메모 */}
+            <div className="bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 mb-3">
+              <p className="text-[11px] text-[#888]">
+                <span className="font-semibold text-[#666]">📌 원장 메모:</span> 다음 내원 시 X-ray 촬영 필요
+              </p>
+            </div>
             <div className="flex gap-2">
               <motion.button
                 onClick={onNext}
@@ -501,10 +480,12 @@ function StepInbox({ onNext }: { onNext: () => void }) {
 
         <BounceArrow text="김서연 태스크의 카톡 내용 복사 버튼을 눌러보세요" />
 
-        <div className="mt-4 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
+        <div className="mt-4 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3 space-y-1.5">
           <p className="text-[11px] text-[#999] leading-relaxed">
-            <span className="font-semibold text-[#666]">참고:</span> 빨간 테두리는 기한이 지난(overdue) 태스크입니다. 
-            우선적으로 처리해주세요. 태스크는 위에서부터 긴급한 순서로 정렬됩니다.
+            <span className="font-semibold text-red-500">빨간 테두리</span> = 기한이 지난 태스크. 우선 처리하세요.
+          </p>
+          <p className="text-[11px] text-[#999] leading-relaxed">
+            <span className="font-semibold text-[#666]">원장 메모</span>가 있으면 환자 안내 시 참고하세요.
           </p>
         </div>
       </div>
@@ -512,7 +493,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 5: 카톡 내용 복사 ─── */
+/* ─── Step 4: 카톡 복사 → 카카오톡 발송 ─── */
 function StepKakaoCopy({ onNext }: { onNext: () => void }) {
   const [copied, setCopied] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -528,15 +509,13 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
       className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5"
     >
       <div className="max-w-md w-full">
-        <h2 className="text-[20px] font-extrabold text-[#111] mb-1">카톡 내용 미리보기</h2>
-        <p className="text-[13px] text-[#999] mb-5">김서연 환자에게 보낼 메시지입니다</p>
+        <h2 className="text-[20px] font-extrabold text-[#111] mb-1">카톡 내용 복사 → 발송</h2>
+        <p className="text-[13px] text-[#999] mb-5">AI가 생성한 메시지를 복사해서 카카오톡 앱에서 보내주세요</p>
 
         {/* Kakao-style message preview */}
         <div className="bg-[#B2C7D9] rounded-2xl p-5 mb-4">
@@ -553,41 +532,40 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
           </div>
         </div>
 
-        <p className="text-[12px] text-[#bbb] text-center mb-4">
-          내용을 수정할 수도 있어요. 복사 후 카카오톡 앱에서 붙여넣기로 보내주세요.
+        <p className="text-[12px] text-[#888] text-center mb-4">
+          메시지 내용을 수정할 수도 있습니다. 복사 후 카카오톡 앱에서 붙여넣기로 보내주세요.
         </p>
 
         {/* Copy button */}
         <motion.button
           onClick={!copied ? handleCopy : undefined}
           className={`relative w-full h-12 rounded-xl text-[15px] font-bold transition-colors flex items-center justify-center gap-2 ${
-            copied
-              ? "bg-green-500 text-white"
-              : "bg-[#00B6C5] hover:bg-[#00a3b1] text-white"
+            copied ? "bg-green-500 text-white" : "bg-[#00B6C5] hover:bg-[#00a3b1] text-white"
           }`}
           whileTap={!copied ? { scale: 0.97 } : {}}
         >
           {!copied && <PulseRing />}
           {copied ? (
-            <>
-              <CheckCircle2 size={16} />
-              복사 완료!
-            </>
+            <><CheckCircle2 size={16} /> 복사 완료!</>
           ) : (
-            <>
-              <Copy size={16} />
-              복사
-            </>
+            <><Copy size={16} /> 복사</>
           )}
         </motion.button>
 
         {!copied && <BounceArrow text="복사 버튼을 눌러보세요" />}
 
-        <div className="mt-4 bg-[#fff8e6] border border-[#f5e6b8] rounded-xl p-3">
-          <p className="text-[11px] text-[#b8860b] leading-relaxed">
-            💡 현재는 자동발송이 아닌 <span className="font-bold">복사 + 붙여넣기</span> 방식입니다. 
-            복사 후 카카오톡 앱에서 해당 환자에게 직접 보내주세요.
-          </p>
+        {/* 워크플로우 안내 */}
+        <div className="mt-5 space-y-2">
+          <div className="bg-[#fff8e6] border border-[#f5e6b8] rounded-xl p-3">
+            <p className="text-[12px] text-[#b8860b] leading-relaxed">
+              <span className="font-bold">⚠️ 자동발송이 아닙니다.</span> 복사 후 카카오톡 앱을 열어서 해당 환자에게 직접 붙여넣기로 보내주세요.
+            </p>
+          </div>
+          <div className="bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
+            <p className="text-[11px] text-[#888] leading-relaxed">
+              <span className="font-semibold text-[#666]">발송 순서:</span> 복사 버튼 → 카카오톡 앱 열기 → 환자 채팅방 → 붙여넣기 → 전송
+            </p>
+          </div>
         </div>
       </div>
 
@@ -596,7 +574,7 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 6: EMR 복붙 ─── */
+/* ─── Step 5: EMR 복붙 ─── */
 function StepEMR({ onNext }: { onNext: () => void }) {
   const [phase, setPhase] = useState<"copy" | "copied" | "done">("copy");
   const [showToast, setShowToast] = useState(false);
@@ -616,17 +594,15 @@ function StepEMR({ onNext }: { onNext: () => void }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
       className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5"
     >
       <div className="max-w-md w-full">
         <TooltipBubble text="원장님이 확정한 차트를 EMR에 옮겨주세요" duration={3000} />
 
         <h2 className="text-[20px] font-extrabold text-[#111] mb-1">EMR 복붙</h2>
-        <p className="text-[13px] text-[#999] mb-5">확정된 차트를 EMR에 입력합니다</p>
+        <p className="text-[13px] text-[#999] mb-5">확정된 SOAP 차트를 EMR 프로그램에 입력합니다</p>
 
         {/* Tab bar */}
         <div className="flex gap-1 mb-4 bg-[#f0f0f0] rounded-lg p-1">
@@ -652,6 +628,7 @@ function StepEMR({ onNext }: { onNext: () => void }) {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-[14px] font-bold text-[#111]">김서연</span>
+                      <span className="text-[10px] text-[#00B6C5] font-semibold bg-[#e8f7f8] px-1.5 py-0.5 rounded">Active</span>
                       <span className="text-[10px] text-[#999]">09:45 확정</span>
                     </div>
                     <p className="text-[12px] text-[#888] leading-relaxed">
@@ -667,9 +644,7 @@ function StepEMR({ onNext }: { onNext: () => void }) {
                   <motion.button
                     onClick={phase === "copy" ? handleCopy : undefined}
                     className={`relative flex-1 h-10 rounded-xl text-[13px] font-bold transition-colors flex items-center justify-center gap-1.5 ${
-                      phase === "copy"
-                        ? "bg-[#00B6C5] text-white"
-                        : "bg-green-100 text-green-600"
+                      phase === "copy" ? "bg-[#00B6C5] text-white" : "bg-green-100 text-green-600"
                     }`}
                     whileTap={phase === "copy" ? { scale: 0.97 } : {}}
                   >
@@ -684,9 +659,7 @@ function StepEMR({ onNext }: { onNext: () => void }) {
                   <motion.button
                     onClick={phase === "copied" ? handleDone : undefined}
                     className={`relative flex-1 h-10 rounded-xl text-[13px] font-bold transition-colors flex items-center justify-center gap-1.5 ${
-                      phase === "copied"
-                        ? "bg-[#00B6C5] text-white"
-                        : "bg-[#f0f0f0] text-[#ccc] cursor-not-allowed"
+                      phase === "copied" ? "bg-[#00B6C5] text-white" : "bg-[#f0f0f0] text-[#ccc] cursor-not-allowed"
                     }`}
                     whileTap={phase === "copied" ? { scale: 0.97 } : {}}
                   >
@@ -700,11 +673,7 @@ function StepEMR({ onNext }: { onNext: () => void }) {
           </AnimatePresence>
 
           {phase === "done" && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="p-8 text-center"
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-8 text-center">
               <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
               <p className="text-[13px] text-[#888]">모든 차트가 EMR에 입력되었습니다</p>
             </motion.div>
@@ -716,8 +685,7 @@ function StepEMR({ onNext }: { onNext: () => void }) {
 
         <div className="mt-4 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
           <p className="text-[11px] text-[#999] leading-relaxed">
-            <span className="font-semibold text-[#666]">참고:</span> 환자명을 누르면 통합보드를 확인할 수 있어요. 
-            복사 → EMR 프로그램에 붙여넣기 → 완료 순서로 진행합니다.
+            <span className="font-semibold text-[#666]">순서:</span> 복사 → EMR 프로그램 열기 → 환자 차트에 붙여넣기 → 하니에이전트에서 완료 버튼
           </p>
         </div>
       </div>
@@ -730,11 +698,11 @@ function StepEMR({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 7: 완료 ─── */
+/* ─── Step 6: 완료 ─── */
 function StepComplete({ onFinish }: { onFinish: () => void }) {
   const dailyFlow = [
     { step: "1", label: "환자 도착 → 퀵 체크인", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
-    { step: "2", label: "원장님 진료 + 확정", role: "자동", color: "bg-[#f0f0f0] text-[#888]" },
+    { step: "2", label: "원장님 진료 + 확정 (대기)", role: "자동", color: "bg-[#f0f0f0] text-[#888]" },
     { step: "3", label: "인박스에서 태스크 확인", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
     { step: "4", label: "카톡 내용 복사 → 카톡 앱에서 발송", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
     { step: "5", label: "EMR 복사 → EMR에 붙여넣기 → 완료", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
@@ -743,16 +711,13 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
       className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5 py-8"
     >
       <div className="max-w-md w-full text-center">
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          initial={{ scale: 0 }} animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 15 }}
           className="w-20 h-20 rounded-full bg-[#e8f7f8] flex items-center justify-center mx-auto mb-6"
         >
@@ -760,10 +725,10 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
         </motion.div>
 
         <h2 className="text-[24px] font-extrabold text-[#111] mb-2">
-          온보딩 완료!
+          실전 가이드 완료!
         </h2>
         <p className="text-[14px] text-[#888] mb-6">
-          실장님의 하루 업무 흐름을 모두 익히셨습니다
+          실장님의 모든 업무 흐름을 체험하셨습니다
         </p>
 
         {/* Daily flow summary */}
@@ -798,10 +763,16 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
           <p className="text-[12px] text-[#888] mt-1">이 흐름만 기억하세요!</p>
         </div>
 
-        {/* Tip */}
-        <div className="bg-[#fff8e6] border border-[#f5e6b8] rounded-xl p-3 mb-6">
+        {/* Tips */}
+        <div className="bg-[#fff8e6] border border-[#f5e6b8] rounded-xl p-3 mb-6 text-left space-y-1.5">
           <p className="text-[12px] text-[#b8860b]">
-            💡 인박스에 빨간 테두리 태스크가 보이면 기한이 지난 것이에요. 우선 처리해주세요!
+            💡 빨간 테두리 태스크 = 기한 지남. 우선 처리하세요!
+          </p>
+          <p className="text-[12px] text-[#b8860b]">
+            💡 카카오톡은 자동발송이 아닌 복사+붙여넣기 방식입니다.
+          </p>
+          <p className="text-[12px] text-[#b8860b]">
+            💡 원장 메모가 있으면 환자 안내 시 참고하세요.
           </p>
         </div>
 
@@ -809,13 +780,13 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
           onClick={onFinish}
           className="w-full h-12 bg-[#00B6C5] hover:bg-[#00a3b1] text-white font-bold rounded-xl text-[15px] transition-colors flex items-center justify-center gap-2"
         >
-          완료! 시작하기
+          완료! 서비스 시작하기
           <ArrowRight size={16} />
         </button>
 
-        <p className="mt-3 text-[12px] text-[#bbb]">
-          첫 환자가 오시면 체크인부터 시작해보세요!
-        </p>
+        <a href="/tutorial" className="inline-block mt-3 text-[12px] text-[#bbb] hover:text-[#888] transition-colors">
+          ← 튜토리얼 허브로 돌아가기
+        </a>
       </div>
     </motion.div>
   );
@@ -838,11 +809,10 @@ export default function StaffTutorial() {
         <AnimatePresence mode="wait">
           {step === 1 && <StepWelcome key="s1" onNext={goNext} />}
           {step === 2 && <StepCheckin key="s2" onNext={goNext} />}
-          {step === 3 && <StepNewPatient key="s3" onNext={goNext} />}
-          {step === 4 && <StepInbox key="s4" onNext={goNext} />}
-          {step === 5 && <StepKakaoCopy key="s5" onNext={goNext} />}
-          {step === 6 && <StepEMR key="s6" onNext={goNext} />}
-          {step === 7 && <StepComplete key="s7" onFinish={goFinish} />}
+          {step === 3 && <StepInbox key="s3" onNext={goNext} />}
+          {step === 4 && <StepKakaoCopy key="s4" onNext={goNext} />}
+          {step === 5 && <StepEMR key="s5" onNext={goNext} />}
+          {step === 6 && <StepComplete key="s6" onFinish={goFinish} />}
         </AnimatePresence>
       </div>
     </div>

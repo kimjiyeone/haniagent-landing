@@ -8,6 +8,7 @@ const navItems = [
   { label: "기능", href: "#features" },
   { label: "가격", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
+  { label: "사용법", href: "/tutorial" },
 ];
 
 export default function Header() {
