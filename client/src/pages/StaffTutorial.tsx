@@ -3,9 +3,9 @@
  * 
  * 7 Steps:
  * 1. 환영 + 업무 요약
- * 2. T1/T2/T3 태스크 유형 설명
- * 3. 퀵 체크인 + 신규 등록
- * 4. 인박스 태스크 처리
+ * 2. 퀵 체크인 + 신규 등록
+ * 3. T1/T2/T3 태스크 유형 소개 (인박스 직전)
+ * 4. 인박스 태스크 처리 (클릭 인터랙션 강화)
  * 5. 카톡 복사 → 카카오톡 발송
  * 6. EMR 복붙
  * 7. 완료 + 하루 루틴 체크리스트
@@ -15,9 +15,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, UserPlus, Inbox, Copy, FileText, CheckCircle2,
-  ArrowRight, Clock, MessageSquare, ClipboardCheck,
+  ArrowRight, ArrowLeft, Clock, MessageSquare, ClipboardCheck,
   ChevronDown, AlertCircle, RefreshCw, AlertTriangle, Edit3,
-  Calendar, Bell, Zap
+  Calendar, Bell, Zap, ChevronRight
 } from "lucide-react";
 import Logo from "@/components/Logo";
 
@@ -90,7 +90,7 @@ function Toast({ message, show }: { message: string; show: boolean }) {
 }
 
 function ProgressBar({ step }: { step: number }) {
-  const stepNames = ["업무 요약", "태스크 유형", "체크인", "인박스", "카톡 복사", "EMR 복붙", "완료"];
+  const stepNames = ["업무 요약", "체크인", "태스크 유형", "인박스", "카톡 복사", "EMR 복붙", "완료"];
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#f0f0f0]">
       <div className="h-1 bg-[#e5e7eb]">
@@ -124,7 +124,8 @@ function NavButtons({ onPrev, onNext, nextLabel = "다음", showPrev = true }: {
           onClick={onPrev}
           className="h-12 px-5 border border-[#e8e8e8] text-[#888] font-semibold rounded-xl text-[14px] hover:bg-[#f8f8f8] transition-colors flex items-center gap-2"
         >
-          ← 이전
+          <ArrowLeft size={14} />
+          이전
         </button>
       )}
       <button
@@ -206,95 +207,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 2: T1/T2/T3 태스크 유형 설명 ─── */
-function StepTaskTypes({ onPrev, onNext }: { onPrev: () => void; onNext: () => void }) {
-  const tasks = [
-    {
-      type: "T1", name: "예약 확인 + 예약관리 카톡", icon: Calendar,
-      desc: "원장님이 차트를 확정하면 자동 생성됩니다. 환자에게 예약 안내 카톡을 보내고, 예약 여부를 처리합니다.",
-      detail: "AI가 진료 차트를 분석하여 환자 맞춤형 카톡 메시지를 자동 생성합니다.",
-      timing: "차트 확정 직후",
-      color: "border-blue-300 bg-blue-50", tagColor: "bg-blue-500",
-    },
-    {
-      type: "T2", name: "D-1 리마인드 카톡", icon: Bell,
-      desc: "예약일 하루 전, 환자에게 내원 리마인드 카톡을 보냅니다.",
-      detail: "차트 기반으로 AI가 환자 상태에 맞는 맞춤형 리마인드 메시지를 생성합니다.",
-      timing: "예약일 D-1 자동 생성",
-      color: "border-green-300 bg-green-50", tagColor: "bg-green-500",
-    },
-    {
-      type: "T3", name: "D+1 리마인드 카톡", icon: MessageSquare,
-      desc: "예약일 다음 날, 미방문 환자에게 리마인드 카톡을 보냅니다.",
-      detail: "차트 기반 AI 맞춤형 메시지로 환자의 재방문을 유도합니다.",
-      timing: "예약일 D+1 자동 생성",
-      color: "border-amber-300 bg-amber-50", tagColor: "bg-amber-500",
-    },
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
-      className="flex flex-col items-center min-h-[calc(100vh-60px)] px-5 py-8"
-    >
-      <div className="max-w-lg w-full">
-        <h2 className="text-[22px] font-extrabold text-[#111] mb-1">인박스 태스크 유형</h2>
-        <p className="text-[13px] text-[#888] mb-6">인박스에 들어오는 태스크는 3가지 유형입니다</p>
-
-        <div className="space-y-4">
-          {tasks.map((task, i) => (
-            <motion.div
-              key={task.type}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.1 }}
-              className={`border-2 rounded-2xl p-5 ${task.color}`}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span className={`${task.tagColor} text-white text-[12px] font-extrabold px-2.5 py-1 rounded-lg`}>
-                  {task.type}
-                </span>
-                <div className="flex items-center gap-2">
-                  <task.icon size={16} className="text-[#555]" />
-                  <span className="text-[15px] font-bold text-[#111]">{task.name}</span>
-                </div>
-              </div>
-              <p className="text-[13px] text-[#555] leading-relaxed mb-2">{task.desc}</p>
-              <p className="text-[12px] text-[#888] leading-relaxed mb-3">
-                <Zap size={11} className="inline mr-1 text-amber-500" />
-                {task.detail}
-              </p>
-              <p className="text-[11px] text-[#888]">
-                <span className="font-bold text-[#666]">생성 시점:</span> {task.timing}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-5 bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3">
-          <p className="text-[13px] font-bold text-[#00B6C5] text-center">
-            모든 카톡 메시지는 AI가 차트를 분석해서 환자별 맞춤 생성합니다
-          </p>
-          <p className="text-[11px] text-[#888] text-center mt-1">
-            현재는 복사 후 카카오톡 앱에서 직접 발송 · 추후 자동 발송 기능이 추가될 예정입니다
-          </p>
-        </div>
-
-        <div className="mt-3 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
-          <p className="text-[11px] text-[#999] leading-relaxed">
-            <span className="font-semibold text-[#666]">처리 팁:</span> 인박스에서 태스크는 긴급도 순으로 자동 정렬됩니다.
-            기한이 지난(빨간 테두리) 태스크를 먼저 처리하세요.
-          </p>
-        </div>
-
-        <NavButtons onPrev={onPrev} onNext={onNext} />
-      </div>
-    </motion.div>
-  );
-}
-
-/* ─── Step 3: 퀵 체크인 + 신규 등록 ─── */
+/* ─── Step 2: 퀵 체크인 + 신규 등록 ─── */
 function StepCheckin({ onNext }: { onNext: () => void }) {
   const [phase, setPhase] = useState<"search" | "found" | "checkedIn" | "newBtn" | "newForm" | "newFilling" | "newDone">("search");
   const [typed, setTyped] = useState("");
@@ -364,7 +277,6 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
         {(phase === "search" || phase === "found" || phase === "checkedIn") && (
           <>
             <TooltipBubble text="체크인이 모든 것의 시작입니다. 체크인해야 원장님이 녹음을 시작할 수 있어요" duration={3500} />
-
             <p className="text-[13px] font-bold text-[#333] mb-3">1. 기존 환자 체크인</p>
 
             <div className="relative mb-4">
@@ -500,13 +412,155 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 4: 인박스 태스크 처리 ─── */
-function StepInbox({ onNext }: { onNext: () => void }) {
+/* ─── Step 3: T1/T2/T3 태스크 유형 소개 (인박스 직전) ─── */
+function StepTaskTypes({ onPrev, onNext }: { onPrev: () => void; onNext: () => void }) {
+  const [revealed, setRevealed] = useState(0);
+
+  const tasks = [
+    {
+      type: "T1", name: "예약 확인 + 예약관리 카톡", icon: Calendar,
+      when: "차트 확정 직후",
+      what: "환자에게 다음 예약 안내 카톡을 보내고, 예약 여부를 기록합니다.",
+      color: "border-blue-200 bg-blue-50/70", tagColor: "bg-blue-500", iconColor: "text-blue-500",
+    },
+    {
+      type: "T2", name: "D-1 리마인드 카톡", icon: Bell,
+      when: "예약일 하루 전 자동 생성",
+      what: "내일 예약된 환자에게 내원 리마인드 카톡을 보냅니다.",
+      color: "border-green-200 bg-green-50/70", tagColor: "bg-green-500", iconColor: "text-green-500",
+    },
+    {
+      type: "T3", name: "D+1 리마인드 카톡", icon: MessageSquare,
+      when: "예약일 다음 날 자동 생성",
+      what: "어제 예약이었지만 미방문한 환자에게 리마인드 카톡을 보냅니다.",
+      color: "border-amber-200 bg-amber-50/70", tagColor: "bg-amber-500", iconColor: "text-amber-500",
+    },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
-      className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] px-5"
+      className="flex flex-col items-center min-h-[calc(100vh-60px)] px-5 py-8"
+    >
+      <div className="max-w-md w-full">
+        <h2 className="text-[22px] font-extrabold text-[#111] mb-1">인박스에 어떤 태스크가 올까요?</h2>
+        <p className="text-[13px] text-[#888] mb-2">
+          원장님이 차트를 확정하면, 아래 3가지 태스크가 <span className="font-bold text-[#555]">자동으로</span> 인박스에 생성됩니다.
+        </p>
+        <p className="text-[12px] text-[#00B6C5] font-semibold mb-6">
+          각 카드를 탭하여 확인하세요 ({revealed}/3)
+        </p>
+
+        <div className="space-y-3">
+          {tasks.map((task, i) => {
+            const isRevealed = revealed > i;
+            const isCurrent = revealed === i;
+
+            return (
+              <motion.button
+                key={task.type}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.08 }}
+                onClick={isCurrent ? () => setRevealed(r => r + 1) : undefined}
+                className={`relative w-full text-left rounded-2xl p-4 border-2 transition-all ${
+                  isCurrent
+                    ? `${task.color} shadow-[0_2px_16px_rgba(0,0,0,0.06)] cursor-pointer`
+                    : isRevealed
+                      ? `${task.color} opacity-90`
+                      : "border-[#e8e8e8] bg-[#fafafa] opacity-50 cursor-not-allowed"
+                }`}
+                whileTap={isCurrent ? { scale: 0.98 } : {}}
+              >
+                {isCurrent && <PulseRing color={task.tagColor.replace("bg-", "").includes("blue") ? "#3b82f6" : task.tagColor.includes("green") ? "#22c55e" : "#f59e0b"} />}
+
+                {/* Header row */}
+                <div className="flex items-center gap-3 mb-2">
+                  <span className={`${task.tagColor} text-white text-[13px] font-extrabold w-9 h-9 rounded-xl flex items-center justify-center shrink-0`}>
+                    {task.type}
+                  </span>
+                  <div className="flex-1">
+                    <p className="text-[14px] font-bold text-[#111]">{task.name}</p>
+                  </div>
+                  {!isRevealed && !isCurrent && (
+                    <span className="text-[10px] text-[#ccc]">잠김</span>
+                  )}
+                </div>
+
+                {/* Expanded content */}
+                <AnimatePresence>
+                  {(isRevealed || isCurrent) && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <div className="mt-2 space-y-2">
+                        <div className="flex items-start gap-2">
+                          <Clock size={12} className="text-[#999] mt-0.5 shrink-0" />
+                          <p className="text-[12px] text-[#888]">
+                            <span className="font-bold text-[#666]">생성 시점:</span> {task.when}
+                          </p>
+                        </div>
+                        <p className="text-[13px] text-[#555] leading-relaxed pl-5">{task.what}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            );
+          })}
+        </div>
+
+        {revealed < 3 && (
+          <BounceArrow text={`${tasks[revealed].type} 카드를 탭하세요`} />
+        )}
+
+        {/* AI 맞춤 메시지 안내 — 3개 모두 확인 후 표시 */}
+        <AnimatePresence>
+          {revealed >= 3 && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-5 space-y-3"
+            >
+              <div className="bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Zap size={14} className="text-amber-500" />
+                  <p className="text-[14px] font-bold text-[#00B6C5]">모든 카톡은 AI 맞춤 생성</p>
+                </div>
+                <p className="text-[13px] text-[#555] leading-relaxed">
+                  AI가 원장님의 <span className="font-bold">진료 차트를 분석</span>해서 환자마다 다른 내용의 카톡 메시지를 자동으로 만들어줍니다.
+                </p>
+                <p className="text-[12px] text-[#888] mt-2">
+                  🚀 추후 자동 발송 기능이 추가될 예정입니다. 현재는 복사 후 카카오톡 앱에서 직접 발송해주세요.
+                </p>
+              </div>
+
+              <NavButtons onPrev={onPrev} onNext={onNext} nextLabel="인박스 체험하기" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Step 4: 인박스 태스크 처리 (클릭 인터랙션 강화) ─── */
+function StepInbox({ onNext }: { onNext: () => void }) {
+  const [phase, setPhase] = useState<"view" | "overdueClicked" | "todayReady">("view");
+
+  const handleOverdueClick = () => {
+    setPhase("overdueClicked");
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
+      className="flex flex-col items-center min-h-[calc(100vh-60px)] px-5 py-8"
     >
       <div className="max-w-md w-full">
         <TooltipBubble text="원장님이 확정하면 여기에 태스크가 자동으로 나타납니다" duration={3500} />
@@ -532,23 +586,42 @@ function StepInbox({ onNext }: { onNext: () => void }) {
         {/* Task cards */}
         <div className="space-y-3">
           {/* Overdue task — T3 D+1 */}
-          <div className="bg-white border-2 border-red-200 rounded-xl p-4">
+          <motion.div
+            className={`bg-white border-2 rounded-xl p-4 transition-all ${
+              phase === "view" ? "border-red-200 cursor-pointer" : "border-red-100 opacity-60"
+            }`}
+            onClick={phase === "view" ? handleOverdueClick : undefined}
+            whileTap={phase === "view" ? { scale: 0.98 } : {}}
+          >
+            {phase === "view" && <div className="relative"><PulseRing color="#ef4444" /></div>}
             <div className="flex items-center gap-2 mb-2">
               <AlertCircle size={14} className="text-red-400" />
               <span className="text-[13px] font-bold text-[#111]">이준호</span>
               <span className="text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">지남</span>
               <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">T3</span>
             </div>
-            <p className="text-[12px] text-[#888] mb-3">D+1 리마인드 · 목 통증 · 3월 9일 예정</p>
-            <div className="flex gap-2">
-              <button className="h-8 px-3 bg-[#f0f0f0] text-[#888] rounded-lg text-[12px] font-medium opacity-50">
-                카톡 내용 복사
-              </button>
-            </div>
-          </div>
+            <p className="text-[12px] text-[#888] mb-2">D+1 리마인드 · 목 통증 · 3월 9일 예정</p>
+
+            {phase === "overdueClicked" && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="bg-red-50 border border-red-100 rounded-lg p-2.5 mt-1"
+              >
+                <p className="text-[11px] text-red-600 font-semibold">
+                  ⚠️ 기한이 지난 태스크입니다. 빨간 테두리 = 우선 처리!
+                </p>
+                <p className="text-[11px] text-[#888] mt-1">
+                  실제로는 카톡 복사 버튼을 눌러 처리합니다.
+                </p>
+              </motion.div>
+            )}
+          </motion.div>
 
           {/* Today's task — T1 */}
-          <div className="bg-white border border-[#e8e8e8] rounded-xl p-4">
+          <div className={`bg-white border rounded-xl p-4 transition-all ${
+            phase === "overdueClicked" ? "border-[#00B6C5]" : "border-[#e8e8e8]"
+          }`}>
             <div className="flex items-center gap-2 mb-2">
               <Inbox size={14} className="text-[#00B6C5]" />
               <span className="text-[13px] font-bold text-[#111]">김서연</span>
@@ -564,11 +637,15 @@ function StepInbox({ onNext }: { onNext: () => void }) {
             </div>
             <div className="flex gap-2">
               <motion.button
-                onClick={onNext}
-                className="relative h-8 px-3.5 bg-[#00B6C5] text-white rounded-lg text-[12px] font-semibold flex items-center gap-1.5"
-                whileTap={{ scale: 0.95 }}
+                onClick={phase === "overdueClicked" ? onNext : undefined}
+                className={`relative h-8 px-3.5 rounded-lg text-[12px] font-semibold flex items-center gap-1.5 transition-colors ${
+                  phase === "overdueClicked"
+                    ? "bg-[#00B6C5] text-white"
+                    : "bg-[#f0f0f0] text-[#ccc] cursor-not-allowed"
+                }`}
+                whileTap={phase === "overdueClicked" ? { scale: 0.95 } : {}}
               >
-                <PulseRing />
+                {phase === "overdueClicked" && <PulseRing />}
                 <Copy size={12} />
                 카톡 내용 복사
               </motion.button>
@@ -582,7 +659,12 @@ function StepInbox({ onNext }: { onNext: () => void }) {
           </div>
         </div>
 
-        <BounceArrow text="김서연 태스크의 카톡 내용 복사 버튼을 눌러보세요" />
+        {phase === "view" && (
+          <BounceArrow text="빨간 테두리(지남) 태스크를 먼저 탭해보세요" />
+        )}
+        {phase === "overdueClicked" && (
+          <BounceArrow text="김서연 태스크의 카톡 내용 복사 버튼을 눌러보세요" />
+        )}
 
         <div className="mt-4 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3 space-y-1.5">
           <p className="text-[11px] text-[#999] leading-relaxed">
@@ -907,8 +989,8 @@ export default function StaffTutorial() {
       <div className="pt-[60px]">
         <AnimatePresence mode="wait">
           {step === 1 && <StepWelcome key="s1" onNext={goNext} />}
-          {step === 2 && <StepTaskTypes key="s2" onPrev={goPrev} onNext={goNext} />}
-          {step === 3 && <StepCheckin key="s3" onNext={goNext} />}
+          {step === 2 && <StepCheckin key="s2" onNext={goNext} />}
+          {step === 3 && <StepTaskTypes key="s3" onPrev={goPrev} onNext={goNext} />}
           {step === 4 && <StepInbox key="s4" onNext={goNext} />}
           {step === 5 && <StepKakaoCopy key="s5" onNext={goNext} />}
           {step === 6 && <StepEMR key="s6" onNext={goNext} />}
