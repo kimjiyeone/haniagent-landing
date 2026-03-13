@@ -478,13 +478,7 @@ function StepRecording({ onNext }: { onNext: () => void }) {
           </p>
         )}
 
-        {/* 하단 추가 경고 */}
-        <div className="mt-4 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
-          <p className="text-[11px] text-[#888] leading-relaxed">
-            <span className="font-bold text-red-500">⚠️</span> 전화가 오면 녹음을 먼저 중지한 후 받으세요.
-            녹음 중지 후 다시 녹음을 시작할 수 있습니다.
-          </p>
-        </div>
+
       </div>
     </motion.div>
   );

@@ -1,14 +1,14 @@
 /*
  * Stage 2: 실장 실전 가이드
- * 전체 플로우(Stage 1)를 이해한 후 진행하는 실전 체험 가이드
  * 
- * 6 Steps:
+ * 7 Steps:
  * 1. 환영 + 업무 요약
- * 2. 퀵 체크인 + 신규 등록
- * 3. 인박스 태스크 처리
- * 4. 카톡 복사 → 카카오톡 발송
- * 5. EMR 복붙
- * 6. 완료 + 하루 루틴 체크리스트
+ * 2. T1/T2/T3 태스크 유형 설명
+ * 3. 퀵 체크인 + 신규 등록
+ * 4. 인박스 태스크 처리
+ * 5. 카톡 복사 → 카카오톡 발송
+ * 6. EMR 복붙
+ * 7. 완료 + 하루 루틴 체크리스트
  */
 
 import { useState, useEffect } from "react";
@@ -16,11 +16,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, UserPlus, Inbox, Copy, FileText, CheckCircle2,
   ArrowRight, Clock, MessageSquare, ClipboardCheck,
-  ChevronDown, AlertCircle, RefreshCw, AlertTriangle, Edit3
+  ChevronDown, AlertCircle, RefreshCw, AlertTriangle, Edit3,
+  Calendar, Bell, Zap
 } from "lucide-react";
 import Logo from "@/components/Logo";
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 7;
 
 /* ─── Shared Components ─── */
 function PulseRing({ color = "#00B6C5" }: { color?: string }) {
@@ -89,7 +90,7 @@ function Toast({ message, show }: { message: string; show: boolean }) {
 }
 
 function ProgressBar({ step }: { step: number }) {
-  const stepNames = ["업무 요약", "체크인 + 신규 등록", "인박스 처리", "카톡 복사", "EMR 복붙", "완료"];
+  const stepNames = ["업무 요약", "태스크 유형", "체크인", "인박스", "카톡 복사", "EMR 복붙", "완료"];
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-[#f0f0f0]">
       <div className="h-1 bg-[#e5e7eb]">
@@ -113,13 +114,37 @@ function ProgressBar({ step }: { step: number }) {
   );
 }
 
+function NavButtons({ onPrev, onNext, nextLabel = "다음", showPrev = true }: {
+  onPrev?: () => void; onNext: () => void; nextLabel?: string; showPrev?: boolean;
+}) {
+  return (
+    <div className="flex gap-3 mt-6">
+      {showPrev && onPrev && (
+        <button
+          onClick={onPrev}
+          className="h-12 px-5 border border-[#e8e8e8] text-[#888] font-semibold rounded-xl text-[14px] hover:bg-[#f8f8f8] transition-colors flex items-center gap-2"
+        >
+          ← 이전
+        </button>
+      )}
+      <button
+        onClick={onNext}
+        className="flex-1 h-12 bg-[#00B6C5] hover:bg-[#00a3b1] text-white font-bold rounded-xl text-[15px] transition-colors flex items-center justify-center gap-2"
+      >
+        {nextLabel}
+        <ArrowRight size={16} />
+      </button>
+    </div>
+  );
+}
+
 /* ─── Step 1: 환영 + 업무 요약 ─── */
 function StepWelcome({ onNext }: { onNext: () => void }) {
   const roles = [
     { icon: Search, label: "체크인", desc: "환자 도착 → 이름 검색 → 탭" },
     { icon: Inbox, label: "인박스", desc: "태스크 순서대로 처리" },
-    { icon: MessageSquare, label: "카톡 복사", desc: "내용 복사 → 카톡 앱에서 발송" },
-    { icon: ClipboardCheck, label: "EMR 복붙", desc: "SOAP 복사 → EMR에 붙여넣기" },
+    { icon: MessageSquare, label: "카톡 복사", desc: "AI 맞춤 카톡 → 복사 발송" },
+    { icon: ClipboardCheck, label: "EMR 복붙", desc: "차트 복사 → EMR 붙여넣기" },
   ];
 
   return (
@@ -181,7 +206,95 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 2: 퀵 체크인 + 신규 등록 ─── */
+/* ─── Step 2: T1/T2/T3 태스크 유형 설명 ─── */
+function StepTaskTypes({ onPrev, onNext }: { onPrev: () => void; onNext: () => void }) {
+  const tasks = [
+    {
+      type: "T1", name: "예약 확인 + 예약관리 카톡", icon: Calendar,
+      desc: "원장님이 차트를 확정하면 자동 생성됩니다. 환자에게 예약 안내 카톡을 보내고, 예약 여부를 처리합니다.",
+      detail: "AI가 진료 차트를 분석하여 환자 맞춤형 카톡 메시지를 자동 생성합니다.",
+      timing: "차트 확정 직후",
+      color: "border-blue-300 bg-blue-50", tagColor: "bg-blue-500",
+    },
+    {
+      type: "T2", name: "D-1 리마인드 카톡", icon: Bell,
+      desc: "예약일 하루 전, 환자에게 내원 리마인드 카톡을 보냅니다.",
+      detail: "차트 기반으로 AI가 환자 상태에 맞는 맞춤형 리마인드 메시지를 생성합니다.",
+      timing: "예약일 D-1 자동 생성",
+      color: "border-green-300 bg-green-50", tagColor: "bg-green-500",
+    },
+    {
+      type: "T3", name: "D+1 리마인드 카톡", icon: MessageSquare,
+      desc: "예약일 다음 날, 미방문 환자에게 리마인드 카톡을 보냅니다.",
+      detail: "차트 기반 AI 맞춤형 메시지로 환자의 재방문을 유도합니다.",
+      timing: "예약일 D+1 자동 생성",
+      color: "border-amber-300 bg-amber-50", tagColor: "bg-amber-500",
+    },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.4 }}
+      className="flex flex-col items-center min-h-[calc(100vh-60px)] px-5 py-8"
+    >
+      <div className="max-w-lg w-full">
+        <h2 className="text-[22px] font-extrabold text-[#111] mb-1">인박스 태스크 유형</h2>
+        <p className="text-[13px] text-[#888] mb-6">인박스에 들어오는 태스크는 3가지 유형입니다</p>
+
+        <div className="space-y-4">
+          {tasks.map((task, i) => (
+            <motion.div
+              key={task.type}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + i * 0.1 }}
+              className={`border-2 rounded-2xl p-5 ${task.color}`}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className={`${task.tagColor} text-white text-[12px] font-extrabold px-2.5 py-1 rounded-lg`}>
+                  {task.type}
+                </span>
+                <div className="flex items-center gap-2">
+                  <task.icon size={16} className="text-[#555]" />
+                  <span className="text-[15px] font-bold text-[#111]">{task.name}</span>
+                </div>
+              </div>
+              <p className="text-[13px] text-[#555] leading-relaxed mb-2">{task.desc}</p>
+              <p className="text-[12px] text-[#888] leading-relaxed mb-3">
+                <Zap size={11} className="inline mr-1 text-amber-500" />
+                {task.detail}
+              </p>
+              <p className="text-[11px] text-[#888]">
+                <span className="font-bold text-[#666]">생성 시점:</span> {task.timing}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-5 bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3">
+          <p className="text-[13px] font-bold text-[#00B6C5] text-center">
+            모든 카톡 메시지는 AI가 차트를 분석해서 환자별 맞춤 생성합니다
+          </p>
+          <p className="text-[11px] text-[#888] text-center mt-1">
+            현재는 복사 후 카카오톡 앱에서 직접 발송 · 추후 자동 발송 기능이 추가될 예정입니다
+          </p>
+        </div>
+
+        <div className="mt-3 bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
+          <p className="text-[11px] text-[#999] leading-relaxed">
+            <span className="font-semibold text-[#666]">처리 팁:</span> 인박스에서 태스크는 긴급도 순으로 자동 정렬됩니다.
+            기한이 지난(빨간 테두리) 태스크를 먼저 처리하세요.
+          </p>
+        </div>
+
+        <NavButtons onPrev={onPrev} onNext={onNext} />
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Step 3: 퀵 체크인 + 신규 등록 ─── */
 function StepCheckin({ onNext }: { onNext: () => void }) {
   const [phase, setPhase] = useState<"search" | "found" | "checkedIn" | "newBtn" | "newForm" | "newFilling" | "newDone">("search");
   const [typed, setTyped] = useState("");
@@ -191,7 +304,6 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
   const [phoneTyped, setPhoneTyped] = useState("");
   const target = "김서연";
 
-  // Auto-type search
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
@@ -218,13 +330,11 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
     setPhase("newForm");
     setTimeout(async () => {
       setPhase("newFilling");
-      // Auto-type name
       const name = "박민수";
       for (let i = 0; i <= name.length; i++) {
         await new Promise(r => setTimeout(r, 100));
         setNameTyped(name.slice(0, i));
       }
-      // Auto-type phone
       const phone = "010-9876-5432";
       for (let i = 0; i <= phone.length; i++) {
         await new Promise(r => setTimeout(r, 60));
@@ -251,14 +361,12 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
         <h2 className="text-[20px] font-extrabold text-[#111] mb-1">체크인 + 신규 등록</h2>
         <p className="text-[13px] text-[#999] mb-5">기존 환자 체크인과 신규 환자 등록을 체험합니다</p>
 
-        {/* Part 1: 기존 환자 체크인 */}
         {(phase === "search" || phase === "found" || phase === "checkedIn") && (
           <>
             <TooltipBubble text="체크인이 모든 것의 시작입니다. 체크인해야 원장님이 녹음을 시작할 수 있어요" duration={3500} />
 
             <p className="text-[13px] font-bold text-[#333] mb-3">1. 기존 환자 체크인</p>
 
-            {/* Search bar */}
             <div className="relative mb-4">
               <div className="flex items-center gap-2 bg-white border-2 border-[#00B6C5] rounded-xl px-4 h-12">
                 <Search size={16} className="text-[#00B6C5]" />
@@ -272,7 +380,6 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
                 )}
               </div>
 
-              {/* Autocomplete dropdown */}
               <AnimatePresence>
                 {phase === "found" && (
                   <motion.div
@@ -313,7 +420,6 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
           </>
         )}
 
-        {/* Part 2: 신규 환자 등록 */}
         {(phase === "newBtn" || phase === "newForm" || phase === "newFilling" || phase === "newDone") && (
           <>
             <p className="text-[13px] font-bold text-[#333] mb-3">2. 신규 환자 등록</p>
@@ -338,7 +444,6 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
 
             {phase === "newBtn" && <BounceArrow text="+신규 버튼을 눌러보세요" />}
 
-            {/* Registration form */}
             {(phase === "newForm" || phase === "newFilling" || phase === "newDone") && (
               <motion.div
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
@@ -386,7 +491,6 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
           <p className="text-[11px] text-[#999] leading-relaxed">
             <span className="font-semibold text-[#666]">참고:</span> 체크인하면 원장님 화면에 환자가 나타나고,
             기존 대기 태스크(예: 예약 확인)가 자동으로 완료 처리됩니다.
-            신규 등록 시 Lite 배지가 부여됩니다.
           </p>
         </div>
       </div>
@@ -396,7 +500,7 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 3: 인박스 태스크 처리 ─── */
+/* ─── Step 4: 인박스 태스크 처리 ─── */
 function StepInbox({ onNext }: { onNext: () => void }) {
   return (
     <motion.div
@@ -427,15 +531,15 @@ function StepInbox({ onNext }: { onNext: () => void }) {
 
         {/* Task cards */}
         <div className="space-y-3">
-          {/* Overdue task */}
+          {/* Overdue task — T3 D+1 */}
           <div className="bg-white border-2 border-red-200 rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">
               <AlertCircle size={14} className="text-red-400" />
               <span className="text-[13px] font-bold text-[#111]">이준호</span>
               <span className="text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">지남</span>
-              <span className="text-[10px] font-semibold text-[#888] bg-[#f0f0f0] px-1.5 py-0.5 rounded">Lite</span>
+              <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">T3</span>
             </div>
-            <p className="text-[12px] text-[#888] mb-3">T2 리마인드 · 목 통증 · 3월 9일 예정</p>
+            <p className="text-[12px] text-[#888] mb-3">D+1 리마인드 · 목 통증 · 3월 9일 예정</p>
             <div className="flex gap-2">
               <button className="h-8 px-3 bg-[#f0f0f0] text-[#888] rounded-lg text-[12px] font-medium opacity-50">
                 카톡 내용 복사
@@ -443,15 +547,15 @@ function StepInbox({ onNext }: { onNext: () => void }) {
             </div>
           </div>
 
-          {/* Today's task */}
+          {/* Today's task — T1 */}
           <div className="bg-white border border-[#e8e8e8] rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">
               <Inbox size={14} className="text-[#00B6C5]" />
               <span className="text-[13px] font-bold text-[#111]">김서연</span>
               <span className="text-[10px] font-bold text-[#00B6C5] bg-[#e8f7f8] px-1.5 py-0.5 rounded">오늘</span>
-              <span className="text-[10px] font-semibold text-[#00B6C5] bg-[#e8f7f8] px-1.5 py-0.5 rounded">Active</span>
+              <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">T1</span>
             </div>
-            <p className="text-[12px] text-[#888] mb-2">T1 예약관리 · 허리 통증 · 1주 후 권장</p>
+            <p className="text-[12px] text-[#888] mb-2">예약 확인 + 예약관리 카톡 · 허리 통증 · 1주 후 권장</p>
             {/* 원장 메모 */}
             <div className="bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 mb-3">
               <p className="text-[11px] text-[#888]">
@@ -493,7 +597,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 4: 카톡 복사 → 카카오톡 발송 ─── */
+/* ─── Step 5: 카톡 복사 → 카카오톡 발송 ─── */
 function StepKakaoCopy({ onNext }: { onNext: () => void }) {
   const [copied, setCopied] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -515,7 +619,7 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
     >
       <div className="max-w-md w-full">
         <h2 className="text-[20px] font-extrabold text-[#111] mb-1">카톡 내용 복사 → 발송</h2>
-        <p className="text-[13px] text-[#999] mb-5">AI가 생성한 메시지를 복사해서 카카오톡 앱에서 보내주세요</p>
+        <p className="text-[13px] text-[#999] mb-5">AI가 차트를 분석해 생성한 맞춤형 메시지입니다</p>
 
         {/* Kakao-style message preview */}
         <div className="bg-[#B2C7D9] rounded-2xl p-5 mb-4">
@@ -532,9 +636,12 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
           </div>
         </div>
 
-        <p className="text-[12px] text-[#888] text-center mb-4">
-          메시지 내용을 수정할 수도 있습니다. 복사 후 카카오톡 앱에서 붙여넣기로 보내주세요.
-        </p>
+        <div className="bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3 mb-4">
+          <p className="text-[12px] text-[#00B6C5] text-center leading-relaxed">
+            <Zap size={12} className="inline mr-1" />
+            <span className="font-bold">AI 맞춤 메시지</span> — 진료 차트를 분석하여 환자별로 다른 내용이 생성됩니다
+          </p>
+        </div>
 
         {/* Copy button */}
         <motion.button
@@ -556,14 +663,15 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
 
         {/* 워크플로우 안내 */}
         <div className="mt-5 space-y-2">
-          <div className="bg-[#fff8e6] border border-[#f5e6b8] rounded-xl p-3">
-            <p className="text-[12px] text-[#b8860b] leading-relaxed">
-              <span className="font-bold">⚠️ 자동발송이 아닙니다.</span> 복사 후 카카오톡 앱을 열어서 해당 환자에게 직접 붙여넣기로 보내주세요.
-            </p>
-          </div>
           <div className="bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-3">
             <p className="text-[11px] text-[#888] leading-relaxed">
               <span className="font-semibold text-[#666]">발송 순서:</span> 복사 버튼 → 카카오톡 앱 열기 → 환자 채팅방 → 붙여넣기 → 전송
+            </p>
+          </div>
+          <div className="bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3">
+            <p className="text-[12px] text-[#00B6C5] leading-relaxed">
+              <span className="font-bold">🚀 자동 발송 기능이 추후 추가될 예정입니다.</span>
+              <span className="text-[#888]"> 현재는 복사 후 카카오톡 앱에서 직접 발송해주세요.</span>
             </p>
           </div>
         </div>
@@ -574,7 +682,7 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 5: EMR 복붙 ─── */
+/* ─── Step 6: EMR 복붙 ─── */
 function StepEMR({ onNext }: { onNext: () => void }) {
   const [phase, setPhase] = useState<"copy" | "copied" | "done">("copy");
   const [showToast, setShowToast] = useState(false);
@@ -602,7 +710,7 @@ function StepEMR({ onNext }: { onNext: () => void }) {
         <TooltipBubble text="원장님이 확정한 차트를 EMR에 옮겨주세요" duration={3000} />
 
         <h2 className="text-[20px] font-extrabold text-[#111] mb-1">EMR 복붙</h2>
-        <p className="text-[13px] text-[#999] mb-5">확정된 SOAP 차트를 EMR 프로그램에 입력합니다</p>
+        <p className="text-[13px] text-[#999] mb-5">확정된 차트를 EMR 프로그램에 입력합니다</p>
 
         {/* Tab bar */}
         <div className="flex gap-1 mb-4 bg-[#f0f0f0] rounded-lg p-1">
@@ -624,23 +732,13 @@ function StepEMR({ onNext }: { onNext: () => void }) {
                 transition={{ duration: 0.3 }}
                 className="p-4"
               >
-                <div className="flex items-start gap-3">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[14px] font-bold text-[#111]">김서연</span>
-                      <span className="text-[10px] text-[#00B6C5] font-semibold bg-[#e8f7f8] px-1.5 py-0.5 rounded">Active</span>
-                      <span className="text-[10px] text-[#999]">09:45 확정</span>
-                    </div>
-                    <p className="text-[12px] text-[#888] leading-relaxed">
-                      S: 허리 통증 2주 전 발생, 좌측 요부 중심<br />
-                      O: 요추 ROM 굴곡 60° 제한, L4-5 압통(+)<br />
-                      A: 요추 염좌 의심<br />
-                      P: 침 치료 + 부항, 1주 후 재방문
-                    </p>
-                  </div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[14px] font-bold text-[#111]">김서연</span>
+                  <span className="text-[10px] text-[#00B6C5] font-semibold bg-[#e8f7f8] px-1.5 py-0.5 rounded">Active</span>
+                  <span className="text-[10px] text-[#999]">09:45 확정</span>
                 </div>
 
-                <div className="flex gap-2 mt-3">
+                <div className="flex gap-2">
                   <motion.button
                     onClick={phase === "copy" ? handleCopy : undefined}
                     className={`relative flex-1 h-10 rounded-xl text-[13px] font-bold transition-colors flex items-center justify-center gap-1.5 ${
@@ -691,14 +789,14 @@ function StepEMR({ onNext }: { onNext: () => void }) {
       </div>
 
       <Toast
-        message={phase === "copied" ? "✅ SOAP 차트 복사 완료 → EMR에 붙여넣기 해주세요" : "✅ EMR 복붙 완료!"}
+        message={phase === "copied" ? "✅ 차트 복사 완료 → EMR에 붙여넣기 해주세요" : "✅ EMR 복붙 완료!"}
         show={showToast}
       />
     </motion.div>
   );
 }
 
-/* ─── Step 6: 완료 ─── */
+/* ─── Step 7: 완료 ─── */
 function StepComplete({ onFinish }: { onFinish: () => void }) {
   const dailyFlow = [
     { step: "1", label: "환자 도착 → 퀵 체크인", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
@@ -769,7 +867,7 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
             💡 빨간 테두리 태스크 = 기한 지남. 우선 처리하세요!
           </p>
           <p className="text-[12px] text-[#b8860b]">
-            💡 카카오톡은 자동발송이 아닌 복사+붙여넣기 방식입니다.
+            💡 카톡 자동 발송 기능이 추후 추가될 예정입니다.
           </p>
           <p className="text-[12px] text-[#b8860b]">
             💡 원장 메모가 있으면 환자 안내 시 참고하세요.
@@ -797,6 +895,7 @@ export default function StaffTutorial() {
   const [step, setStep] = useState(1);
 
   const goNext = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS));
+  const goPrev = () => setStep((s) => Math.max(s - 1, 1));
   const goFinish = () => {
     window.location.href = "https://www.haniagent.kr/main";
   };
@@ -808,11 +907,12 @@ export default function StaffTutorial() {
       <div className="pt-[60px]">
         <AnimatePresence mode="wait">
           {step === 1 && <StepWelcome key="s1" onNext={goNext} />}
-          {step === 2 && <StepCheckin key="s2" onNext={goNext} />}
-          {step === 3 && <StepInbox key="s3" onNext={goNext} />}
-          {step === 4 && <StepKakaoCopy key="s4" onNext={goNext} />}
-          {step === 5 && <StepEMR key="s5" onNext={goNext} />}
-          {step === 6 && <StepComplete key="s6" onFinish={goFinish} />}
+          {step === 2 && <StepTaskTypes key="s2" onPrev={goPrev} onNext={goNext} />}
+          {step === 3 && <StepCheckin key="s3" onNext={goNext} />}
+          {step === 4 && <StepInbox key="s4" onNext={goNext} />}
+          {step === 5 && <StepKakaoCopy key="s5" onNext={goNext} />}
+          {step === 6 && <StepEMR key="s6" onNext={goNext} />}
+          {step === 7 && <StepComplete key="s7" onFinish={goFinish} />}
         </AnimatePresence>
       </div>
     </div>
