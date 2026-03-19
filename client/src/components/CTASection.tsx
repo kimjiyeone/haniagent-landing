@@ -18,7 +18,7 @@ export default function CTASection() {
             <span className="text-[#00B6C5]">한의원 시스템</span>을 만나보세요
           </h2>
           <p className="mt-4 text-[15px] text-[#777] leading-relaxed">
-            녹음 한 번이면 차트부터 환자 관리까지.
+            녹음 한 번이면 차팅, 환자 관리부터 경영까지.
             <br />
             원장님은 진료에만 집중하세요.
           </p>
@@ -31,7 +31,7 @@ export default function CTASection() {
               className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-[#111] hover:bg-[#333] text-white font-semibold rounded-xl text-[15px] transition-colors shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
             >
               <Monitor size={18} />
-              Windows 앱 다운로드
+              무료로 시작하기
             </a>
             <a
               href="mailto:contact@hanitek.kr?subject=하니에이전트 도입 문의"

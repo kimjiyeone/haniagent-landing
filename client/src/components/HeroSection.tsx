@@ -340,18 +340,15 @@ export default function HeroSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto"
         >
-          <p className="text-[15px] md:text-[16px] text-[#888] font-medium mb-3 italic">
-            차트, 환자 관리, 경영 전략까지
-          </p>
           <h1 className="text-[32px] sm:text-[42px] md:text-[52px] font-extrabold text-[#111] leading-[1.1] tracking-tight">
-            한의원 성장을 위한
+            진료에만 집중할 수 있도록,
             <br />
-            <span className="text-[#00B6C5]">AI 에이전트</span>
+            <span className="text-[#00B6C5]">가장 똑똑한 AI 시스템</span>
           </h1>
           <p className="mt-5 text-[16px] md:text-[17px] text-[#666] leading-relaxed max-w-lg mx-auto">
-            녹음 한 번이면 SOAP 차트 작성부터 환자 관리, 리마인드 카톡까지.
+            녹음 한 번이면 SOAP 차트 작성부터 환자/직원 관리, 데이터 기반 경영전략까지.
             <br />
-            원장님은 진료에만 집중하세요.
+            사람의존에서 시스템 경영으로 바꿔보세요.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -362,7 +359,7 @@ export default function HeroSection() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 h-12 px-6 border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#555] font-medium rounded-xl text-[15px] transition-colors bg-white"
             >
-              설치 없이 시작하기
+              무료로 시작하기
               <ArrowRight size={16} />
             </a>
           </div>

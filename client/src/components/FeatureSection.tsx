@@ -59,7 +59,7 @@ const themes: Theme[] = [
   },
   {
     id: "patient",
-    name: "환자 관리",
+    name: "환자/직원 관리",
     subtitle: "리마인드부터 재방문까지 시스템이 챙깁니다",
     color: "text-blue-600",
     lightBg: "bg-blue-50/50",

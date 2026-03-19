@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="max-w-xs">
             <Logo className="h-6 w-auto" />
             <p className="mt-3 text-[13px] text-[#999] leading-relaxed">
-              녹음 한 번이면 차트부터 리마인드까지.
+              녹음 한 번이면 차팅, 환자관리부터 경영까지.
               <br />
               한의원 운영 자동화 솔루션.
             </p>

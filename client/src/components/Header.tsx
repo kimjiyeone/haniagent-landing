@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Monitor } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 
@@ -57,8 +57,7 @@ export default function Header() {
             className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none gap-1.5"
             onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
           >
-            <Monitor size={14} />
-            앱 다운로드
+            도입문의
           </Button>
         </div>
 
@@ -95,8 +94,7 @@ export default function Header() {
                   className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg gap-1.5"
                   onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
                 >
-                  <Monitor size={14} />
-                  앱 다운로드
+                  도입문의
                 </Button>
               </div>
             </nav>
