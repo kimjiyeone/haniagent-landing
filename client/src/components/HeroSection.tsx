@@ -69,14 +69,14 @@ function HeroFlowAnimation() {
   }, [activeStep]);
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto px-2 sm:px-0">
       {/* Step indicator bar */}
-      <div className="flex items-center justify-center gap-1 mb-5">
+      <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-4 sm:mb-5 overflow-x-auto pb-1">
         {flowSteps.map((step, i) => (
-          <div key={i} className="flex items-center gap-1">
+          <div key={i} className="flex items-center gap-0.5 sm:gap-1 shrink-0">
             <motion.button
               onClick={() => { setActiveStep(i); setPhase(["recording", "soap", "confirm", "t1", "katalk", "revisit"][i] as typeof phase); }}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold transition-all ${
+              className={`flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-[10px] sm:text-[11px] font-semibold transition-all ${
                 i === activeStep
                   ? "bg-[#00B6C5] text-white shadow-[0_2px_12px_rgba(0,182,197,0.3)]"
                   : "bg-[#f5f5f5] text-[#999] hover:bg-[#eee]"
@@ -84,11 +84,11 @@ function HeroFlowAnimation() {
               animate={i === activeStep ? { scale: [1, 1.02, 1] } : {}}
               transition={{ duration: 0.3 }}
             >
-              <step.icon size={12} />
+              <step.icon size={11} className="shrink-0" />
               <span className="hidden sm:inline">{step.label}</span>
             </motion.button>
             {i < flowSteps.length - 1 && (
-              <ArrowRight size={10} className={i < activeStep ? "text-[#00B6C5]" : "text-[#ddd]"} />
+              <ArrowRight size={8} className={`shrink-0 ${i < activeStep ? "text-[#00B6C5]" : "text-[#ddd]"}`} />
             )}
           </div>
         ))}
@@ -111,7 +111,7 @@ function HeroFlowAnimation() {
         </div>
 
         {/* Content area */}
-        <div className="p-5 md:p-6 min-h-[320px] md:min-h-[360px]">
+        <div className="p-3 sm:p-5 md:p-6 min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
           <AnimatePresence mode="wait">
             {phase === "recording" && (
               <motion.div key="recording" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
@@ -278,13 +278,13 @@ function HeroFlowAnimation() {
 function ClinicMarquee({ clinics, reverse = false }: { clinics: typeof clinicsRow1; reverse?: boolean }) {
   return (
     <div className="relative overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-white to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-white to-transparent z-10" />
       <div className={`flex ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
         {[...clinics, ...clinics, ...clinics].map((clinic, i) => (
           <div
             key={i}
-            className="shrink-0 mx-2.5 flex items-center gap-2.5 px-4 py-2.5 bg-[#fafafa] hover:bg-[#f5f5f5] rounded-xl border border-[#eee] transition-colors"
+            className="shrink-0 mx-1.5 sm:mx-2.5 flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-2 sm:py-2.5 bg-[#fafafa] hover:bg-[#f5f5f5] rounded-xl border border-[#eee] transition-colors"
           >
             {clinic.logo ? (
               <img
@@ -298,7 +298,7 @@ function ClinicMarquee({ clinics, reverse = false }: { clinics: typeof clinicsRo
                 <span className="text-[10px] font-bold text-[#999]">{clinic.name.charAt(0)}</span>
               </div>
             )}
-            <span className="text-[13px] text-[#555] font-medium whitespace-nowrap">{clinic.name}</span>
+            <span className="text-[12px] sm:text-[13px] text-[#555] font-medium whitespace-nowrap">{clinic.name}</span>
           </div>
         ))}
       </div>
@@ -314,7 +314,7 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
       href="https://www.haniagent.kr/auth/login"
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 h-12 px-6 font-semibold rounded-xl text-[15px] transition-all ${
+      className={`inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 font-semibold rounded-xl text-[14px] sm:text-[15px] transition-all w-full sm:w-auto ${
         isPrimary
           ? "bg-[#111] hover:bg-[#333] text-white shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
           : "bg-white border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#333]"
@@ -329,17 +329,17 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
 /* ─── Main Hero Section ─── */
 export default function HeroSection() {
   return (
-    <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
-      {/* tiro-style brand gradient background — z-0 so it sits behind content */}
+    <section className="relative pt-20 pb-10 sm:pt-28 sm:pb-16 md:pt-36 md:pb-20 overflow-hidden">
+      {/* tiro-style brand gradient background — subtle & elegant */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
-        {/* Base tint — clearly visible mint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#d4f3f5] via-[#e8fafb] to-white" />
-        {/* Main radial glow — top center, strong */}
-        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[130%] h-[800px] bg-[radial-gradient(ellipse_80%_60%_at_50%_15%,rgba(0,182,197,0.25),transparent)]" />
+        {/* Base tint — subtle mint */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#ecf8f9] via-[#f5fcfc] to-white" />
+        {/* Main radial glow — top center */}
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[130%] h-[800px] bg-[radial-gradient(ellipse_80%_60%_at_50%_15%,rgba(0,182,197,0.10),transparent)]" />
         {/* Left accent blob */}
-        <div className="absolute top-0 -left-20 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(0,182,197,0.14),transparent_65%)]" />
+        <div className="absolute top-0 -left-20 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(0,182,197,0.05),transparent_65%)]" />
         {/* Right accent blob */}
-        <div className="absolute top-16 -right-16 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,210,220,0.12),transparent_65%)]" />
+        <div className="absolute top-16 -right-16 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,210,220,0.04),transparent_65%)]" />
       </div>
 
       <div className="container relative z-10">
@@ -348,26 +348,28 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto"
+          className="text-center max-w-2xl mx-auto px-4 sm:px-0"
         >
-          <h1 className="text-[32px] sm:text-[42px] md:text-[52px] font-extrabold text-[#111] leading-[1.1] tracking-tight">
+          <h1 className="text-[26px] sm:text-[36px] md:text-[48px] lg:text-[52px] font-extrabold text-[#111] leading-[1.15] tracking-tight">
             진료에만 집중할 수 있도록,
             <br />
             <span className="text-[#00B6C5]">가장 똑똑한 AI 시스템</span>
           </h1>
-          <p className="mt-5 text-[16px] md:text-[17px] text-[#666] leading-relaxed max-w-lg mx-auto">
-            녹음 한 번이면 SOAP 차트 작성부터 환자/직원 관리, 데이터 기반 경영전략까지.
+          <p className="mt-4 sm:mt-5 text-[14px] sm:text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-md sm:max-w-lg mx-auto">
+            녹음 한 번이면 SOAP 차트 작성부터 환자/직원 관리,
+            <br className="hidden sm:block" />
+            데이터 기반 경영전략까지.
             <br />
             사람의존에서 시스템 경영으로 바꿔보세요.
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <AppDownloadButton variant="primary" />
             <a
               href="https://www.haniagent.kr/auth/login"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#555] font-medium rounded-xl text-[15px] transition-colors bg-white"
+              className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#555] font-medium rounded-xl text-[14px] sm:text-[15px] transition-colors bg-white w-full sm:w-auto"
             >
               무료로 시작하기
               <ArrowRight size={16} />
@@ -380,7 +382,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-14"
+          className="mt-10 sm:mt-14"
         >
           <HeroFlowAnimation />
         </motion.div>
@@ -390,9 +392,9 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16"
+          className="mt-10 sm:mt-16"
         >
-          <p className="text-center text-[13px] text-[#999] font-medium mb-5">
+          <p className="text-center text-[12px] sm:text-[13px] text-[#999] font-medium mb-4 sm:mb-5">
             전국 한의원에서 사용 중
           </p>
           <div className="space-y-3">
