@@ -30,16 +30,14 @@ export default function HeroSection() {
             한의원 전용 AI 어시스턴트
           </p>
           <h1 className="text-[32px] sm:text-[40px] md:text-[48px] font-extrabold text-[#111] leading-[1.15] tracking-tight">
-            진료 끝나면{" "}
+            원장님은{" "}
             <br className="hidden sm:block" />
-            차트부터 환자 관리까지{" "}
-            <br className="hidden sm:block" />
-            <span className="text-[#00B6C5]">다 해놓겠습니다</span>
+            <span className="text-[#00B6C5]">진료에만 집중하세요!</span>
           </h1>
           <p className="mt-5 text-[16px] md:text-[17px] text-[#666] leading-relaxed max-w-lg mx-auto">
             녹음 한 번이면 SOAP 차트 작성, 내원 안내, 예약 리마인드까지.
             <br />
-            원장님은 환자만 보세요. 나머지는 하니가 합니다.
+            나머지는 하니가 다 해놓겠습니다.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
