@@ -331,15 +331,15 @@ export default function HeroSection() {
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
       {/* tiro-style brand gradient background */}
-      <div className="absolute inset-0 -z-10">
-        {/* Main radial glow — top center */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(0,182,197,0.12),transparent)]" />
-        {/* Secondary glow — left accent */}
-        <div className="absolute top-20 -left-40 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,182,197,0.06),transparent_70%)]" />
-        {/* Tertiary glow — right accent */}
-        <div className="absolute top-40 -right-32 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,210,220,0.05),transparent_70%)]" />
-        {/* Bottom fade to white */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Base tint */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#e8fafb] via-[#f2fdfd] to-white" />
+        {/* Main radial glow — top center, strong */}
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[140%] h-[700px] bg-[radial-gradient(ellipse_70%_55%_at_50%_20%,rgba(0,182,197,0.18),transparent)]" />
+        {/* Left accent blob */}
+        <div className="absolute top-10 -left-20 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,182,197,0.10),transparent_65%)]" />
+        {/* Right accent blob */}
+        <div className="absolute top-24 -right-16 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,210,220,0.08),transparent_65%)]" />
       </div>
 
       <div className="container">
