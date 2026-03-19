@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Monitor } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 
@@ -54,10 +54,11 @@ export default function Header() {
             로그인
           </a>
           <Button
-            className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none"
+            className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none gap-1.5"
             onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
           >
-            도입 문의
+            <Monitor size={14} />
+            앱 다운로드
           </Button>
         </div>
 
@@ -91,10 +92,11 @@ export default function Header() {
               ))}
               <div className="mt-3 pt-3 border-t border-[#f0f0f0] flex flex-col gap-2">
                 <Button
-                  className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg"
+                  className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg gap-1.5"
                   onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
                 >
-                  도입 문의
+                  <Monitor size={14} />
+                  앱 다운로드
                 </Button>
               </div>
             </nav>

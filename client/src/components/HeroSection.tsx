@@ -1,19 +1,31 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, FileText, CheckCircle2, Inbox, MessageSquare, Calendar, ArrowRight, Zap } from "lucide-react";
+import { Mic, FileText, CheckCircle2, Inbox, MessageSquare, Calendar, ArrowRight, Zap, Monitor } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/mockup-hero-soap-Vh9hWeMEGNYxEwmZzcvZDy.webp";
-
-/* ─── 한의원 목록 (두 줄, 반대 방향) ─── */
+/* ─── 한의원 로고 + 이름 (2줄, 반대 방향) ─── */
 const clinicsRow1 = [
-  "청원한의원", "운정중앙한의원", "위례하늘애한의원", "경희아양한의원",
-  "아현재한의원", "경희일생한의원", "본아한의원", "수한의원",
-  "온누리한의원", "참좋은한의원",
+  { name: "청원한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/0_edZryrad2Zm3qPaULcBn03_1773911281178_na1fn_L2hvbWUvdWJ1bnR1L2NoZW9uZ3dvbl9sb2dv_d166eaa0.png" },
+  { name: "운정중앙한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/1_p7gW1fHPaZqOqB6Y1kznjz_1773911268195_na1fn_L2hvbWUvdWJ1bnR1L2xvZ28_bb813000.webp" },
+  { name: "위례하늘애한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/2_vh6lyxEHaJlJePbC4ZoSDw_1773911265524_na1fn_L2hvbWUvdWJ1bnR1L2xvZ28_4eb1fa82.png" },
+  { name: "경희아양한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/3_54vGt0h6ziDodkO0SGa1ad_1773911290265_na1fn_L2hvbWUvdWJ1bnR1L2xvZ29zL2t5dW5naGVlX2F5YW5nX2xvZ28_a043b974.webp" },
+  { name: "아현재한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/4_yMO9swfD3XajE4qBTzG3zm_1773911249974_na1fn_L2hvbWUvdWJ1bnR1L2Rvd25sb2Fkcy9haHl1bmphZV9sb2dv_6cab7fd0.webp" },
+  { name: "경희일생한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/5_ri2iLqsjWeIgn6gjdb3Qay_1773911298365_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzLzZGZ0dickRMZFg0ag_2ffc15fc.jpg" },
+  { name: "본아한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/6_91Uvbf1EikDoAzuRHnRL0u_1773911261683_na1fn_L2hvbWUvdWJ1bnR1L2Rvd25sb2Fkcy9ib25haGFuaV9sb2dv_35db1364.webp" },
+  { name: "수한의원", logo: null },
+  { name: "온누리한의원", logo: null },
+  { name: "참좋은한의원", logo: null },
 ];
 const clinicsRow2 = [
-  "한마음한의원", "동의보감한의원", "청아한의원", "하나한의원",
-  "보령한의원", "청담한의원", "우리한의원", "미소한의원",
-  "경희한의원", "보성한의원",
+  { name: "한마음한의원", logo: null },
+  { name: "동의보감한의원", logo: null },
+  { name: "청아한의원", logo: null },
+  { name: "하나한의원", logo: null },
+  { name: "보령한의원", logo: null },
+  { name: "청담한의원", logo: null },
+  { name: "우리한의원", logo: null },
+  { name: "미소한의원", logo: null },
+  { name: "경희한의원", logo: null },
+  { name: "보성한의원", logo: null },
 ];
 
 /* ─── 작동 흐름 애니메이션 단계 ─── */
@@ -34,7 +46,7 @@ const flowSteps: FlowStep[] = [
   { icon: Calendar, label: "재내원", role: "루프", roleColor: "text-green-600", roleBg: "bg-green-50" },
 ];
 
-/* ─── 인라인 작동 흐름 애니메이션 (tiro 스타일 - 히어로 이미지 대체) ─── */
+/* ─── 인라인 작동 흐름 애니메이션 (tiro 스타일) ─── */
 function HeroFlowAnimation() {
   const [activeStep, setActiveStep] = useState(0);
   const [phase, setPhase] = useState<"recording" | "soap" | "confirm" | "t1" | "katalk" | "revisit">("recording");
@@ -138,12 +150,7 @@ function HeroFlowAnimation() {
                       </div>
                     </div>
                   </div>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    className="mt-4 bg-white rounded-lg p-3 border border-[#f0f0f0]"
-                  >
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-4 bg-white rounded-lg p-3 border border-[#f0f0f0]">
                     <p className="text-[12px] text-[#666] leading-relaxed italic">
                       "김서연님 허리 통증 3회차입니다. 지난 침 치료 후 호전 양상 보이고, ROM 개선되었습니다..."
                     </p>
@@ -156,31 +163,19 @@ function HeroFlowAnimation() {
               <motion.div key="soap" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-[14px] font-bold text-[#111]">AI SOAP 차트 생성</p>
-                  <motion.span
-                    className="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full"
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ duration: 0.8, repeat: 3 }}
-                  >
+                  <motion.span className="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full" animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 0.8, repeat: 3 }}>
                     AI 분석 중...
                   </motion.span>
                 </div>
                 <div className="bg-white border border-[#e8e8e8] rounded-xl overflow-hidden">
                   {[
-                    { label: "S", text: "허리 통증 3회차. 침 치료 후 호전. 일상생활 시 간헐적 통증 잔존. 앉아있을 때 뻐근함 호소.", color: "bg-[#00B6C5]" },
-                    { label: "O", text: "요추 ROM 개선 (굴곡 60° → 75°). L4-5 압통 감소. 근긴장도 완화.", color: "bg-blue-500" },
+                    { label: "S", text: "허리 통증 3회차. 침 치료 후 호전. 일상생활 시 간헐적 통증 잔존.", color: "bg-[#00B6C5]" },
+                    { label: "O", text: "요추 ROM 개선 (굴곡 60° → 75°). L4-5 압통 감소.", color: "bg-blue-500" },
                     { label: "A", text: "요추 염좌 호전 중. 추가 2-3회 치료 권장.", color: "bg-amber-500" },
-                    { label: "P", text: "침 치료 + 부항. 1주 후 재내원 권장. 스트레칭 교육.", color: "bg-green-500" },
+                    { label: "P", text: "침 치료 + 부항. 1주 후 재내원 권장.", color: "bg-green-500" },
                   ].map((item, i) => (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + i * 0.5 }}
-                      className="flex gap-3 p-3.5 border-b border-[#f5f5f5] last:border-0"
-                    >
-                      <span className={`text-[11px] font-extrabold text-white ${item.color} w-6 h-6 rounded flex items-center justify-center shrink-0`}>
-                        {item.label}
-                      </span>
+                    <motion.div key={item.label} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.5 }} className="flex gap-3 p-3.5 border-b border-[#f5f5f5] last:border-0">
+                      <span className={`text-[11px] font-extrabold text-white ${item.color} w-6 h-6 rounded flex items-center justify-center shrink-0`}>{item.label}</span>
                       <p className="text-[12px] text-[#555] leading-relaxed">{item.text}</p>
                     </motion.div>
                   ))}
@@ -189,33 +184,12 @@ function HeroFlowAnimation() {
             )}
 
             {phase === "confirm" && (
-              <motion.div key="confirm" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}
-                className="flex flex-col items-center justify-center min-h-[280px]"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 12 }}
-                  className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mb-4"
-                >
+              <motion.div key="confirm" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }} className="flex flex-col items-center justify-center min-h-[280px]">
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200, damping: 12 }} className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mb-4">
                   <CheckCircle2 size={40} className="text-green-500" />
                 </motion.div>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-[18px] font-extrabold text-[#111] mb-2"
-                >
-                  차트 확정 완료!
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="text-[13px] text-[#888]"
-                >
-                  실장님 인박스에 태스크가 자동 생성됩니다
-                </motion.p>
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-[18px] font-extrabold text-[#111] mb-2">차트 확정 완료!</motion.p>
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[13px] text-[#888]">실장님 인박스에 태스크가 자동 생성됩니다</motion.p>
               </motion.div>
             )}
 
@@ -224,51 +198,20 @@ function HeroFlowAnimation() {
                 <div className="flex items-center gap-2 mb-4">
                   <Inbox size={16} className="text-blue-500" />
                   <p className="text-[14px] font-bold text-[#111]">실장님 인박스</p>
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.3, type: "spring" }}
-                    className="text-[10px] font-bold text-white bg-red-500 px-1.5 py-0.5 rounded-full"
-                  >
-                    1
-                  </motion.span>
+                  <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3, type: "spring" }} className="text-[10px] font-bold text-white bg-red-500 px-1.5 py-0.5 rounded-full">1</motion.span>
                 </div>
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="bg-blue-50/60 border-2 border-blue-200 rounded-xl p-4 mb-3"
-                >
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-blue-50/60 border-2 border-blue-200 rounded-xl p-4 mb-3">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-[10px] font-extrabold text-white bg-blue-500 px-2 py-0.5 rounded">T1</span>
                     <span className="text-[13px] font-bold text-[#333]">김서연 — 예약 확인 + 예약관리 카톡</span>
                   </div>
                   <p className="text-[12px] text-[#888]">AI 맞춤 카톡 메시지 생성 완료</p>
                   <div className="mt-3 flex gap-2">
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.8 }}
-                      className="text-[11px] font-semibold text-blue-600 bg-blue-100 px-3 py-1.5 rounded-lg"
-                    >
-                      카톡 복사
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 1.0 }}
-                      className="text-[11px] font-semibold text-[#888] bg-[#f0f0f0] px-3 py-1.5 rounded-lg"
-                    >
-                      EMR 복사
-                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-[11px] font-semibold text-blue-600 bg-blue-100 px-3 py-1.5 rounded-lg">카톡 복사</motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="text-[11px] font-semibold text-[#888] bg-[#f0f0f0] px-3 py-1.5 rounded-lg">EMR 복사</motion.div>
                   </div>
                 </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.2 }}
-                  className="bg-[#f8fafb] border border-[#e8e8e8] rounded-lg p-3 flex items-center gap-2"
-                >
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="bg-[#f8fafb] border border-[#e8e8e8] rounded-lg p-3 flex items-center gap-2">
                   <Zap size={12} className="text-[#00B6C5]" />
                   <p className="text-[11px] text-[#888]">T2(D-1), T3(D+1) 태스크도 예약일 기준 자동 생성됩니다</p>
                 </motion.div>
@@ -289,14 +232,9 @@ function HeroFlowAnimation() {
                     </div>
                     <span className="text-[13px] font-bold text-white">OO한의원</span>
                   </div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="bg-white rounded-xl p-4 shadow-sm"
-                  >
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-white rounded-xl p-4 shadow-sm">
                     <p className="text-[13px] text-[#333] leading-relaxed">
-                      안녕하세요 김서연님 😊
+                      안녕하세요 김서연님 :)
                       <br /><br />
                       내일 <b>3월 24일(월) 오후 2시</b> 예약이 있으셔서 안내드려요.
                       <br /><br />
@@ -305,12 +243,7 @@ function HeroFlowAnimation() {
                       내원이 어려우시면 미리 말씀해 주세요!
                     </p>
                   </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5 }}
-                    className="mt-2 text-center"
-                  >
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="mt-2 text-center">
                     <p className="text-[10px] text-white/70 font-medium">AI가 차트 기반으로 맞춤 생성</p>
                   </motion.div>
                 </div>
@@ -318,39 +251,13 @@ function HeroFlowAnimation() {
             )}
 
             {phase === "revisit" && (
-              <motion.div key="revisit" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}
-                className="flex flex-col items-center justify-center min-h-[280px]"
-              >
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ type: "spring", stiffness: 150, damping: 12 }}
-                  className="w-20 h-20 rounded-full bg-[#e8f7f8] flex items-center justify-center mb-4"
-                >
+              <motion.div key="revisit" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }} className="flex flex-col items-center justify-center min-h-[280px]">
+                <motion.div initial={{ scale: 0, rotate: -180 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 150, damping: 12 }} className="w-20 h-20 rounded-full bg-[#e8f7f8] flex items-center justify-center mb-4">
                   <Calendar size={36} className="text-[#00B6C5]" />
                 </motion.div>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-[18px] font-extrabold text-[#111] mb-2"
-                >
-                  환자 재내원!
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="text-[13px] text-[#888] mb-4"
-                >
-                  체크인 → 녹음 → 차트 → 루프가 다시 시작됩니다
-                </motion.p>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8 }}
-                  className="flex items-center gap-2 bg-[#f0fafb] border border-[#d5eef0] rounded-full px-4 py-2"
-                >
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-[18px] font-extrabold text-[#111] mb-2">환자 재내원!</motion.p>
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[13px] text-[#888] mb-4">체크인 → 녹음 → 차트 → 루프가 다시 시작됩니다</motion.p>
+                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8 }} className="flex items-center gap-2 bg-[#f0fafb] border border-[#d5eef0] rounded-full px-4 py-2">
                   {flowSteps.map((s, i) => (
                     <div key={i} className="flex items-center gap-1">
                       <s.icon size={11} className="text-[#00B6C5]" />
@@ -367,26 +274,55 @@ function HeroFlowAnimation() {
   );
 }
 
-/* ─── Clinic Marquee Row ─── */
-function ClinicMarquee({ clinics, reverse = false }: { clinics: string[]; reverse?: boolean }) {
+/* ─── Clinic Marquee Row (with logos) ─── */
+function ClinicMarquee({ clinics, reverse = false }: { clinics: typeof clinicsRow1; reverse?: boolean }) {
   return (
     <div className="relative overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
       <div className={`flex ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
-        {[...clinics, ...clinics, ...clinics].map((name, i) => (
+        {[...clinics, ...clinics, ...clinics].map((clinic, i) => (
           <div
             key={i}
-            className="shrink-0 mx-3 flex items-center gap-2 px-4 py-2 bg-[#f8f8f8] hover:bg-[#f0f0f0] rounded-lg border border-[#f0f0f0] transition-colors"
+            className="shrink-0 mx-2.5 flex items-center gap-2.5 px-4 py-2.5 bg-[#fafafa] hover:bg-[#f5f5f5] rounded-xl border border-[#eee] transition-colors"
           >
-            <div className="w-6 h-6 rounded bg-[#e8e8e8] flex items-center justify-center shrink-0">
-              <span className="text-[9px] font-bold text-[#999]">{name.charAt(0)}</span>
-            </div>
-            <span className="text-[12px] text-[#666] font-medium whitespace-nowrap">{name}</span>
+            {clinic.logo ? (
+              <img
+                src={clinic.logo}
+                alt={clinic.name}
+                className="w-7 h-7 rounded-lg object-contain bg-white"
+                loading="lazy"
+              />
+            ) : (
+              <div className="w-7 h-7 rounded-lg bg-[#e8e8e8] flex items-center justify-center shrink-0">
+                <span className="text-[10px] font-bold text-[#999]">{clinic.name.charAt(0)}</span>
+              </div>
+            )}
+            <span className="text-[13px] text-[#555] font-medium whitespace-nowrap">{clinic.name}</span>
           </div>
         ))}
       </div>
     </div>
+  );
+}
+
+/* ─── App Download Button (reusable) ─── */
+export function AppDownloadButton({ variant = "primary" }: { variant?: "primary" | "secondary" }) {
+  const isPrimary = variant === "primary";
+  return (
+    <a
+      href="https://www.haniagent.kr/auth/login"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center justify-center gap-2 h-12 px-6 font-semibold rounded-xl text-[15px] transition-all ${
+        isPrimary
+          ? "bg-[#111] hover:bg-[#333] text-white shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
+          : "bg-white border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#333]"
+      }`}
+    >
+      <Monitor size={18} />
+      <span>Windows 앱 다운로드</span>
+    </a>
   );
 }
 
@@ -397,43 +333,36 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#f8fffe] to-white -z-10" />
 
       <div className="container">
-        {/* Text */}
+        {/* Text — tiro style 2-line slogan */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto"
         >
-          <p className="text-[15px] text-[#00B6C5] font-semibold mb-4 tracking-wide">
-            한의원 전용 AI 어시스턴트
+          <p className="text-[15px] md:text-[16px] text-[#888] font-medium mb-3 italic">
+            차트, 환자 관리, 경영 전략까지
           </p>
-          <h1 className="text-[32px] sm:text-[40px] md:text-[48px] font-extrabold text-[#111] leading-[1.15] tracking-tight">
-            원장님은{" "}
-            <br className="hidden sm:block" />
-            <span className="text-[#00B6C5]">진료에만 집중하세요!</span>
+          <h1 className="text-[32px] sm:text-[42px] md:text-[52px] font-extrabold text-[#111] leading-[1.1] tracking-tight">
+            한의원 성장을 위한
+            <br />
+            <span className="text-[#00B6C5]">AI 에이전트</span>
           </h1>
           <p className="mt-5 text-[16px] md:text-[17px] text-[#666] leading-relaxed max-w-lg mx-auto">
-            녹음 한 번이면 SOAP 차트 작성, 내원 안내, 예약 리마인드까지.
+            녹음 한 번이면 SOAP 차트 작성부터 환자 관리, 리마인드 카톡까지.
             <br />
-            나머지는 하니가 다 해놓겠습니다.
+            원장님은 진료에만 집중하세요.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <AppDownloadButton variant="primary" />
             <a
               href="https://www.haniagent.kr/auth/login"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-12 px-7 bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg text-[15px] transition-colors"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#555] font-medium rounded-xl text-[15px] transition-colors bg-white"
             >
-              무료로 시작하기
-            </a>
-            <a
-              href="https://forms.gle/placeholder"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 h-12 px-6 border border-[#00B6C5] hover:bg-[#f0fafb] text-[#00B6C5] font-semibold rounded-lg text-[15px] transition-colors bg-white"
-            >
-              우리 한의원 맞춤 1:1 무료 컨설팅
+              설치 없이 시작하기
               <ArrowRight size={16} />
             </a>
           </div>
