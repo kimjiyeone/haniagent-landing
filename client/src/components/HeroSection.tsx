@@ -329,7 +329,7 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
 /* ─── Main Hero Section ─── */
 export default function HeroSection() {
   return (
-    <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+    <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#f8fffe] to-white -z-10" />
 
       <div className="container">
