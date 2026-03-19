@@ -330,7 +330,17 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
 export default function HeroSection() {
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#f8fffe] to-white -z-10" />
+      {/* tiro-style brand gradient background */}
+      <div className="absolute inset-0 -z-10">
+        {/* Main radial glow — top center */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(0,182,197,0.12),transparent)]" />
+        {/* Secondary glow — left accent */}
+        <div className="absolute top-20 -left-40 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,182,197,0.06),transparent_70%)]" />
+        {/* Tertiary glow — right accent */}
+        <div className="absolute top-40 -right-32 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,210,220,0.05),transparent_70%)]" />
+        {/* Bottom fade to white */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
+      </div>
 
       <div className="container">
         {/* Text — tiro style 2-line slogan */}
