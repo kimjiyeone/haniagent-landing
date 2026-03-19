@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Monitor, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 
@@ -14,6 +14,7 @@ const navItems = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bannerVisible, setBannerVisible] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -22,85 +23,125 @@ export default function Header() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.06)]" : "bg-transparent"
-      }`}
-    >
-      <div className="container flex items-center justify-between h-[60px]">
-        <a href="#" className="flex items-center gap-2 shrink-0">
-          <Logo className="h-7 w-auto" />
-        </a>
-
-        <nav className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="px-4 py-2 text-[14px] font-medium text-[#555] hover:text-[#111] transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href="https://www.haniagent.kr/auth/login"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[14px] font-medium text-[#555] hover:text-[#111] transition-colors"
-          >
-            로그인
-          </a>
-          <Button
-            className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none gap-1.5"
-            onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
-          >
-            도입문의
-          </Button>
-        </div>
-
-        <button
-          className="md:hidden p-2 text-[#333]"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="메뉴"
-        >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
+    <>
+      {/* Top banner — tiro style */}
       <AnimatePresence>
-        {mobileOpen && (
+        {bannerVisible && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-[#f0f0f0] overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-0 left-0 right-0 z-[60] bg-[#111] text-white"
           >
-            <nav className="container py-4 flex flex-col gap-1">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="px-3 py-2.5 text-[14px] font-medium text-[#555] hover:text-[#111] rounded-lg transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <div className="mt-3 pt-3 border-t border-[#f0f0f0] flex flex-col gap-2">
-                <Button
-                  className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg gap-1.5"
-                  onClick={() => window.open("https://www.haniagent.kr/auth/login", "_blank")}
-                >
-                  도입문의
-                </Button>
-              </div>
-            </nav>
+            <div className="container flex items-center justify-center h-10 gap-3 relative">
+              <Monitor size={14} className="text-[#00B6C5] shrink-0" />
+              <span className="text-[12px] sm:text-[13px] font-medium">
+                하니에이전트 Windows 앱 출시
+              </span>
+              <a
+                href="https://www.haniagent.kr/auth/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[12px] sm:text-[13px] font-semibold text-[#00B6C5] hover:text-[#33d4e2] transition-colors"
+              >
+                다운로드
+                <ArrowRight size={12} />
+              </a>
+              <button
+                onClick={() => setBannerVisible(false)}
+                className="absolute right-4 p-1 text-white/50 hover:text-white transition-colors"
+                aria-label="배너 닫기"
+              >
+                <X size={14} />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+
+      {/* Main header */}
+      <header
+        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-white/95 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.06)]" : "bg-transparent"
+        }`}
+        style={{ top: bannerVisible ? 40 : 0 }}
+      >
+        <div className="container flex items-center justify-between h-[60px]">
+          <a href="#" className="flex items-center gap-2 shrink-0">
+            <Logo className="h-7 w-auto" />
+          </a>
+
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="px-4 py-2 text-[14px] font-medium text-[#555] hover:text-[#111] transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="https://www.haniagent.kr/auth/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[14px] font-medium text-[#555] hover:text-[#111] transition-colors"
+            >
+              로그인
+            </a>
+            <Button
+              className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none gap-1.5"
+              onClick={() => window.open("mailto:contact@hanitek.kr?subject=하니에이전트 도입 문의", "_blank")}
+            >
+              도입문의
+            </Button>
+          </div>
+
+          <button
+            className="md:hidden p-2 text-[#333]"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="메뉴"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-white border-t border-[#f0f0f0] overflow-hidden"
+            >
+              <nav className="container py-4 flex flex-col gap-1">
+                {navItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="px-3 py-2.5 text-[14px] font-medium text-[#555] hover:text-[#111] rounded-lg transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <div className="mt-3 pt-3 border-t border-[#f0f0f0] flex flex-col gap-2">
+                  <Button
+                    className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg gap-1.5"
+                    onClick={() => window.open("mailto:contact@hanitek.kr?subject=하니에이전트 도입 문의", "_blank")}
+                  >
+                    도입문의
+                  </Button>
+                </div>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+    </>
   );
 }

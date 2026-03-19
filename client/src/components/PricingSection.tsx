@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { Check, X, ArrowRight, Sparkles, Monitor } from "lucide-react";
 
 /*
- * PricingSection — Basic (무료체험 2주, AI 음성 차팅만) + Pro (가격 문의, 올인원)
+ * PricingSection — 3열: 무료체험(2주) / Basic 방문진료 / Pro 올인원
+ * tiro 스타일 세로 카드
  */
 
 interface PlanFeature {
@@ -12,8 +13,8 @@ interface PlanFeature {
 
 interface Plan {
   name: string;
-  badge: string;
-  badgeStyle: string;
+  badge?: string;
+  badgeStyle?: string;
   price: string;
   priceNote: string;
   desc: string;
@@ -26,27 +27,49 @@ interface Plan {
 
 const plans: Plan[] = [
   {
-    name: "Basic",
-    badge: "무료 체험",
-    badgeStyle: "bg-[#f0f0f0] text-[#666]",
-    price: "무료",
-    priceNote: "2주 무료 체험",
+    name: "무료 체험",
+    price: "₩0",
+    priceNote: "2주간 무료",
     desc: "AI 음성 차팅을 먼저 경험해보세요",
     features: [
       { text: "AI 음성 차팅", included: true },
       { text: "SOAP 차트 자동 생성", included: true },
       { text: "차트 수정 및 확정", included: true },
+      { text: "기본 환자 관리", included: true },
       { text: "실장 인박스", included: false },
-      { text: "T1/T2/T3 태스크 자동 생성", included: false },
-      { text: "AI 맞춤 카톡 생성", included: false },
-      { text: "EMR 복붙 대기열", included: false },
+      { text: "T1/T2/T3 태스크", included: false },
+      { text: "AI 맞춤 카톡", included: false },
+      { text: "상병코드 추천", included: false },
       { text: "경영지표 대시보드", included: false },
       { text: "AI 상담 피드백", included: false },
-      { text: "멀티 직원 계정", included: false },
     ],
     cta: "무료 체험 시작하기",
-    ctaStyle: "border-2 border-[#ddd] text-[#333] hover:border-[#bbb] bg-white",
+    ctaStyle: "border-2 border-[#e0e0e0] text-[#333] hover:border-[#bbb] bg-white hover:bg-[#fafafa]",
     href: "https://www.haniagent.kr/auth/login",
+    highlight: false,
+  },
+  {
+    name: "Basic",
+    badge: "방문진료",
+    badgeStyle: "bg-blue-100 text-blue-700",
+    price: "가격 문의",
+    priceNote: "방문진료 한의원 맞춤",
+    desc: "방문진료에 특화된 상병코드 추천까지",
+    features: [
+      { text: "AI 음성 차팅 무제한", included: true },
+      { text: "SOAP 차트 자동 생성", included: true },
+      { text: "차트 수정 및 확정", included: true },
+      { text: "고도화된 상병코드 추천", included: true },
+      { text: "방문진료 특화 차트 템플릿", included: true },
+      { text: "EMR 복붙 대기열", included: true },
+      { text: "실장 인박스", included: false },
+      { text: "T1/T2/T3 태스크", included: false },
+      { text: "AI 맞춤 카톡", included: false },
+      { text: "경영지표 대시보드", included: false },
+    ],
+    cta: "도입 상담 받기",
+    ctaStyle: "border-2 border-[#111] text-[#111] hover:bg-[#111] hover:text-white bg-white",
+    href: "mailto:contact@hanitek.kr?subject=하니에이전트 Basic(방문진료) 플랜 문의",
     highlight: false,
   },
   {
@@ -77,7 +100,7 @@ const plans: Plan[] = [
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="py-16 md:py-24">
+    <section id="pricing" className="py-16 md:py-24 bg-[#fafafa]">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -90,14 +113,14 @@ export default function PricingSection() {
             Pricing
           </p>
           <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold text-[#111] tracking-tight">
-            합리적인 요금제를 만나보세요
+            우리 한의원에 맞는 플랜을 선택하세요
           </h2>
-          <p className="mt-3 text-[15px] text-[#777]">
-            2주 무료 체험 후, 우리 한의원에 맞는 플랜을 상담받으세요.
+          <p className="mt-3 text-[15px] text-[#777] max-w-md mx-auto">
+            2주 무료 체험으로 시작하고, 한의원에 딱 맞는 플랜으로 전환하세요.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto items-start">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -105,28 +128,28 @@ export default function PricingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className={`relative rounded-2xl p-6 md:p-7 flex flex-col ${
+              className={`relative rounded-2xl p-6 flex flex-col ${
                 plan.highlight
-                  ? "bg-white border-2 border-[#111] shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+                  ? "bg-white border-2 border-[#111] shadow-[0_8px_32px_rgba(0,0,0,0.08)] md:-mt-4 md:pb-8"
                   : "bg-white border border-[#e8e8e8]"
               }`}
             >
               {/* Badge */}
-              <span className={`inline-flex items-center self-start text-[11px] font-bold px-2.5 py-1 rounded-full mb-4 ${plan.badgeStyle}`}>
-                {plan.badge === "추천" && <Sparkles size={10} className="mr-1" />}
-                {plan.badge}
-              </span>
+              {plan.badge && (
+                <span className={`inline-flex items-center self-start text-[11px] font-bold px-2.5 py-1 rounded-full mb-3 ${plan.badgeStyle}`}>
+                  {plan.badge === "추천" && <Sparkles size={10} className="mr-1" />}
+                  {plan.badge}
+                </span>
+              )}
 
               {/* Plan name */}
-              <h3 className="text-[20px] font-extrabold text-[#111] mb-1">{plan.name}</h3>
-              <p className="text-[12px] text-[#888] mb-5">{plan.desc}</p>
+              <h3 className="text-[20px] font-extrabold text-[#111]">{plan.name}</h3>
+              <p className="text-[12px] text-[#888] mt-1 mb-4">{plan.desc}</p>
 
               {/* Price */}
-              <div className="mb-6">
-                <span className="text-[32px] font-extrabold text-[#111]">{plan.price}</span>
-                {plan.priceNote && (
-                  <p className="text-[12px] text-[#999] mt-1">{plan.priceNote}</p>
-                )}
+              <div className="mb-5">
+                <span className="text-[28px] font-extrabold text-[#111]">{plan.price}</span>
+                <p className="text-[12px] text-[#999] mt-0.5">{plan.priceNote}</p>
               </div>
 
               {/* CTA */}
@@ -134,16 +157,19 @@ export default function PricingSection() {
                 href={plan.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[15px] font-semibold transition-colors ${plan.ctaStyle}`}
+                className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[14px] font-semibold transition-all ${plan.ctaStyle}`}
               >
                 {plan.cta}
-                <ArrowRight size={16} />
+                <ArrowRight size={14} />
               </a>
 
-              {/* Features checklist */}
-              <ul className="mt-6 pt-6 border-t border-[#f0f0f0] space-y-3 flex-1">
+              {/* Divider */}
+              <div className="my-5 border-t border-[#f0f0f0]" />
+
+              {/* Features */}
+              <ul className="space-y-2.5 flex-1">
                 {plan.features.map((f) => (
-                  <li key={f.text} className={`flex items-start gap-2.5 text-[13px] ${f.included ? "text-[#555]" : "text-[#ccc]"}`}>
+                  <li key={f.text} className={`flex items-start gap-2 text-[13px] ${f.included ? "text-[#444]" : "text-[#ccc]"}`}>
                     {f.included ? (
                       <Check className="w-4 h-4 text-[#00B6C5] shrink-0 mt-0.5" />
                     ) : (
@@ -165,7 +191,7 @@ export default function PricingSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 text-center"
         >
-          <div className="inline-flex items-center gap-3 bg-[#f8f8f8] rounded-xl px-5 py-3 border border-[#f0f0f0]">
+          <div className="inline-flex items-center gap-3 bg-white rounded-xl px-5 py-3 border border-[#e8e8e8]">
             <span className="text-[13px] text-[#666]">
               다지점 · 대형 한의원은 <b className="text-[#111]">Enterprise</b> 플랜을 문의해주세요
             </span>
@@ -176,25 +202,6 @@ export default function PricingSection() {
               문의하기 →
             </a>
           </div>
-        </motion.div>
-
-        {/* Download CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="mt-10 text-center"
-        >
-          <a
-            href="https://www.haniagent.kr/auth/login"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#111] hover:bg-[#333] text-white font-semibold rounded-xl text-[14px] transition-colors shadow-[0_2px_12px_rgba(0,0,0,0.1)]"
-          >
-            <Monitor size={16} />
-            Windows 앱 다운로드
-          </a>
         </motion.div>
       </div>
     </section>
