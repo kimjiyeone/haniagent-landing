@@ -330,19 +330,19 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
 export default function HeroSection() {
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
-      {/* tiro-style brand gradient background */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Base tint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#e8fafb] via-[#f2fdfd] to-white" />
+      {/* tiro-style brand gradient background — z-0 so it sits behind content */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        {/* Base tint — clearly visible mint */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#d4f3f5] via-[#e8fafb] to-white" />
         {/* Main radial glow — top center, strong */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[140%] h-[700px] bg-[radial-gradient(ellipse_70%_55%_at_50%_20%,rgba(0,182,197,0.18),transparent)]" />
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[130%] h-[800px] bg-[radial-gradient(ellipse_80%_60%_at_50%_15%,rgba(0,182,197,0.25),transparent)]" />
         {/* Left accent blob */}
-        <div className="absolute top-10 -left-20 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,182,197,0.10),transparent_65%)]" />
+        <div className="absolute top-0 -left-20 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(0,182,197,0.14),transparent_65%)]" />
         {/* Right accent blob */}
-        <div className="absolute top-24 -right-16 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,210,220,0.08),transparent_65%)]" />
+        <div className="absolute top-16 -right-16 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,210,220,0.12),transparent_65%)]" />
       </div>
 
-      <div className="container">
+      <div className="container relative z-10">
         {/* Text — tiro style 2-line slogan */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
