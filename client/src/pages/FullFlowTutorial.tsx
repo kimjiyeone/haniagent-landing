@@ -336,7 +336,7 @@ function Step4({ onPrev }: { onPrev: () => void }) {
             </div>
             <div className="flex-1">
               <p className="text-[15px] font-bold text-[#111]">실장님 실전 가이드</p>
-              <p className="text-[12px] text-[#888]">T1·T2·T3 태스크 → 체크인 → 인박스 → 카톡 → EMR</p>
+              <p className="text-[12px] text-[#888]">예약확인·D-1·D+1 태스크 → 체크인 → 인박스 → 카톡 → EMR</p>
             </div>
             <ArrowRight size={16} className="text-blue-500 group-hover:translate-x-1 transition-transform" />
           </a>

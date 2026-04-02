@@ -71,13 +71,13 @@ export default function TutorialHub() {
                   </p>
                   <p className="text-[13px] text-[#666] leading-relaxed mb-4">
                     환자 도착부터 진료 완료까지, 원장과 실장이 함께 만드는 하루의 전체 흐름을 체험합니다.
-                    T1/T2/T3 태스크, Light/Active 배지, 시간대별 업무 흐름을 한눈에 이해할 수 있습니다.
+                    예약확인/D-1/D+1 태스크, Light/Active 배지, 시간대별 업무 흐름을 한눈에 이해할 수 있습니다.
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {[
                       { icon: Users, label: "코어 루프" },
-                      { icon: Zap, label: "T1·T2·T3 태스크" },
+                      { icon: Zap, label: "예약확인·D-1·D+1" },
                       { icon: Clock, label: "시간대별 흐름" },
                       { icon: BookOpen, label: "Light·Active 배지" },
                     ].map((item) => (

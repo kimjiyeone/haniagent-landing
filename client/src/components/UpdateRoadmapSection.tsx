@@ -34,6 +34,7 @@ const roadmapItems = [
     label: "진행 중",
     labelColor: "bg-[#00B6C5] text-white",
     title: "AI 상담 피드백 & 환자 유형 분석",
+    comingSoon: true,
     desc: "환자 유형 자동 분류 및 맞춤 소통 팁 제안 기능",
   },
   {
@@ -48,7 +49,7 @@ const roadmapItems = [
     label: "예정",
     labelColor: "bg-amber-100 text-amber-700",
     title: "카카오 알림톡 연동 자동 발송",
-    desc: "T1/T2/T3 카톡을 수동 복붙 없이 알림톡으로 자동 발송",
+    desc: "예약확인/D-1/D+1 카톡을 수동 복붙 없이 알림톡으로 자동 발송",
   },
   {
     date: "2026 Q4",
@@ -150,6 +151,9 @@ export default function UpdateRoadmapSection() {
                       {item.label}
                     </span>
                     <h4 className="text-[14px] font-bold text-[#111]">{item.title}</h4>
+                    {(item as any).comingSoon && (
+                      <span className="text-[9px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">Coming Soon</span>
+                    )}
                   </div>
                   <p className="text-[12px] text-[#888] leading-relaxed">{item.desc}</p>
                 </div>

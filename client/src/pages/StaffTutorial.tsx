@@ -4,7 +4,7 @@
  * 7 Steps:
  * 1. 환영 + 업무 요약
  * 2. 퀵 체크인 + 신규 등록
- * 3. T1/T2/T3 태스크 유형 소개 (인박스 직전)
+ * 3. 예약확인/D-1/D+1 태스크 유형 소개 (인박스 직전)
  * 4. 인박스 태스크 처리 (클릭 인터랙션 강화)
  * 5. 카톡 복사 → 카카오톡 발송
  * 6. EMR 복붙
@@ -412,25 +412,25 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ─── Step 3: T1/T2/T3 태스크 유형 소개 (인박스 직전) ─── */
+/* ─── Step 3: 예약확인/D-1/D+1 태스크 유형 소개 (인박스 직전) ─── */
 function StepTaskTypes({ onPrev, onNext }: { onPrev: () => void; onNext: () => void }) {
   const [revealed, setRevealed] = useState(0);
 
   const tasks = [
     {
-      type: "T1", name: "예약 확인 + 예약관리 카톡", icon: Calendar,
+      type: "예약확인", name: "예약 확인 + 예약관리 카톡", icon: Calendar,
       when: "차트 확정 직후",
       what: "환자에게 다음 예약 안내 카톡을 보내고, 예약 여부를 기록합니다.",
       color: "border-blue-200 bg-blue-50/70", tagColor: "bg-blue-500", iconColor: "text-blue-500",
     },
     {
-      type: "T2", name: "D-1 리마인드 카톡", icon: Bell,
+      type: "D-1카톡", name: "D-1 리마인드 카톡", icon: Bell,
       when: "예약일 하루 전 자동 생성",
       what: "내일 예약된 환자에게 내원 리마인드 카톡을 보냅니다.",
       color: "border-green-200 bg-green-50/70", tagColor: "bg-green-500", iconColor: "text-green-500",
     },
     {
-      type: "T3", name: "D+1 리마인드 카톡", icon: MessageSquare,
+      type: "D+1카톡", name: "D+1 팔로업 카톡", icon: MessageSquare,
       when: "예약일 다음 날 자동 생성",
       what: "어제 예약이었지만 미방문한 환자에게 리마인드 카톡을 보냅니다.",
       color: "border-amber-200 bg-amber-50/70", tagColor: "bg-amber-500", iconColor: "text-amber-500",
@@ -585,7 +585,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
 
         {/* Task cards */}
         <div className="space-y-3">
-          {/* Overdue task — T3 D+1 */}
+          {/* Overdue task — D+1카톡 */}
           <motion.div
             className={`bg-white border-2 rounded-xl p-4 transition-all ${
               phase === "view" ? "border-red-200 cursor-pointer" : "border-red-100 opacity-60"
@@ -598,7 +598,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
               <AlertCircle size={14} className="text-red-400" />
               <span className="text-[13px] font-bold text-[#111]">이준호</span>
               <span className="text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">지남</span>
-              <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">T3</span>
+              <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">D+1카톡</span>
             </div>
             <p className="text-[12px] text-[#888] mb-2">D+1 리마인드 · 목 통증 · 3월 9일 예정</p>
 
@@ -618,7 +618,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
             )}
           </motion.div>
 
-          {/* Today's task — T1 */}
+          {/* Today's task — 예약확인 */}
           <div className={`bg-white border rounded-xl p-4 transition-all ${
             phase === "overdueClicked" ? "border-[#00B6C5]" : "border-[#e8e8e8]"
           }`}>
@@ -626,7 +626,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
               <Inbox size={14} className="text-[#00B6C5]" />
               <span className="text-[13px] font-bold text-[#111]">김서연</span>
               <span className="text-[10px] font-bold text-[#00B6C5] bg-[#e8f7f8] px-1.5 py-0.5 rounded">오늘</span>
-              <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">T1</span>
+              <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">예약확인</span>
             </div>
             <p className="text-[12px] text-[#888] mb-2">예약 확인 + 예약관리 카톡 · 허리 통증 · 1주 후 권장</p>
             {/* 원장 메모 */}

@@ -12,14 +12,13 @@ const items = [
   { icon: Server, title: "클리닉 간 완벽한 데이터 격리", desc: "각 한의원 데이터가 완전히 분리된 아키텍처로 운영됩니다." },
   { icon: Shield, title: "음성 원본 즉시 폐기", desc: "SOAP 차트 생성 후 녹음 원본은 저장하지 않고 즉시 삭제합니다." },
   { icon: Fingerprint, title: "개인별 완전 암호화", desc: "환자 개인정보는 개별 암호화 키로 보호됩니다." },
-  { icon: FileCheck, title: "정보보호 배상책임보험", desc: "만일의 사태에 대비한 정보보호 배상책임보험에 가입되어 있습니다." },
+  { icon: FileCheck, title: "정기 보안 감사", desc: "정기적인 보안 감사와 취약점 점검을 통해 시스템 안전성을 유지합니다." },
 ];
 
 const badges = [
   "특허 출원 완료",
   "Google Firebase (ISO 27001, HIPAA)",
-  "정보보호 배상책임보험 가입",
-  "상표권 출원",
+
 ];
 
 export default function SecuritySection() {

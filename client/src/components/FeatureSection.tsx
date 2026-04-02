@@ -25,51 +25,41 @@ interface Theme {
 function MockupRecording() {
   return (
     <div className="bg-white rounded-xl border border-[#e8e8e8] overflow-hidden shadow-sm">
-      {/* 환자 헤더 */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-[#f0f0f0]">
-        <div className="w-8 h-8 rounded-full bg-[#e8f7f8] flex items-center justify-center shrink-0">
-          <span className="text-[11px] font-bold text-[#00B6C5]">김</span>
+      {/* 상단: 원장 상담 녹음 + 저장/실시간 토글 */}
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#f0f0f0] bg-[#fafafa]">
+        <div className="flex items-center gap-2">
+          <Mic size={13} className="text-[#888]" />
+          <span className="text-[12px] font-bold text-[#333]">원장 상담 녹음</span>
         </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <span className="text-[13px] font-bold text-[#111]">김서연</span>
-            <span className="text-[8px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">Active</span>
-            <span className="text-[10px] text-[#999]">3회차</span>
+        <div className="flex items-center gap-1 bg-[#eee] rounded-full px-1 py-0.5">
+          <span className="text-[9px] text-[#999] px-1.5 py-0.5">저장</span>
+          <div className="w-6 h-3 bg-[#00B6C5] rounded-full relative">
+            <div className="absolute right-0.5 top-0.5 w-2 h-2 bg-white rounded-full" />
           </div>
-          <p className="text-[10px] text-[#999] mt-0.5">허리 통증 · 좌측 요추부</p>
+          <span className="text-[9px] font-semibold text-[#00B6C5] px-1.5 py-0.5">실시간</span>
         </div>
-        <span className="text-[10px] text-[#bbb] font-mono shrink-0">14:30</span>
       </div>
-      {/* 녹음 UI */}
       <div className="p-4">
-        <div className="flex items-center gap-3 mb-3">
-          <motion.div
-            className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center shadow-[0_0_16px_rgba(239,68,68,0.25)]"
-            animate={{ scale: [1, 1.06, 1] }}
-            transition={{ duration: 1.2, repeat: Infinity }}
-          >
-            <Mic size={16} className="text-white" />
-          </motion.div>
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-[12px] font-bold text-red-500">녹음 중</span>
-              <span className="text-[10px] text-[#999] font-mono">02:34</span>
-            </div>
-            <div className="flex gap-[2px]">
-              {Array.from({ length: 24 }).map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="w-[2px] bg-red-400 rounded-full"
-                  animate={{ height: [2, Math.random() * 16 + 2, 2] }}
-                  transition={{ duration: 0.3 + Math.random() * 0.3, repeat: Infinity, delay: i * 0.03 }}
-                />
-              ))}
-            </div>
+        {/* 녹색 녹음 버튼 */}
+        <button className="w-full flex items-center justify-center gap-2 bg-[#00B6C5] text-white font-semibold py-2.5 rounded-xl mb-3 text-[12px]">
+          <Mic size={14} />
+          이어 녹음하기
+        </button>
+        {/* 환자 정보 */}
+        <div className="mb-2">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[12px] font-bold text-[#111]">김서연</span>
+            <span className="text-[8px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">원장상담</span>
           </div>
+          <p className="text-[10px] text-[#999]">123 · 1990-05-12 · <span className="text-[#00B6C5]">수정</span></p>
         </div>
         <div className="bg-[#f8fafb] rounded-lg p-3 border border-[#f0f0f0]">
-          <p className="text-[11px] text-[#666] leading-relaxed italic">
-            "허리 통증 3회차입니다. 지난 침 치료 후 호전 양상 보이고..."
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-[10px] font-semibold text-[#555]">전체 진료 요약</span>
+            <span className="text-[9px] text-[#00B6C5] font-medium">원장 C/C 보기</span>
+          </div>
+          <p className="text-[10px] text-[#666] leading-relaxed">
+            원장: 허리 통증 3회차, 침 치료 후 호전 양상
           </p>
         </div>
       </div>
@@ -127,9 +117,9 @@ function MockupInbox() {
         <span className="text-[9px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded-full ml-auto">3건</span>
       </div>
       {[
-        { name: "김서연", task: "T1", taskLabel: "현장안내", color: "border-amber-200 bg-amber-50/30", tagBg: "bg-amber-200 text-amber-800", memo: "예약 확인 + 카톡", time: "방금" },
-        { name: "윤상필", task: "T1", taskLabel: "현장안내", color: "border-amber-200 bg-amber-50/30", tagBg: "bg-amber-200 text-amber-800", memo: "통합보드 메모", time: "5분 전" },
-        { name: "신태현", task: "T2", taskLabel: "D-1", color: "border-blue-200 bg-blue-50/30", tagBg: "bg-blue-200 text-blue-800", memo: "내일 예약 리마인드", time: "내일" },
+        { name: "김서연", task: "예약확인", taskLabel: "현장안내", color: "border-amber-200 bg-amber-50/30", tagBg: "bg-amber-200 text-amber-800", memo: "예약 확인 + 카톡", time: "방금" },
+        { name: "윤상필", task: "예약확인", taskLabel: "현장안내", color: "border-amber-200 bg-amber-50/30", tagBg: "bg-amber-200 text-amber-800", memo: "통합보드 메모", time: "5분 전" },
+        { name: "신태현", task: "D-1카톡", taskLabel: "리마인드", color: "border-blue-200 bg-blue-50/30", tagBg: "bg-blue-200 text-blue-800", memo: "내일 예약 리마인드", time: "내일" },
       ].map((item, i) => (
         <motion.div
           key={item.name}
@@ -164,7 +154,7 @@ function MockupKakao() {
       <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#f0f0f0] bg-[#fafafa]">
         <MessageSquare size={14} className="text-amber-500" />
         <span className="text-[12px] font-bold text-[#333]">AI 맞춤 카톡 생성</span>
-        <span className="text-[9px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded ml-auto">T2 D-1</span>
+        <span className="text-[9px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded ml-auto">D-1 카톡</span>
       </div>
       <div className="p-4">
         {/* 카톡 미리보기 */}
@@ -176,11 +166,14 @@ function MockupKakao() {
             <span className="text-[11px] font-bold text-white">OO한의원</span>
           </div>
           <div className="bg-white rounded-lg p-3">
-            <p className="text-[11px] text-[#333] leading-relaxed">
-              김서연님, OO한의원입니다.<br /><br />
-              내일 <b>3월 24일(월)</b> 진료 예정이세요.<br />
-              내원 가능하시면 답변 부탁드려요 :)
-            </p>
+                    <p className="text-[11px] text-[#333] leading-relaxed">
+                      안녕하세요, 김서연님 😊<br /><br />
+                      <b>이OO 원장</b>입니다.<br />
+                      지난번 내원 시 <b>허리 통증</b>이 좌측 요추부에 집중되어 있다고 말씀하셨죠.<br />
+                      침 치료 후 ROM이 개선되고 있어서, 이번에는 <b>침 + 부항</b>으로 마무리 치료를 진행할 예정입니다.<br /><br />
+                      내일 <b>3월 24일(월)</b> 예약이 잡혀 있는데요,<br />
+                      내원 가능하시면 답변 부탁드려요 :)
+                    </p>
           </div>
         </div>
         <div className="mt-3 flex items-center justify-between">
@@ -190,12 +183,12 @@ function MockupKakao() {
         {/* T1/T2/T3 태스크 체인 */}
         <div className="mt-3 flex items-center gap-1.5 justify-center">
           {[
-            { t: "T1", label: "예약확인", active: false },
-            { t: "T2", label: "D-1", active: true },
-            { t: "T3", label: "D+1", active: false },
+            { t: "예약확인", label: "", active: false },
+            { t: "D-1 카톡", label: "", active: true },
+            { t: "D+1 카톡", label: "", active: false },
           ].map((item) => (
             <span key={item.t} className={`text-[9px] font-bold px-2 py-1 rounded ${item.active ? "bg-blue-500 text-white" : "bg-[#f0f0f0] text-[#999]"}`}>
-              {item.t} {item.label}
+              {item.t}{item.label ? ` ${item.label}` : ""}
             </span>
           ))}
         </div>
@@ -255,6 +248,7 @@ function MockupAIFeedback() {
       <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#f0f0f0] bg-[#fafafa]">
         <Brain size={14} className="text-purple-500" />
         <span className="text-[12px] font-bold text-[#333]">AI 상담 피드백</span>
+        <span className="text-[8px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded ml-auto">Coming Soon</span>
       </div>
       <div className="p-4">
         <div className="flex items-center gap-3 mb-3 pb-3 border-b border-[#f0f0f0]">
@@ -333,8 +327,8 @@ const themes: Theme[] = [
         icon: MessageSquare,
         label: "AI 맞춤 카톡",
         title: "차트 기반 맞춤 카톡,\nAI가 자동 생성합니다.",
-        desc: "예약 확인(T1), D-1 리마인드(T2), D+1 사후관리(T3) 카톡을 AI가 차트 내용 기반으로 맞춤 생성합니다.",
-        bullets: ["T1 예약확인 · T2 D-1 리마인드 · T3 D+1 사후관리", "차트 기반 AI 맞춤 메시지", "추후 자동 발송 업데이트 예정"],
+        desc: "예약확인, D-1 리마인드, D+1 사후관리 카톡을 AI가 차트 내용 기반으로 맞춤 생성합니다.",
+        bullets: ["예약확인 · D-1 리마인드 · D+1 사후관리", "차트 기반 AI 맞춤 메시지", "추후 자동 발송 업데이트 예정"],
         mockup: MockupKakao,
       },
     ],
