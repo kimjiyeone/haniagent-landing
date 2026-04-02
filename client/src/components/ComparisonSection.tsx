@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { X, Check } from "lucide-react";
+import { X, Check, TrendingUp, Award, FileCheck, Users } from "lucide-react";
 
 const rows = [
   { item: "차트 작성", before: "원장이 직접 타이핑", after: "녹음 → AI 자동 생성" },
@@ -10,10 +10,10 @@ const rows = [
 ];
 
 const stats = [
-  { value: "+20%", label: "재진율 향상" },
-  { value: "Day 1", label: "신입 즉시 투입" },
-  { value: "50%↓", label: "차트 작성 시간" },
-  { value: "0건", label: "리마인드 누락" },
+  { icon: TrendingUp, value: "80%↓", label: "차팅 시간 단축", color: "text-[#00B6C5]" },
+  { icon: Users, value: "Day 1", label: "신입 즉시 투입", color: "text-blue-600" },
+  { icon: FileCheck, value: "3,000+", label: "누적 차트 생성", color: "text-amber-600" },
+  { icon: Award, value: "장관상", label: "보건복지부 수상", color: "text-green-600" },
 ];
 
 export default function ComparisonSection() {
@@ -76,20 +76,24 @@ export default function ComparisonSection() {
           </div>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats - 사업계획서 실제 수치 */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto"
+          className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
         >
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="text-[24px] md:text-[28px] font-extrabold text-[#111]">{s.value}</div>
-              <div className="text-[11px] text-[#999] mt-0.5">{s.label}</div>
-            </div>
-          ))}
+          {stats.map((s) => {
+            const Icon = s.icon;
+            return (
+              <div key={s.label} className="bg-white rounded-xl border border-[#e8e8e8] p-4 text-center">
+                <Icon className={`w-5 h-5 mx-auto mb-2 ${s.color}`} />
+                <div className="text-[24px] md:text-[28px] font-extrabold text-[#111]">{s.value}</div>
+                <div className="text-[11px] text-[#999] mt-0.5">{s.label}</div>
+              </div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

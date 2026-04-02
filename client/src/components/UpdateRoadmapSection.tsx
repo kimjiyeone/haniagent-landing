@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Zap, RefreshCw, ArrowRight, Rocket } from "lucide-react";
+import { MessageCircle, Zap, RefreshCw, ArrowRight, Rocket, Calendar, Sparkles } from "lucide-react";
 
 /*
  * UpdateRoadmapSection
  * "함께 만들어가는 시스템" — 원장님 피드백 기반 빠른 업데이트 약속
- * 3-column 프로세스 + 최근 업데이트 타임라인
+ * 사업계획서 로드맵 기반 업데이트
  */
 
 const process = [
@@ -24,38 +24,38 @@ const process = [
     icon: RefreshCw,
     step: "03",
     title: "매주 업데이트",
-    desc: "새로운 기능과 개선 사항이 매주 자동으로 적용됩니다. 별도 설치 없이.",
+    desc: "새로운 기능과 개선 사항이 자동으로 적용됩니다. 별도 설치 없이.",
   },
 ];
 
-const recentUpdates = [
+const roadmapItems = [
   {
-    date: "2025.03",
-    label: "NEW",
+    date: "2026 Q2",
+    label: "진행 중",
     labelColor: "bg-[#00B6C5] text-white",
-    title: "AI 상담 피드백 기능",
-    desc: "환자 유형 자동 분류 및 맞춤 소통 팁 제안",
+    title: "AI 상담 피드백 & 환자 유형 분석",
+    desc: "환자 유형 자동 분류 및 맞춤 소통 팁 제안 기능",
   },
   {
-    date: "2025.02",
-    label: "개선",
+    date: "2026 Q3",
+    label: "예정",
+    labelColor: "bg-amber-100 text-amber-700",
+    title: "환자별 통합 운영 보드",
+    desc: "칸반/캘린더 뷰로 환자별 치료 여정을 한눈에 관리",
+  },
+  {
+    date: "2026 Q4",
+    label: "예정",
+    labelColor: "bg-amber-100 text-amber-700",
+    title: "카카오 알림톡 연동 자동 발송",
+    desc: "T1/T2/T3 카톡을 수동 복붙 없이 알림톡으로 자동 발송",
+  },
+  {
+    date: "2026 Q4",
+    label: "예정",
     labelColor: "bg-blue-100 text-blue-700",
-    title: "SOAP 차트 정확도 향상",
-    desc: "한의학 전문 용어 인식률 30% 개선",
-  },
-  {
-    date: "2025.02",
-    label: "NEW",
-    labelColor: "bg-[#00B6C5] text-white",
-    title: "경영지표 대시보드",
-    desc: "재진율, 매출, 환자 현황 실시간 모니터링",
-  },
-  {
-    date: "2025.01",
-    label: "개선",
-    labelColor: "bg-blue-100 text-blue-700",
-    title: "방문진료 상병코드 추천 고도화",
-    desc: "진료 내용 기반 상병코드 자동 추천 정확도 향상",
+    title: "AI 클리닉 운영 자동화 v1.5",
+    desc: "경영지표 고도화 + 환자 세그먼트별 마케팅 자동화",
   },
 ];
 
@@ -98,7 +98,6 @@ export default function UpdateRoadmapSection() {
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className="relative text-center"
             >
-              {/* Connector arrow (desktop only) */}
               {i < process.length - 1 && (
                 <div className="hidden md:block absolute top-8 -right-3 z-10">
                   <ArrowRight size={16} className="text-[#ddd]" />
@@ -114,7 +113,7 @@ export default function UpdateRoadmapSection() {
           ))}
         </div>
 
-        {/* Recent updates timeline */}
+        {/* Roadmap timeline */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -122,11 +121,14 @@ export default function UpdateRoadmapSection() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mx-auto"
         >
-          <h3 className="text-[16px] font-bold text-[#111] mb-6 text-center">
-            최근 업데이트
-          </h3>
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <Calendar size={16} className="text-[#00B6C5]" />
+            <h3 className="text-[16px] font-bold text-[#111]">
+              개발 로드맵
+            </h3>
+          </div>
           <div className="space-y-0">
-            {recentUpdates.map((update, i) => (
+            {roadmapItems.map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: -12 }}
@@ -135,23 +137,21 @@ export default function UpdateRoadmapSection() {
                 transition={{ duration: 0.3, delay: i * 0.08 }}
                 className="flex gap-4 relative"
               >
-                {/* Timeline line */}
-                <div className="flex flex-col items-center shrink-0 w-16">
-                  <span className="text-[11px] text-[#999] font-medium whitespace-nowrap">{update.date}</span>
-                  <div className="w-2 h-2 rounded-full bg-[#00B6C5] mt-2" />
-                  {i < recentUpdates.length - 1 && (
+                <div className="flex flex-col items-center shrink-0 w-20">
+                  <span className="text-[11px] text-[#999] font-medium whitespace-nowrap">{item.date}</span>
+                  <div className={`w-2.5 h-2.5 rounded-full mt-2 ${i === 0 ? "bg-[#00B6C5] ring-4 ring-[#00B6C5]/20" : "bg-[#ddd]"}`} />
+                  {i < roadmapItems.length - 1 && (
                     <div className="w-px flex-1 bg-[#eee] mt-1" />
                   )}
                 </div>
-                {/* Content */}
                 <div className="pb-6 flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${update.labelColor}`}>
-                      {update.label}
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${item.labelColor}`}>
+                      {item.label}
                     </span>
-                    <h4 className="text-[14px] font-bold text-[#111]">{update.title}</h4>
+                    <h4 className="text-[14px] font-bold text-[#111]">{item.title}</h4>
                   </div>
-                  <p className="text-[12px] text-[#888] leading-relaxed">{update.desc}</p>
+                  <p className="text-[12px] text-[#888] leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
             ))}

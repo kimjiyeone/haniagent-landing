@@ -22,6 +22,7 @@ export default function Footer() {
                   { label: "기능 소개", href: "#features" },
                   { label: "가격", href: "#pricing" },
                   { label: "FAQ", href: "#faq" },
+                  { label: "사용법", href: "/tutorial" },
                 ].map((l) => (
                   <li key={l.label}>
                     <a href={l.href} className="text-[13px] text-[#888] hover:text-[#111] transition-colors">
@@ -59,7 +60,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} 주식회사 하니텍. All rights reserved.
           </p>
           <p className="text-[11px] text-[#bbb]">
-            사업자등록번호 000-00-00000 | 대표 OOO
+            강원도 원주시 | 주식회사 하니텍
           </p>
         </div>
       </div>

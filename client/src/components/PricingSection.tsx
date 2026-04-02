@@ -3,7 +3,7 @@ import { Check, X, ArrowRight, Sparkles, Monitor } from "lucide-react";
 
 /*
  * PricingSection — 3열: 무료체험(2주) / Basic 방문진료 / Pro 올인원
- * tiro 스타일 세로 카드
+ * 사업계획서 기반: Clinic Plan 월 12~55만원, Enterprise 300만원~
  */
 
 interface PlanFeature {
@@ -32,7 +32,7 @@ const plans: Plan[] = [
     priceNote: "2주간 무료",
     desc: "AI 음성 차팅을 먼저 경험해보세요",
     features: [
-      { text: "AI 음성 차팅", included: true },
+      { text: "AI 음성 차팅 (2주)", included: true },
       { text: "SOAP 차트 자동 생성", included: true },
       { text: "차트 수정 및 확정", included: true },
       { text: "기본 환자 관리", included: true },
@@ -41,7 +41,6 @@ const plans: Plan[] = [
       { text: "AI 맞춤 카톡", included: false },
       { text: "상병코드 추천", included: false },
       { text: "경영지표 대시보드", included: false },
-      { text: "AI 상담 피드백", included: false },
     ],
     cta: "무료 체험 시작하기",
     ctaStyle: "border-2 border-[#e0e0e0] text-[#333] hover:border-[#bbb] bg-white hover:bg-[#fafafa]",
@@ -54,7 +53,7 @@ const plans: Plan[] = [
     badgeStyle: "bg-blue-100 text-blue-700",
     price: "가격 문의",
     priceNote: "방문진료 한의원 맞춤",
-    desc: "방문진료에 특화된 상병코드 추천까지",
+    desc: "상병코드 추천이 포함된 방문진료 특화 버전",
     features: [
       { text: "AI 음성 차팅 무제한", included: true },
       { text: "SOAP 차트 자동 생성", included: true },
@@ -65,7 +64,6 @@ const plans: Plan[] = [
       { text: "실장 인박스", included: false },
       { text: "T1/T2/T3 태스크", included: false },
       { text: "AI 맞춤 카톡", included: false },
-      { text: "경영지표 대시보드", included: false },
     ],
     cta: "도입 상담 받기",
     ctaStyle: "border-2 border-[#111] text-[#111] hover:bg-[#111] hover:text-white bg-white",
@@ -83,8 +81,8 @@ const plans: Plan[] = [
       { text: "AI 음성 차팅 무제한", included: true },
       { text: "SOAP 차트 자동 생성", included: true },
       { text: "차트 수정 및 확정", included: true },
-      { text: "실장 인박스", included: true },
-      { text: "T1/T2/T3 태스크 자동 생성", included: true },
+      { text: "실장 인박스 + 태스크 자동 생성", included: true },
+      { text: "T1 예약확인 · T2 D-1 · T3 D+1", included: true },
       { text: "AI 맞춤 카톡 생성", included: true },
       { text: "EMR 복붙 대기열", included: true },
       { text: "경영지표 대시보드", included: true },
@@ -115,7 +113,7 @@ export default function PricingSection() {
           <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold text-[#111] tracking-tight">
             우리 한의원에 맞는 플랜을 선택하세요
           </h2>
-          <p className="mt-3 text-[15px] text-[#777] max-w-md mx-auto">
+          <p className="mt-3 text-[14px] sm:text-[15px] text-[#777] max-w-md mx-auto">
             2주 무료 체험으로 시작하고, 한의원에 딱 맞는 플랜으로 전환하세요.
           </p>
         </motion.div>
