@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, FileText, CheckCircle2, Inbox, MessageSquare, Calendar, ArrowRight, Monitor, Send } from "lucide-react";
+import { Mic, FileText, CheckCircle2, Inbox, MessageSquare, Calendar, ArrowRight, Monitor, Send, Volume2, Radio } from "lucide-react";
 import { useState, useEffect } from "react";
 
 /* ─── 한의원 로고 + 이름 (2줄, 반대 방향) ─── */
@@ -19,7 +19,7 @@ const clinicsRow2 = [
   { name: "청이담한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/cheongeedam_logo_dd587ec3.png" },
 ];
 
-/* ─── 작동 흐름 단계 (7단계: D+1 카톡 추가) ─── */
+/* ─── 작동 흐름 단계 (7단계) ─── */
 const flowSteps = [
   { icon: Mic, label: "음성 녹음", role: "원장", roleColor: "text-[#00B6C5]", roleBg: "bg-[#e8f7f8]" },
   { icon: FileText, label: "SOAP 차트", role: "AI", roleColor: "text-amber-600", roleBg: "bg-amber-50" },
@@ -94,123 +94,175 @@ function HeroFlowAnimation() {
         {/* Content */}
         <div className="p-3 sm:p-5 md:p-6 min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
           <AnimatePresence mode="wait">
-            {/* Step 1: 녹음 — 실제 UI 기반 */}
+            {/* Step 1: 음성 녹음 — 간결한 인포그래픽 */}
             {phase === "recording" && (
               <motion.div key="rec" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
-                {/* 상단: 실장 상담 녹음 + 저장/실시간 토글 */}
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#f0f0f0]">
-                  <div className="flex items-center gap-2">
-                    <Mic size={16} className="text-[#888]" />
-                    <span className="text-[14px] font-bold text-[#333]">원장 상담 녹음</span>
+                <div className="flex flex-col items-center justify-center min-h-[280px] sm:min-h-[320px]">
+                  {/* 인포그래픽: 원장-환자 진료 녹음 */}
+                  <div className="flex items-center gap-6 sm:gap-10 mb-6">
+                    {/* 원장 */}
+                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="flex flex-col items-center">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#e8f7f8] flex items-center justify-center mb-2 border-2 border-[#00B6C5]/30">
+                        <span className="text-[20px] sm:text-[22px]">👨‍⚕️</span>
+                      </div>
+                      <span className="text-[11px] sm:text-[12px] font-bold text-[#333]">원장</span>
+                      <span className="text-[9px] text-[#999]">진료 중</span>
+                    </motion.div>
+
+                    {/* 음파 애니메이션 */}
+                    <motion.div className="flex flex-col items-center gap-2">
+                      <div className="flex items-center gap-1">
+                        {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+                          <motion.div
+                            key={i}
+                            className="w-1 bg-[#00B6C5] rounded-full"
+                            animate={{ height: [8, 16 + Math.random() * 20, 8] }}
+                            transition={{ duration: 0.6 + Math.random() * 0.4, repeat: Infinity, delay: i * 0.1 }}
+                          />
+                        ))}
+                      </div>
+                      <motion.div
+                        className="flex items-center gap-1.5 bg-red-500 text-white px-3 py-1.5 rounded-full"
+                        animate={{ opacity: [1, 0.7, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <Radio size={10} />
+                        <span className="text-[10px] font-bold">녹음 중</span>
+                      </motion.div>
+                    </motion.div>
+
+                    {/* 환자 */}
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="flex flex-col items-center">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-amber-50 flex items-center justify-center mb-2 border-2 border-amber-200/50">
+                        <span className="text-[20px] sm:text-[22px]">🧑</span>
+                      </div>
+                      <span className="text-[11px] sm:text-[12px] font-bold text-[#333]">환자</span>
+                      <span className="text-[9px] text-[#999]">김서연</span>
+                    </motion.div>
                   </div>
-                  <div className="flex items-center gap-1.5 bg-[#f5f5f5] rounded-full px-1 py-0.5">
-                    <span className="text-[10px] text-[#999] px-2 py-0.5">저장</span>
-                    <div className="w-8 h-4 bg-[#00B6C5] rounded-full relative">
-                      <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full" />
+
+                  {/* 실시간 텍스트 변환 */}
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="w-full max-w-md">
+                    <div className="bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Volume2 size={12} className="text-[#00B6C5]" />
+                        <span className="text-[10px] font-bold text-[#555]">실시간 텍스트 변환</span>
+                        <div className="flex items-center gap-1 ml-auto">
+                          <span className="text-[9px] text-[#999]">저장</span>
+                          <div className="w-7 h-3.5 bg-[#00B6C5] rounded-full relative">
+                            <div className="absolute right-0.5 top-0.5 w-2.5 h-2.5 bg-white rounded-full" />
+                          </div>
+                          <span className="text-[9px] font-semibold text-[#00B6C5]">실시간</span>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="flex gap-2">
+                          <span className="text-[9px] font-bold text-[#00B6C5] bg-[#e8f7f8] px-1.5 py-0.5 rounded shrink-0">원장</span>
+                          <p className="text-[11px] text-[#555]">허리 통증은 언제부터 시작됐어요?</p>
+                        </motion.div>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }} className="flex gap-2">
+                          <span className="text-[9px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded shrink-0">환자</span>
+                          <p className="text-[11px] text-[#555]">일주일 전에 무거운 거 들다가 삐끗했어요</p>
+                        </motion.div>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }} className="flex gap-2">
+                          <span className="text-[9px] font-bold text-[#00B6C5] bg-[#e8f7f8] px-1.5 py-0.5 rounded shrink-0">원장</span>
+                          <p className="text-[11px] text-[#555]">집에서 핫팩 해주시고, 무거운 거 당분간 안 드는 게...</p>
+                        </motion.div>
+                      </div>
                     </div>
-                    <span className="text-[10px] font-semibold text-[#00B6C5] px-2 py-0.5">실시간</span>
-                  </div>
-                </div>
-                {/* 녹음 버튼 — 실제 앱처럼 녹색 */}
-                <motion.button
-                  className="w-full flex items-center justify-center gap-2 bg-[#00B6C5] hover:bg-[#00a3b1] text-white font-semibold py-3 rounded-xl mb-4 shadow-[0_2px_12px_rgba(0,182,197,0.25)] transition-colors"
-                  animate={{ scale: [1, 1.01, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Mic size={16} />
-                  <span className="text-[13px]">이어 녹음하기</span>
-                </motion.button>
-                {/* 환자 정보 카드 */}
-                <div className="bg-white border border-[#e8e8e8] rounded-xl p-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <p className="text-[14px] font-bold text-[#111]">김서연</p>
-                    <span className="text-[9px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">원장상담</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-[11px] text-[#999] mb-3">
-                    <span>차트번호 123</span>
-                    <span>·</span>
-                    <span>1990-05-12</span>
-                    <span className="text-[#00B6C5] font-medium cursor-pointer">수정</span>
-                  </div>
-                  <div className="bg-[#f8fafb] rounded-lg p-3 border border-[#f0f0f0]">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[11px] font-semibold text-[#555]">전체 진료 요약</span>
-                      <span className="text-[10px] text-[#00B6C5] font-medium cursor-pointer">원장 C/C 보기</span>
-                    </div>
-                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="text-[11px] text-[#666] leading-relaxed">
-                      원장: 허리 통증 3회차, 침 치료 후 호전 양상, ROM 개선
-                    </motion.p>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             )}
 
-            {/* Step 2: SOAP 차트 생성 — 실제 UI 기반 (C/C, O/S 등 세부 항목) */}
+            {/* Step 2: SOAP 차트 — 실제 haniagent.kr 통합보드 UI */}
             {phase === "soap" && (
               <motion.div key="soap" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
-                <div className="flex items-center justify-between mb-3">
+                {/* 환자 정보 + 확정 대기 */}
+                <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#f0f0f0]">
                   <div className="flex items-center gap-2">
-                    <p className="text-[14px] font-bold text-[#111]">현재 환자 차트</p>
-                    <motion.span className="text-[9px] font-bold text-[#00B6C5] bg-[#e8f7f8] px-2 py-0.5 rounded" animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 0.8, repeat: 3 }}>
-                      AI 생성 완료
-                    </motion.span>
+                    <span className="text-[14px] font-bold text-[#111]">김서연</span>
+                    <span className="text-[9px] font-bold text-amber-700 bg-amber-200 px-1.5 py-0.5 rounded">확정 대기</span>
+                    <span className="text-[9px] font-bold text-green-700 bg-green-100 px-1.5 py-0.5 rounded">Lite</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#999] bg-[#f5f5f5] px-2 py-1 rounded cursor-pointer hover:bg-[#eee]">대화보기</span>
-                    <span className="text-[10px] text-[#00B6C5] font-semibold bg-[#e8f7f8] px-2 py-1 rounded cursor-pointer hover:bg-[#d5eef0]">전체 복사</span>
-                  </div>
+                  <span className="text-[10px] text-[#999]">3회차 · 14:51</span>
                 </div>
-                {/* 진료 요약 + 녹음시간 */}
-                <div className="flex items-center gap-4 text-[10px] text-[#999] mb-3 pb-2 border-b border-[#f0f0f0]">
-                  <span>진료 요약: 허리 통증 3회차, 침 치료 후 호전</span>
-                  <span className="ml-auto">녹음 2분 34초</span>
-                </div>
-                <div className="bg-white border border-[#e8e8e8] rounded-xl overflow-hidden">
-                  {/* S 섹션 */}
-                  <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="p-3.5 border-b border-[#f5f5f5]">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[11px] font-extrabold text-white bg-[#00B6C5] w-5 h-5 rounded flex items-center justify-center shrink-0">S</span>
-                    </div>
-                    <div className="space-y-1.5 pl-1">
-                      <div>
-                        <span className="text-[10px] font-bold text-[#333]">C/C</span>
-                        <p className="text-[11px] text-[#555] leading-relaxed">#1 허리 통증 (좌측 요추부)
-                          <br />침 치료 후 호전 양상, 일상생활 시 간헐적 통증 잔존</p>
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-bold text-[#333]">O/S</span>
-                        <p className="text-[11px] text-[#555]">요추부 통증, 2025-03-10</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                  {/* O 섹션 */}
-                  <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8 }} className="p-3.5 border-b border-[#f5f5f5]">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-extrabold text-white bg-blue-500 w-5 h-5 rounded flex items-center justify-center shrink-0">O</span>
-                    </div>
-                    <p className="text-[11px] text-[#555] pl-1">요추 ROM 개선 (굴곡 60° → 75°), L4-5 압통 감소</p>
-                  </motion.div>
-                  {/* A 섹션 */}
-                  <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.3 }} className="p-3.5 border-b border-[#f5f5f5]">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-extrabold text-white bg-amber-500 w-5 h-5 rounded flex items-center justify-center shrink-0">A</span>
-                    </div>
-                    <p className="text-[11px] text-[#555] pl-1">요추 염좌 호전 중. 추가 2-3회 치료 권장.</p>
-                  </motion.div>
-                  {/* P 섹션 */}
-                  <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.8 }} className="p-3.5">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-extrabold text-white bg-green-500 w-5 h-5 rounded flex items-center justify-center shrink-0">P</span>
-                    </div>
-                    <p className="text-[11px] text-[#555] pl-1">침 치료 + 부항. 1주 후 재내원 권장.</p>
-                  </motion.div>
-                </div>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }} className="mt-3 flex items-center gap-2">
-                  <span className="text-[11px] text-[#999]">권장 방문일</span>
+
+                {/* 실장 전달 메모 */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mb-3">
+                  <span className="text-[10px] font-semibold text-[#888] mb-1 block">실장 전달 메모</span>
+                  <div className="bg-[#f8f8f8] rounded-lg px-3 py-2 text-[11px] text-[#999] border border-[#eee]">실장에게 전달할 메모</div>
+                </motion.div>
+
+                {/* 권장 방문일 */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex items-center gap-2 mb-3">
+                  <span className="text-[10px] font-semibold text-[#888]">권장 방문일</span>
                   <div className="flex gap-1">
-                    {["1일", "3일", "1주", "2주", "1달"].map((d, i) => (
-                      <span key={d} className={`text-[10px] px-2 py-1 rounded-md font-medium ${i === 2 ? "bg-[#00B6C5] text-white" : "bg-[#f5f5f5] text-[#999]"}`}>{d}</span>
+                    {["1일", "3일", "1주", "2주", "1달", "미정"].map((d, i) => (
+                      <span key={d} className={`text-[9px] px-2 py-1 rounded-md font-medium ${
+                        i === 1 ? "bg-amber-300 text-amber-900 font-bold" : "bg-[#f0f0f0] text-[#999]"
+                      }`}>
+                        {d}{i === 1 && " AI"}
+                      </span>
                     ))}
+                  </div>
+                </motion.div>
+
+                {/* S 섹션 — 파란 점선 테두리 */}
+                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="border-2 border-dashed border-blue-300 rounded-xl p-3 mb-2.5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-[11px] font-extrabold text-white bg-blue-500 w-5 h-5 rounded flex items-center justify-center shrink-0">S</span>
+                  </div>
+                  <div className="space-y-1.5 pl-1">
+                    <div>
+                      <span className="text-[10px] font-bold text-[#333]">C/C</span>
+                      <p className="text-[11px] text-[#555] leading-relaxed">좌측 허리/둔부 통증</p>
+                      <p className="text-[10px] text-[#777] leading-relaxed">좌측 허리, 엉덩이 쪽 지속 통증<br/>앉았다 일어날 때 심함</p>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-bold text-[#333]">O/S</span>
+                      <p className="text-[10px] text-[#777]">좌측 허리/둔부 통증 · 2026.04.03(3일 전)</p>
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-bold text-[#333]">MOT</span>
+                      <p className="text-[10px] text-[#777]">무거운 장바구니 들다가 허리 삐끗</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* O 섹션 — 파란 점선 테두리 */}
+                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9 }} className="border-2 border-dashed border-blue-300 rounded-xl p-3 mb-2.5">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[11px] font-extrabold text-white bg-blue-500 w-5 h-5 rounded flex items-center justify-center shrink-0">O</span>
+                  </div>
+                  <p className="text-[10px] text-[#777] pl-1 leading-relaxed">요추 전굴 40도 · 요추 신전 10도<br/>둔부 압통(+) · 하지직거상(-)<br/>맥: 현맥, 설: 설홍</p>
+                </motion.div>
+
+                {/* A 섹션 — 빨간 점선 테두리 */}
+                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.3 }} className="border-2 border-dashed border-red-300 rounded-xl p-3 mb-2.5">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[11px] font-extrabold text-white bg-red-400 w-5 h-5 rounded flex items-center justify-center shrink-0">A</span>
+                  </div>
+                  <div className="pl-1 space-y-1">
+                    {["S3350 - 요추의 염좌 및 긴장", "M5456 - 요통/요추부", "U238 - 비증(痺證)"].map((code) => (
+                      <div key={code} className="flex items-center gap-1.5">
+                        <CheckCircle2 size={10} className="text-green-500 shrink-0" />
+                        <span className="text-[10px] text-[#555]">{code}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* P 섹션 — 빨간 점선 테두리 + 코치 */}
+                <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.7 }} className="border-2 border-dashed border-red-300 rounded-xl p-3">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[11px] font-extrabold text-white bg-red-400 w-5 h-5 rounded flex items-center justify-center shrink-0">P</span>
+                    <span className="text-[9px] font-bold text-green-700 bg-green-100 px-1.5 py-0.5 rounded ml-auto">코치</span>
+                  </div>
+                  <div className="pl-1 text-[10px] text-[#555] leading-relaxed">
+                    <p>SCHED: 3일 뒤 1회 내원</p>
+                    <p className="text-[#00B6C5] font-semibold">COACH: 무거운 거 당분간 들지 말기</p>
+                    <p className="text-[#00B6C5] font-semibold">COACH: 집에서 핫팩 하기</p>
                   </div>
                 </motion.div>
               </motion.div>
@@ -263,7 +315,7 @@ function HeroFlowAnimation() {
               </motion.div>
             )}
 
-            {/* Step 5: D-1 카톡 — 실제 원장 이름 + 차트 기반 내용 */}
+            {/* Step 5: D-1 카톡 — 생활코칭 중심 */}
             {phase === "katalk" && (
               <motion.div key="katalk" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
                 <div className="flex items-center gap-2 mb-4">
@@ -284,17 +336,17 @@ function HeroFlowAnimation() {
                       <br /><br />
                       <b>이OO 원장</b>입니다.
                       <br />
-                      지난번 내원 시 <b>허리 통증</b>이 좌측 요추부에 집중된다고 말씀하셨죠.
-                      <br />
-                      침 치료 후 ROM이 개선되고 있어서, 이번에는 <b>침 + 부항</b>으로 마무리 치료를 진행할 예정입니다.
+                      지난번 말씀하신 <b>허리 통증</b>, 호전되고 계시죠?
+                      <br /><br />
+                      말씀드렸던 것처럼 <b>무거운 물건은 당분간 피해주시고</b>, <b>핫팩도 꾸준히</b> 해주시면 회복에 도움이 됩니다 :)
                       <br /><br />
                       내일 <b>3월 24일(월)</b> 예약이 잡혀 있는데요,
                       <br />
-                      내원 가능하시면 답변 부탁드려요 :)
+                      내원 가능하시면 답변 부탁드려요!
                     </p>
                   </motion.div>
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="mt-3 flex items-center justify-between">
-                    <p className="text-[10px] text-white/70 font-medium">차트 기반 AI 맞춤 생성</p>
+                    <p className="text-[10px] text-white/70 font-medium">차트 기반 생활코칭 포함</p>
                     <span className="text-[10px] text-white/50">추후 자동 발송 예정</span>
                   </motion.div>
                 </div>
@@ -306,7 +358,7 @@ function HeroFlowAnimation() {
               </motion.div>
             )}
 
-            {/* Step 6: D+1 카톡 — 미내원 환자 팔로업 */}
+            {/* Step 6: D+1 카톡 — 생활코칭 팔로업 */}
             {phase === "katalk_d1" && (
               <motion.div key="katalk_d1" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
                 <div className="flex items-center gap-2 mb-4">
@@ -329,15 +381,15 @@ function HeroFlowAnimation() {
                       <br />
                       어제 예약일이었는데 내원이 어려우셨나 봐요.
                       <br /><br />
-                      지난번 치료 시 <b>좌측 요추부 통증</b>이 호전되고 있었고, <b>ROM도 60°에서 75°로 개선</b>되었습니다.
-                      <br />
-                      마무리 단계인 <b>침 + 부항</b> 치료까지 완료하시면 통증 재발을 막을 수 있습니다.
+                      <b>허리 통증</b>이 호전 중이었는데, 마무리 치료까지 진행하시면 재발 방지에 도움이 됩니다.
+                      <br /><br />
+                      그리고 말씀드렸던 <b>핫팩은 꾸준히 해주시고</b>, <b>앉아있을 때 자세도 신경</b> 써주세요!
                       <br /><br />
                       편하신 시간에 연락 주세요 :)
                     </p>
                   </motion.div>
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="mt-3 flex items-center justify-between">
-                    <p className="text-[10px] text-white/70 font-medium">차트 기반 AI 맞춤 생성</p>
+                    <p className="text-[10px] text-white/70 font-medium">차트 기반 생활코칭 포함</p>
                     <span className="text-[10px] text-white/50">노쇼 방지 팔로업</span>
                   </motion.div>
                 </div>

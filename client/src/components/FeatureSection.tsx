@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, type ReactNode } from "react";
-import { Mic, FileCheck, Inbox, MessageSquare, BarChart3, Brain, Monitor, CheckCircle2, Copy, ArrowRight } from "lucide-react";
+import { Mic, FileCheck, Inbox, MessageSquare, BarChart3, Brain, Monitor, CheckCircle2, Copy, ArrowRight, Volume2, Radio, TrendingUp, Users, Activity } from "lucide-react";
 
 /* ─── Theme / Feature types ─── */
 interface Feature {
@@ -25,42 +25,53 @@ interface Theme {
 function MockupRecording() {
   return (
     <div className="bg-white rounded-xl border border-[#e8e8e8] overflow-hidden shadow-sm">
-      {/* 상단: 원장 상담 녹음 + 저장/실시간 토글 */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#f0f0f0] bg-[#fafafa]">
-        <div className="flex items-center gap-2">
-          <Mic size={13} className="text-[#888]" />
-          <span className="text-[12px] font-bold text-[#333]">원장 상담 녹음</span>
-        </div>
-        <div className="flex items-center gap-1 bg-[#eee] rounded-full px-1 py-0.5">
-          <span className="text-[9px] text-[#999] px-1.5 py-0.5">저장</span>
-          <div className="w-6 h-3 bg-[#00B6C5] rounded-full relative">
-            <div className="absolute right-0.5 top-0.5 w-2 h-2 bg-white rounded-full" />
-          </div>
-          <span className="text-[9px] font-semibold text-[#00B6C5] px-1.5 py-0.5">실시간</span>
-        </div>
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#f0f0f0] bg-[#fafafa]">
+        <Mic size={13} className="text-[#888]" />
+        <span className="text-[12px] font-bold text-[#333]">원장 상담 녹음</span>
       </div>
       <div className="p-4">
-        {/* 녹색 녹음 버튼 */}
-        <button className="w-full flex items-center justify-center gap-2 bg-[#00B6C5] text-white font-semibold py-2.5 rounded-xl mb-3 text-[12px]">
-          <Mic size={14} />
-          이어 녹음하기
-        </button>
-        {/* 환자 정보 */}
-        <div className="mb-2">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[12px] font-bold text-[#111]">김서연</span>
-            <span className="text-[8px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">원장상담</span>
+        {/* 인포그래픽: 원장-환자 진료 */}
+        <div className="flex items-center justify-center gap-6 mb-4">
+          <div className="flex flex-col items-center">
+            <div className="w-11 h-11 rounded-full bg-[#e8f7f8] flex items-center justify-center border-2 border-[#00B6C5]/30">
+              <span className="text-[16px]">👨‍⚕️</span>
+            </div>
+            <span className="text-[9px] font-bold text-[#555] mt-1">원장</span>
           </div>
-          <p className="text-[10px] text-[#999]">123 · 1990-05-12 · <span className="text-[#00B6C5]">수정</span></p>
+          <div className="flex flex-col items-center gap-1.5">
+            <div className="flex items-center gap-0.5">
+              {[0,1,2,3,4].map(i => (
+                <div key={i} className="w-0.5 bg-[#00B6C5] rounded-full" style={{ height: `${8 + Math.random() * 12}px` }} />
+              ))}
+            </div>
+            <div className="flex items-center gap-1 bg-red-500 text-white px-2 py-0.5 rounded-full">
+              <Radio size={8} />
+              <span className="text-[8px] font-bold">녹음 중</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-11 h-11 rounded-full bg-amber-50 flex items-center justify-center border-2 border-amber-200/50">
+              <span className="text-[16px]">🧑</span>
+            </div>
+            <span className="text-[9px] font-bold text-[#555] mt-1">환자</span>
+          </div>
         </div>
+        {/* 실시간 텍스트 */}
         <div className="bg-[#f8fafb] rounded-lg p-3 border border-[#f0f0f0]">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] font-semibold text-[#555]">전체 진료 요약</span>
-            <span className="text-[9px] text-[#00B6C5] font-medium">원장 C/C 보기</span>
+          <div className="flex items-center gap-1.5 mb-2">
+            <Volume2 size={10} className="text-[#00B6C5]" />
+            <span className="text-[9px] font-bold text-[#555]">실시간 텍스트 변환</span>
           </div>
-          <p className="text-[10px] text-[#666] leading-relaxed">
-            원장: 허리 통증 3회차, 침 치료 후 호전 양상
-          </p>
+          <div className="space-y-1.5">
+            <div className="flex gap-1.5">
+              <span className="text-[8px] font-bold text-[#00B6C5] bg-[#e8f7f8] px-1 py-0.5 rounded shrink-0">원장</span>
+              <p className="text-[10px] text-[#555]">허리 통증은 언제부터 시작됐어요?</p>
+            </div>
+            <div className="flex gap-1.5">
+              <span className="text-[8px] font-bold text-amber-600 bg-amber-50 px-1 py-0.5 rounded shrink-0">환자</span>
+              <p className="text-[10px] text-[#555]">일주일 전에 무거운 거 들다가...</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -148,94 +159,248 @@ function MockupInbox() {
   );
 }
 
+/* ─── AI 맞춤 카톡 — 예약확인/D-1/D+1 탭 전환 ─── */
 function MockupKakao() {
+  const [activeTab, setActiveTab] = useState<"t1" | "d1" | "d1plus">("t1");
+
+  const kakaoMessages = {
+    t1: {
+      title: "예약확인",
+      sender: "OO한의원",
+      content: (
+        <p className="text-[11px] text-[#333] leading-relaxed">
+          안녕하세요, 김서연님 😊<br /><br />
+          <b>OO한의원</b>입니다.<br />
+          <b>3월 24일(월) 14:00</b> 예약이 확인되었습니다.<br /><br />
+          내원 시 편하게 방문해 주세요!
+        </p>
+      ),
+    },
+    d1: {
+      title: "D-1 카톡",
+      sender: "OO한의원",
+      content: (
+        <p className="text-[11px] text-[#333] leading-relaxed">
+          안녕하세요, 김서연님 😊<br /><br />
+          <b>이OO 원장</b>입니다.<br />
+          지난번 말씀하신 <b>허리 통증</b>, 호전되고 계시죠?<br /><br />
+          말씀드렸던 것처럼 <b>무거운 물건은 당분간 피해주시고</b>, <b>핫팩도 꾸준히</b> 해주시면 회복에 도움이 됩니다 :)<br /><br />
+          내일 <b>3월 24일(월)</b> 예약이 잡혀 있는데요,<br />
+          내원 가능하시면 답변 부탁드려요!
+        </p>
+      ),
+    },
+    d1plus: {
+      title: "D+1 카톡",
+      sender: "OO한의원",
+      content: (
+        <p className="text-[11px] text-[#333] leading-relaxed">
+          안녕하세요, 김서연님 😊<br /><br />
+          <b>이OO 원장</b>입니다.<br />
+          어제 예약일이었는데 내원이 어려우셨나 봐요.<br /><br />
+          <b>허리 통증</b>이 호전 중이었는데, 마무리 치료까지 진행하시면 재발 방지에 도움이 됩니다.<br /><br />
+          말씀드렸던 <b>핫팩은 꾸준히 해주시고</b>, <b>앉아있을 때 자세도 신경</b> 써주세요!<br /><br />
+          편하신 시간에 연락 주세요 :)
+        </p>
+      ),
+    },
+  };
+
+  const msg = kakaoMessages[activeTab];
+
   return (
     <div className="bg-white rounded-xl border border-[#e8e8e8] overflow-hidden shadow-sm">
       <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#f0f0f0] bg-[#fafafa]">
         <MessageSquare size={14} className="text-amber-500" />
         <span className="text-[12px] font-bold text-[#333]">AI 맞춤 카톡 생성</span>
-        <span className="text-[9px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded ml-auto">D-1 카톡</span>
       </div>
       <div className="p-4">
-        {/* 카톡 미리보기 */}
-        <div className="bg-[#B2C7D9] rounded-xl p-3 max-w-xs mx-auto">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-6 h-6 rounded-full bg-[#FEE500] flex items-center justify-center">
-              <MessageSquare size={10} className="text-[#3C1E1E]" />
-            </div>
-            <span className="text-[11px] font-bold text-white">OO한의원</span>
-          </div>
-          <div className="bg-white rounded-lg p-3">
-                    <p className="text-[11px] text-[#333] leading-relaxed">
-                      안녕하세요, 김서연님 😊<br /><br />
-                      <b>이OO 원장</b>입니다.<br />
-                      지난번 내원 시 <b>허리 통증</b>이 좌측 요추부에 집중되어 있다고 말씀하셨죠.<br />
-                      침 치료 후 ROM이 개선되고 있어서, 이번에는 <b>침 + 부항</b>으로 마무리 치료를 진행할 예정입니다.<br /><br />
-                      내일 <b>3월 24일(월)</b> 예약이 잡혀 있는데요,<br />
-                      내원 가능하시면 답변 부탁드려요 :)
-                    </p>
-          </div>
-        </div>
-        <div className="mt-3 flex items-center justify-between">
-          <span className="text-[10px] text-[#999]">차트 기반 AI 맞춤 생성</span>
-          <span className="text-[10px] text-[#00B6C5] font-semibold">복사하기</span>
-        </div>
-        {/* T1/T2/T3 태스크 체인 */}
-        <div className="mt-3 flex items-center gap-1.5 justify-center">
-          {[
-            { t: "예약확인", label: "", active: false },
-            { t: "D-1 카톡", label: "", active: true },
-            { t: "D+1 카톡", label: "", active: false },
-          ].map((item) => (
-            <span key={item.t} className={`text-[9px] font-bold px-2 py-1 rounded ${item.active ? "bg-blue-500 text-white" : "bg-[#f0f0f0] text-[#999]"}`}>
-              {item.t}{item.label ? ` ${item.label}` : ""}
-            </span>
+        {/* 탭 전환: 예약확인 / D-1 / D+1 */}
+        <div className="flex items-center gap-1.5 mb-4">
+          {([
+            { key: "t1" as const, label: "예약확인", color: "bg-amber-500" },
+            { key: "d1" as const, label: "D-1 카톡", color: "bg-blue-500" },
+            { key: "d1plus" as const, label: "D+1 카톡", color: "bg-rose-500" },
+          ]).map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`text-[10px] font-bold px-3 py-1.5 rounded-lg transition-all ${
+                activeTab === tab.key
+                  ? `${tab.color} text-white shadow-sm`
+                  : "bg-[#f0f0f0] text-[#999] hover:bg-[#e8e8e8]"
+              }`}
+            >
+              {tab.label}
+            </button>
           ))}
+        </div>
+
+        {/* 카톡 미리보기 */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.25 }}
+          >
+            <div className="bg-[#B2C7D9] rounded-xl p-3 max-w-xs mx-auto">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-6 h-6 rounded-full bg-[#FEE500] flex items-center justify-center">
+                  <MessageSquare size={10} className="text-[#3C1E1E]" />
+                </div>
+                <span className="text-[11px] font-bold text-white">{msg.sender}</span>
+              </div>
+              <div className="bg-white rounded-lg p-3">
+                {msg.content}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="mt-3 flex items-center justify-between">
+          <span className="text-[10px] text-[#999]">차트 기반 생활코칭 포함</span>
+          <span className="text-[10px] text-[#00B6C5] font-semibold cursor-pointer">복사하기</span>
         </div>
       </div>
     </div>
   );
 }
 
+/* ─── 경영지표 대시보드 — 실제 그래프 포함 ─── */
 function MockupDashboard() {
-  const bars = [35, 52, 48, 65, 72, 58, 80];
-  const days = ["월", "화", "수", "목", "금", "토", "일"];
+  const weeklyData = [
+    { day: "월", patients: 12, revisit: 8 },
+    { day: "화", patients: 18, revisit: 12 },
+    { day: "수", patients: 15, revisit: 10 },
+    { day: "목", patients: 22, revisit: 16 },
+    { day: "금", patients: 25, revisit: 18 },
+    { day: "토", patients: 20, revisit: 14 },
+  ];
+  const maxVal = 30;
+
   return (
     <div className="bg-white rounded-xl border border-[#e8e8e8] overflow-hidden shadow-sm">
       <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#f0f0f0] bg-[#fafafa]">
         <BarChart3 size={14} className="text-amber-500" />
         <span className="text-[12px] font-bold text-[#333]">경영지표 대시보드</span>
+        <span className="text-[9px] text-[#999] bg-[#f0f0f0] px-1.5 py-0.5 rounded ml-auto">이번 주</span>
       </div>
       <div className="p-4">
         {/* KPI 카드 */}
         <div className="grid grid-cols-3 gap-2 mb-4">
           {[
-            { label: "이번 주 환자", value: "42명", change: "+12%", up: true },
-            { label: "재진율", value: "68%", change: "+5%", up: true },
-            { label: "인박스 처리율", value: "94%", change: "+8%", up: true },
+            { label: "총 환자", value: "112", icon: Users, change: "+12%", up: true, color: "text-[#00B6C5]" },
+            { label: "재진율", value: "68%", icon: TrendingUp, change: "+5%", up: true, color: "text-green-500" },
+            { label: "인박스 처리율", value: "94%", icon: Activity, change: "+8%", up: true, color: "text-amber-500" },
           ].map((kpi) => (
-            <div key={kpi.label} className="bg-[#f8fafb] rounded-lg p-2.5 text-center">
-              <p className="text-[9px] text-[#999] mb-1">{kpi.label}</p>
+            <motion.div
+              key={kpi.label}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-[#f8fafb] rounded-lg p-2.5 text-center border border-[#f0f0f0]"
+            >
+              <kpi.icon size={14} className={`${kpi.color} mx-auto mb-1`} />
+              <p className="text-[8px] text-[#999] mb-0.5">{kpi.label}</p>
               <p className="text-[16px] font-extrabold text-[#111]">{kpi.value}</p>
-              <p className={`text-[9px] font-bold ${kpi.up ? "text-green-500" : "text-red-500"}`}>{kpi.change}</p>
-            </div>
+              <p className={`text-[9px] font-bold ${kpi.up ? "text-green-500" : "text-red-500"}`}>
+                {kpi.up ? "↑" : "↓"} {kpi.change}
+              </p>
+            </motion.div>
           ))}
         </div>
-        {/* 차트 */}
-        <div className="flex items-end gap-2 h-20 px-1">
-          {bars.map((h, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-1">
-              <motion.div
-                className="w-full bg-[#00B6C5] rounded-t"
-                initial={{ height: 0 }}
-                whileInView={{ height: `${h}%` }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.4 }}
-                style={{ maxHeight: `${h}%` }}
-              />
-              <span className="text-[8px] text-[#999]">{days[i]}</span>
+
+        {/* 주간 환자 수 + 재진 환자 바 차트 */}
+        <div className="mb-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] font-bold text-[#555]">주간 환자 현황</span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 rounded-full bg-[#00B6C5]" />
+                <span className="text-[8px] text-[#999]">전체</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 rounded-full bg-[#00B6C5]/30" />
+                <span className="text-[8px] text-[#999]">재진</span>
+              </div>
             </div>
-          ))}
+          </div>
+          <div className="flex items-end gap-2 h-24 px-1">
+            {weeklyData.map((d, i) => (
+              <div key={d.day} className="flex-1 flex flex-col items-center gap-0.5">
+                <div className="w-full relative" style={{ height: "80px" }}>
+                  {/* 전체 환자 바 */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 bg-[#00B6C5] rounded-t"
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${(d.patients / maxVal) * 100}%` }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.4 }}
+                  />
+                  {/* 재진 환자 바 (겹침) */}
+                  <motion.div
+                    className="absolute bottom-0 left-[15%] right-[15%] bg-[#00B6C5]/30 rounded-t"
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${(d.revisit / maxVal) * 100}%` }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 + 0.2, duration: 0.4 }}
+                  />
+                  {/* 숫자 */}
+                  <motion.span
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 text-[8px] font-bold text-[#00B6C5]"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 + 0.4 }}
+                  >
+                    {d.patients}
+                  </motion.span>
+                </div>
+                <span className="text-[8px] text-[#999]">{d.day}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 재진율 트렌드 라인 */}
+        <div className="bg-[#f8fafb] rounded-lg p-2.5 border border-[#f0f0f0]">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[9px] font-bold text-[#555]">재진율 추이</span>
+            <span className="text-[9px] text-green-500 font-bold">↑ 5% 상승</span>
+          </div>
+          <svg viewBox="0 0 200 40" className="w-full h-8">
+            <motion.path
+              d="M 0 35 L 33 28 L 66 30 L 100 22 L 133 18 L 166 15 L 200 10"
+              fill="none"
+              stroke="#00B6C5"
+              strokeWidth="2"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2 }}
+            />
+            <motion.path
+              d="M 0 35 L 33 28 L 66 30 L 100 22 L 133 18 L 166 15 L 200 10 L 200 40 L 0 40 Z"
+              fill="url(#trendGrad)"
+              opacity="0.15"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 0.15 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 }}
+            />
+            <defs>
+              <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#00B6C5" />
+                <stop offset="100%" stopColor="#00B6C5" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div className="flex justify-between text-[7px] text-[#bbb] mt-0.5">
+            <span>4주 전</span><span>3주 전</span><span>2주 전</span><span>지난주</span><span>이번주</span>
+          </div>
         </div>
       </div>
     </div>
@@ -327,8 +492,8 @@ const themes: Theme[] = [
         icon: MessageSquare,
         label: "AI 맞춤 카톡",
         title: "차트 기반 맞춤 카톡,\nAI가 자동 생성합니다.",
-        desc: "예약확인, D-1 리마인드, D+1 사후관리 카톡을 AI가 차트 내용 기반으로 맞춤 생성합니다.",
-        bullets: ["예약확인 · D-1 리마인드 · D+1 사후관리", "차트 기반 AI 맞춤 메시지", "추후 자동 발송 업데이트 예정"],
+        desc: "예약확인, D-1 리마인드, D+1 사후관리 카톡을 AI가 차트 내용과 생활코칭 기반으로 맞춤 생성합니다.",
+        bullets: ["예약확인 · D-1 리마인드 · D+1 사후관리", "차트 기반 생활코칭 포함 메시지", "추후 자동 발송 업데이트 예정"],
         mockup: MockupKakao,
       },
     ],

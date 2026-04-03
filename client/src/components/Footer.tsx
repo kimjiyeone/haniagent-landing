@@ -39,6 +39,7 @@ export default function Footer() {
                   { label: "문의하기", href: "mailto:contact@hanitek.kr" },
                   { label: "회사 소개", href: "https://www.hanitek.kr", ext: true },
                   { label: "개인정보처리방침", href: "#" },
+                  { label: "이용약관", href: "#" },
                 ].map((l) => (
                   <li key={l.label}>
                     <a
@@ -55,13 +56,29 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-[#f0f0f0] flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-[11px] text-[#bbb]">
-            &copy; {new Date().getFullYear()} 주식회사 하니텍. All rights reserved.
-          </p>
-          <p className="text-[11px] text-[#bbb]">
-            강원도 원주시 | 주식회사 하니텍
-          </p>
+        {/* 회사 정보 */}
+        <div className="mt-8 pt-6 border-t border-[#f0f0f0]">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+            <div className="space-y-1">
+              <p className="text-[12px] font-semibold text-[#888]">주식회사 하니텍</p>
+              <div className="text-[11px] text-[#bbb] leading-relaxed space-y-0.5">
+                <p>사업자등록번호: 242-87-03859</p>
+                <p>통신판매번호: 2025-강원원주-01906</p>
+                <p>대표자: 김지현</p>
+                <p>주소: 강원특별자치도 원주시 동부순환로 261, 4층 4호-에이56 (행구동)</p>
+                <p>연락처: 010-3357-0527</p>
+              </div>
+            </div>
+            <div className="text-right space-y-1.5">
+              <p className="text-[11px] text-[#bbb]">
+                &copy; {new Date().getFullYear()} 주식회사 하니텍. All rights reserved.
+              </p>
+              <div className="flex items-center gap-3 justify-end">
+                <a href="#" className="text-[11px] text-[#999] hover:text-[#666] transition-colors underline">개인정보처리방침</a>
+                <a href="#" className="text-[11px] text-[#999] hover:text-[#666] transition-colors underline">이용약관</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

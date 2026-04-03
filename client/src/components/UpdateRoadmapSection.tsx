@@ -4,7 +4,6 @@ import { MessageCircle, Zap, RefreshCw, ArrowRight, Rocket, Calendar, Sparkles }
 /*
  * UpdateRoadmapSection
  * "함께 만들어가는 시스템" — 원장님 피드백 기반 빠른 업데이트 약속
- * 사업계획서 로드맵 기반 업데이트
  */
 
 const process = [
@@ -33,30 +32,38 @@ const roadmapItems = [
     date: "2026 Q2",
     label: "진행 중",
     labelColor: "bg-[#00B6C5] text-white",
-    title: "AI 상담 피드백 & 환자 유형 분석",
+    title: "환자유형별 AI 피드백 고도화",
     comingSoon: true,
-    desc: "환자 유형 자동 분류 및 맞춤 소통 팁 제안 기능",
+    desc: "환자 유형 자동 분류 및 유형별 맞춤 소통 팁·치료 접근법 제안",
+  },
+  {
+    date: "2026 Q2",
+    label: "진행 중",
+    labelColor: "bg-[#00B6C5] text-white",
+    title: "실장 상담 차팅",
+    comingSoon: true,
+    desc: "실장의 전화/대면 상담 내용도 음성 녹음 → 자동 차팅으로 기록·관리",
   },
   {
     date: "2026 Q3",
     label: "예정",
     labelColor: "bg-amber-100 text-amber-700",
-    title: "환자별 통합 운영 보드",
-    desc: "칸반/캘린더 뷰로 환자별 치료 여정을 한눈에 관리",
+    title: "자연어 환자 필터링 & 맞춤 AI 카톡 발송",
+    desc: "\"3회 이상 내원한 허리 환자\" 같은 자연어로 환자를 필터링하고, 맞춤형 AI 카톡을 일괄 발송",
   },
   {
-    date: "2026 Q4",
+    date: "2026 Q3–Q4",
     label: "예정",
     labelColor: "bg-amber-100 text-amber-700",
-    title: "카카오 알림톡 연동 자동 발송",
-    desc: "예약확인/D-1/D+1 카톡을 수동 복붙 없이 알림톡으로 자동 발송",
+    title: "처방관리 및 카톡 연동 확장",
+    desc: "처방 정보 관리 + 처방 기반 카톡 발송 (예약확인·D-1·D+1 이후 추가 터치포인트)",
   },
   {
     date: "2026 Q4",
     label: "예정",
     labelColor: "bg-blue-100 text-blue-700",
-    title: "AI 클리닉 운영 자동화 v1.5",
-    desc: "경영지표 고도화 + 환자 세그먼트별 마케팅 자동화",
+    title: "카카오 알림톡 자동 발송",
+    desc: "예약확인/D-1/D+1 카톡을 수동 복붙 없이 알림톡으로 자동 발송",
   },
 ];
 
@@ -138,20 +145,20 @@ export default function UpdateRoadmapSection() {
                 transition={{ duration: 0.3, delay: i * 0.08 }}
                 className="flex gap-4 relative"
               >
-                <div className="flex flex-col items-center shrink-0 w-20">
+                <div className="flex flex-col items-center shrink-0 w-24">
                   <span className="text-[11px] text-[#999] font-medium whitespace-nowrap">{item.date}</span>
-                  <div className={`w-2.5 h-2.5 rounded-full mt-2 ${i === 0 ? "bg-[#00B6C5] ring-4 ring-[#00B6C5]/20" : "bg-[#ddd]"}`} />
+                  <div className={`w-2.5 h-2.5 rounded-full mt-2 ${i <= 1 ? "bg-[#00B6C5] ring-4 ring-[#00B6C5]/20" : "bg-[#ddd]"}`} />
                   {i < roadmapItems.length - 1 && (
                     <div className="w-px flex-1 bg-[#eee] mt-1" />
                   )}
                 </div>
                 <div className="pb-6 flex-1">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${item.labelColor}`}>
                       {item.label}
                     </span>
                     <h4 className="text-[14px] font-bold text-[#111]">{item.title}</h4>
-                    {(item as any).comingSoon && (
+                    {item.comingSoon && (
                       <span className="text-[9px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">Coming Soon</span>
                     )}
                   </div>
