@@ -177,7 +177,7 @@ export default function TutorialHub() {
                     <h3 className="text-[18px] font-extrabold text-[#111]">실장님 실전 가이드</h3>
                     <p className="text-[12px] text-[#999]">
                       <Clock size={10} className="inline mr-1" />
-                      6 Steps · 약 3분
+                      7 Steps · 약 3분
                     </p>
                   </div>
                 </div>

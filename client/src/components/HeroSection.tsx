@@ -253,16 +253,18 @@ function HeroFlowAnimation() {
                   </div>
                 </motion.div>
 
-                {/* P 섹션 — 빨간 점선 테두리 + 코치 */}
+                {/* P 섹션 — 빨간 점선 테두리 + 코치 + 관용구 */}
                 <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.7 }} className="border-2 border-dashed border-red-300 rounded-xl p-3">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-[11px] font-extrabold text-white bg-red-400 w-5 h-5 rounded flex items-center justify-center shrink-0">P</span>
-                    <span className="text-[9px] font-bold text-green-700 bg-green-100 px-1.5 py-0.5 rounded ml-auto">코치</span>
+                    <span className="text-[9px] font-bold text-green-700 bg-green-100 px-1.5 py-0.5 rounded">코치</span>
+                    <span className="text-[9px] font-bold text-violet-700 bg-violet-100 px-1.5 py-0.5 rounded ml-auto cursor-pointer hover:bg-violet-200 transition-colors">📋 관용구</span>
                   </div>
                   <div className="pl-1 text-[10px] text-[#555] leading-relaxed">
                     <p>SCHED: 3일 뒤 1회 내원</p>
                     <p className="text-[#00B6C5] font-semibold">COACH: 무거운 거 당분간 들지 말기</p>
                     <p className="text-[#00B6C5] font-semibold">COACH: 집에서 핫팩 하기</p>
+                    <p className="text-[#00B6C5] font-semibold">COACH: 앉아있을 때 허리 펴고 쿠션 받치기</p>
                   </div>
                 </motion.div>
               </motion.div>
@@ -332,17 +334,25 @@ function HeroFlowAnimation() {
                   </div>
                   <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-white rounded-xl p-4 shadow-sm">
                     <p className="text-[13px] text-[#333] leading-relaxed">
-                      안녕하세요, 김서연님 😊
+                      안녕하세요, 서연님 😊
                       <br /><br />
-                      <b>이OO 원장</b>입니다.
+                      OO한의원 담당의 <b>이OO 원장</b>입니다.
                       <br />
-                      지난번 말씀하신 <b>허리 통증</b>, 호전되고 계시죠?
+                      오늘 치료 잘 받으셨는지 모르겠네요.
                       <br /><br />
-                      말씀드렸던 것처럼 <b>무거운 물건은 당분간 피해주시고</b>, <b>핫팩도 꾸준히</b> 해주시면 회복에 도움이 됩니다 :)
+                      아까 말씀드린 부분 중에서 한두 가지만 다시 적어드릴게요.
                       <br /><br />
-                      내일 <b>3월 24일(월)</b> 예약이 잡혀 있는데요,
+                      <b>핫팩은 하루에 2~3번, 15분 정도</b> 해주시면 됩니다. 혈류 순환이 좋아져서 회복이 빨라집니다.
+                      <br /><br />
+                      <b>무거운 물건은 당분간 피해주시고</b>, 꼭 들어야 할 때는 허리가 아니라 무릎을 굽혀서 들어주시면 됩니다.
+                      <br /><br />
+                      📅 <b>3월 24일(월) 14:00</b>에 예약 잡혀 있습니다.
+                      <br /><br />
+                      다음에 오실 때도 최선을 다해 진료하겠습니다. 그때 뵙겠습니다!
                       <br />
-                      내원 가능하시면 답변 부탁드려요!
+                      불편한 점 생기시면 언제든 편하게 연락 주세요 😊
+                      <br /><br />
+                      이OO 원장 드림
                     </p>
                   </motion.div>
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="mt-3 flex items-center justify-between">
@@ -375,17 +385,19 @@ function HeroFlowAnimation() {
                   </div>
                   <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-white rounded-xl p-4 shadow-sm">
                     <p className="text-[13px] text-[#333] leading-relaxed">
-                      안녕하세요, 김서연님 😊
+                      안녕하세요, 서연님 😊
                       <br /><br />
-                      <b>이OO 원장</b>입니다.
+                      OO한의원 담당의 <b>이OO 원장</b>입니다.
                       <br />
-                      어제 예약일이었는데 내원이 어려우셨나 봐요.
+                      어제 내원 예정이셨는데 못 오셨더라고요. 별일 없으신지 걱정이 돼서 연락드렸어요.
                       <br /><br />
-                      <b>허리 통증</b>이 호전 중이었는데, 마무리 치료까지 진행하시면 재발 방지에 도움이 됩니다.
+                      요즘 허리 쪽 통증이 심해지지는 않으셨을지 걱정이 됩니다.
                       <br /><br />
-                      그리고 말씀드렸던 <b>핫팩은 꾸준히 해주시고</b>, <b>앉아있을 때 자세도 신경</b> 써주세요!
+                      말씀드렸던 핫팩, 틈틈이 해주고 계시면 좋겠습니다 🙂
                       <br /><br />
-                      편하신 시간에 연락 주세요 :)
+                      불편하신 부분이 있으시면 참지 마시고 편하게 오셔도 됩니다. 예약 없이 오셔도 괜찮습니다.
+                      <br /><br />
+                      이OO 원장 드림 🙏
                     </p>
                   </motion.div>
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="mt-3 flex items-center justify-between">
@@ -546,7 +558,7 @@ export default function HeroSection() {
           className="mt-10 sm:mt-16"
         >
           <p className="text-center text-[12px] sm:text-[13px] text-[#999] font-medium mb-4 sm:mb-5">
-            전국 한의원에서 사용 중
+            탁월한 성과를 가진 한의원들의 선택
           </p>
           <div className="space-y-3">
             <ClinicMarquee clinics={clinicsRow1} />

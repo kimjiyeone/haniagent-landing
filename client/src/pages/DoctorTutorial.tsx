@@ -496,7 +496,7 @@ function StepSOAPAndDate({ onNext }: { onNext: () => void }) {
     { key: "S", title: "Subjective", content: "허리 통증 2주 전 발생. 좌측 요부 중심. 앉아있을 때 악화. 기침 시 통증 없음.", color: "bg-blue-50 border-blue-200 text-blue-700" },
     { key: "O", title: "Objective", content: "요추 ROM: 굴곡 60°(제한), 신전 20°(제한). L4-5 좌측 압통(+). SLR(-).", color: "bg-green-50 border-green-200 text-green-700" },
     { key: "A", title: "Assessment", content: "요추 염좌 의심. 디스크 가능성 낮음.", color: "bg-amber-50 border-amber-200 text-amber-700" },
-    { key: "P", title: "Plan", content: "침 치료(요부 아시혈 + 위중, 환도) + 부항. 1주 후 재방문 권장.", color: "bg-purple-50 border-purple-200 text-purple-700" },
+    { key: "P", title: "Plan", content: "침 치료(요부 아시혈 + 위중, 환도) + 부항. 1주 후 재방문 권장.", color: "bg-purple-50 border-purple-200 text-purple-700", hasPhrase: true },
   ]);
 
   const dateOptions = ["1일후", "3일후", "1주", "2주", "1달", "직접", "미정"];
@@ -535,13 +535,20 @@ function StepSOAPAndDate({ onNext }: { onNext: () => void }) {
                   </span>
                   <span className="text-[11px] text-[#999]">{s.title}</span>
                 </div>
-                <button
-                  onClick={() => setEditingSOAP(editingSOAP === s.key ? null : s.key)}
-                  className="flex items-center gap-1 text-[10px] font-semibold text-[#00B6C5] hover:text-[#00a3b1] transition-colors"
-                >
-                  <Edit3 size={10} />
-                  {editingSOAP === s.key ? "완료" : "수정"}
-                </button>
+                <div className="flex items-center gap-2">
+                  {(s as any).hasPhrase && (
+                    <button className="flex items-center gap-1 text-[10px] font-semibold text-purple-500 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded-md hover:bg-purple-100 transition-colors">
+                      📝 관용구
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setEditingSOAP(editingSOAP === s.key ? null : s.key)}
+                    className="flex items-center gap-1 text-[10px] font-semibold text-[#00B6C5] hover:text-[#00a3b1] transition-colors"
+                  >
+                    <Edit3 size={10} />
+                    {editingSOAP === s.key ? "완료" : "수정"}
+                  </button>
+                </div>
               </div>
               {editingSOAP === s.key ? (
                 <textarea
@@ -609,6 +616,20 @@ function StepSOAPAndDate({ onNext }: { onNext: () => void }) {
             className="w-full bg-white text-[13px] text-[#555] placeholder:text-[#ccc] border border-[#e8e8e8] rounded-lg px-3 py-2.5 outline-none focus:border-[#00B6C5]"
           />
           <p className="text-[10px] text-[#bbb] mt-1.5">실장님이 환자에게 안내할 때 참고하는 메모입니다</p>
+        </motion.div>
+
+        {/* 생활코칭 메모 */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
+          className="bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3 mb-5"
+        >
+          <p className="text-[12px] font-semibold text-[#00B6C5] mb-2 flex items-center gap-1.5">
+            🌿 생활코칭 메모 <span className="text-[10px] font-normal text-[#bbb]">(카톡에 반영됨)</span>
+          </p>
+          <div className="bg-white border border-[#e8e8e8] rounded-lg px-3 py-2.5">
+            <p className="text-[12px] text-[#555] leading-relaxed">앉아있을 때 요추 쿠션 받치기, 자기 전 핫팩 10~15분</p>
+          </div>
+          <p className="text-[10px] text-[#999] mt-1.5">AI가 이 내용을 분석해 카톡 메시지에 자연스럽게 녹여냅니다</p>
         </motion.div>
 
         <p className="text-[12px] text-[#bbb] text-center mb-4">

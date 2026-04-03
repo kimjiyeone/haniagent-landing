@@ -17,7 +17,7 @@ const process = [
     icon: Zap,
     step: "02",
     title: "빠르게 반영합니다",
-    desc: "전담 개발팀이 피드백을 분석하고, 우선순위에 따라 즉시 개발에 착수합니다.",
+    desc: "전담 카이스트 개발팀이 피드백을 분석하고, 우선순위에 따라 즉시 개발에 착수합니다.",
   },
   {
     icon: RefreshCw,
@@ -34,7 +34,7 @@ const roadmapItems = [
     labelColor: "bg-[#00B6C5] text-white",
     title: "환자유형별 AI 피드백 고도화",
     comingSoon: true,
-    desc: "환자 유형 자동 분류 및 유형별 맞춤 소통 팁·치료 접근법 제안",
+    desc: "상담 기반 환자 유형 분류 및 유형별 맞춤 대응 전략 피드백",
   },
   {
     date: "2026 Q2",
@@ -42,21 +42,21 @@ const roadmapItems = [
     labelColor: "bg-[#00B6C5] text-white",
     title: "실장 상담 차팅",
     comingSoon: true,
-    desc: "실장의 전화/대면 상담 내용도 음성 녹음 → 자동 차팅으로 기록·관리",
+    desc: "실장 상담 내용도 음성 녹음 → 자동 차팅으로 기록·관리",
   },
   {
     date: "2026 Q3",
     label: "예정",
     labelColor: "bg-amber-100 text-amber-700",
     title: "자연어 환자 필터링 & 맞춤 AI 카톡 발송",
-    desc: "\"3회 이상 내원한 허리 환자\" 같은 자연어로 환자를 필터링하고, 맞춤형 AI 카톡을 일괄 발송",
+    desc: "\"3회 이상 내원한 20대 식욕부진 여성 환자\" 같은 자연어로 환자를 필터링, 맞춤형 AI 카톡을 일괄 발송",
   },
   {
     date: "2026 Q3–Q4",
     label: "예정",
     labelColor: "bg-amber-100 text-amber-700",
     title: "처방관리 및 카톡 연동 확장",
-    desc: "처방 정보 관리 + 처방 기반 카톡 발송 (예약확인·D-1·D+1 이후 추가 터치포인트)",
+    desc: "처방 데이터 관리 + 처방 기반 카톡 발송 (예약확인·D-1·D+1 이후 추가 터치포인트)",
   },
   {
     date: "2026 Q4",

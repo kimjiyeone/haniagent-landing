@@ -130,7 +130,7 @@ function Step2({ onPrev, onNext }: { onPrev: () => void; onNext: () => void }) {
     { icon: FileText, label: "AI 차트 생성", desc: "녹음이 끝나면 AI가 자동으로 SOAP 차트를 작성합니다. 원장님이 확인하고 수정할 수 있습니다.", role: "자동", color: "bg-amber-500" },
     { icon: CheckCircle2, label: "확정", desc: "원장님이 차트를 확정하면, 실장님 인박스에 태스크가 자동 생성됩니다.", role: "원장", color: "bg-green-500" },
     { icon: Inbox, label: "인박스 처리", desc: "실장님이 인박스에서 태스크를 순서대로 처리합니다. 예약 안내, 카톡 발송, EMR 입력 등.", role: "실장", color: "bg-blue-500" },
-    { icon: MessageSquare, label: "카톡 발송", desc: "AI가 차트를 분석해 환자별 맞춤 카톡을 생성합니다. 실장님이 복사해서 카카오톡 앱에서 발송합니다.", role: "실장", color: "bg-purple-500" },
+    { icon: MessageSquare, label: "카톡 발송", desc: "AI가 원장님의 생활코칭 메모를 분석해 환자별 맞춤 카톡을 생성합니다. 예약확인·D-1·D+1 세 가지 타입으로 자동 생성됩니다.", role: "실장", color: "bg-purple-500" },
     { icon: Calendar, label: "재방문", desc: "환자가 예약일에 다시 방문하면, 체크인부터 루프가 반복됩니다.", role: "루프", color: "bg-[#00B6C5]" },
   ];
 

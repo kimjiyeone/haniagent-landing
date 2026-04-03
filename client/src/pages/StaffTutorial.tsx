@@ -430,9 +430,9 @@ function StepTaskTypes({ onPrev, onNext }: { onPrev: () => void; onNext: () => v
       color: "border-green-200 bg-green-50/70", tagColor: "bg-green-500", iconColor: "text-green-500",
     },
     {
-      type: "D+1카톡", name: "D+1 팔로업 카톡", icon: MessageSquare,
+      type: "D+1카톡", name: "D+1 미내원 팔로업 카톡", icon: MessageSquare,
       when: "예약일 다음 날 자동 생성",
-      what: "어제 예약이었지만 미방문한 환자에게 리마인드 카톡을 보냅니다.",
+      what: "어제 예약이었지만 미방문한 환자에게 걱정 안부 카톡을 보냅니다. 재촉이 아닌 순수 안부 톤입니다.",
       color: "border-amber-200 bg-amber-50/70", tagColor: "bg-amber-500", iconColor: "text-amber-500",
     },
   ];
@@ -600,7 +600,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
               <span className="text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">지남</span>
               <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">D+1카톡</span>
             </div>
-            <p className="text-[12px] text-[#888] mb-2">D+1 리마인드 · 목 통증 · 3월 9일 예정</p>
+            <p className="text-[12px] text-[#888] mb-2">미내원 팔로업 · 목 통증 · 3월 9일 예정이었으나 미방문</p>
 
             {phase === "overdueClicked" && (
               <motion.div
@@ -684,7 +684,7 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
   const [copied, setCopied] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
-  const kakaoMessage = "안녕하세요 김서연님, OO한의원입니다.\n\n원장님께서 김서연님의 허리 통증 치료 경과를 위해 3월 17일경 내원을 권해 주셨어요.\n\n예약 도와드릴까요? 😊";
+  const kakaoMessage = "안녕하세요, 서연님 😊\n\n하니한의원 담당의 이정훈 원장입니다.\n\n오늘 치료 잘 받으셨는지 궁금합니다.\n\n아까 말씀드린 부분 중에서 한두 가지만 다시 적어드릴게요.\n\n앉아 계실 때 허리 뒤에 쿠션이나 수건을 말아서 받쳐주시면 됩니다. 요추 전만이 유지돼야 디스크 압력이 줄어요.\n\n자기 전에 핫팩을 10~15분 정도 대주시면 됩니다. 혈류 순환에 도움이 됩니다.\n\n📅 3월 17일 (월) 오전 10시에 뵙겠습니다.\n\n다음에 오실 때도 최선을 다해 진료하겠습니다. 그때 뵙겠습니다!\n\n불편한 점 생기시면 언제든 편하게 연락 주세요 😊\n\n이정훈 원장 드림";
 
   const handleCopy = () => {
     setCopied(true);
@@ -701,7 +701,7 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
     >
       <div className="max-w-md w-full">
         <h2 className="text-[20px] font-extrabold text-[#111] mb-1">카톡 내용 복사 → 발송</h2>
-        <p className="text-[13px] text-[#999] mb-5">AI가 차트를 분석해 생성한 맞춤형 메시지입니다</p>
+        <p className="text-[13px] text-[#999] mb-5">AI가 진료 차트의 생활코칭을 분석해 생성한 맞춤형 메시지입니다</p>
 
         {/* Kakao-style message preview */}
         <div className="bg-[#B2C7D9] rounded-2xl p-5 mb-4">
@@ -709,7 +709,7 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
             <div className="w-8 h-8 rounded-full bg-[#FEE500] flex items-center justify-center">
               <MessageSquare size={14} className="text-[#3C1E1E]" />
             </div>
-            <span className="text-[13px] font-bold text-[#111]">OO한의원</span>
+            <span className="text-[13px] font-bold text-[#111]">하니한의원 이정훈 원장</span>
           </div>
           <div className="bg-white rounded-xl p-4">
             <p className="text-[13px] text-[#333] leading-relaxed whitespace-pre-line">
