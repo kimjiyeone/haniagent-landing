@@ -277,7 +277,7 @@ function HeroFlowAnimation() {
                   <CheckCircle2 size={40} className="text-green-500" />
                 </motion.div>
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-[18px] font-extrabold text-[#111] mb-2">차트 확정 완료!</motion.p>
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[13px] text-[#888] text-center">원장님은 여기까지. 버튼 2번 + 확정 1탭.<br/>나머지는 시스템이 알아서 합니다.</motion.p>
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-[13px] text-[#888] text-center">원장님은 여기까지. 버튼 1번 + 확정 1탭.<br/>나머지는 시스템이 알아서 합니다.</motion.p>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }} className="mt-5 flex items-center gap-3 text-[11px] text-[#aaa]">
                   <span className="flex items-center gap-1"><Inbox size={12} /> 예약확인 태스크 생성 중...</span>
                   <span className="flex items-center gap-1"><FileText size={12} /> EMR 대기열 추가...</span>
@@ -340,7 +340,7 @@ function HeroFlowAnimation() {
                       <br />
                       오늘 치료 잘 받으셨는지 모르겠네요.
                       <br /><br />
-                      아까 말씀드린 부분 중에서 한두 가지만 다시 적어드릴게요.
+                      아까 말씀드린 부분 중에서 한두 가지만 다시 말씀드릴게요.
                       <br /><br />
                       <b>핫팩은 하루에 2~3번, 15분 정도</b> 해주시면 됩니다. 혈류 순환이 좋아져서 회복이 빨라집니다.
                       <br /><br />
@@ -515,7 +515,7 @@ export default function HeroSection() {
           <h1 className="text-[26px] sm:text-[36px] md:text-[48px] lg:text-[52px] font-extrabold text-[#111] leading-[1.15] tracking-tight">
             진료에만 집중할 수 있도록,
             <br />
-            <span className="text-[#00B6C5]">가장 똑똑한 AI 시스템</span>
+            <span className="text-[#00B6C5]">가장 똑똑한 AI 에이전트</span>
           </h1>
           <p className="mt-4 sm:mt-5 text-[14px] sm:text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-md sm:max-w-lg mx-auto">
             녹음 한 번이면 SOAP 차트 작성부터 환자/직원 관리,

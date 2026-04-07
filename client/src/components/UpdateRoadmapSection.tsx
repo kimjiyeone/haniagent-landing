@@ -59,9 +59,9 @@ const roadmapItems = [
     desc: "처방 데이터 관리 + 처방 기반 카톡 발송 (예약확인·D-1·D+1 이후 추가 터치포인트)",
   },
   {
-    date: "2026 Q4",
-    label: "예정",
-    labelColor: "bg-blue-100 text-blue-700",
+    date: "2026 Q2",
+    label: "진행 중",
+    labelColor: "bg-[#00B6C5] text-white",
     title: "카카오 알림톡 자동 발송",
     desc: "예약확인/D-1/D+1 카톡을 수동 복붙 없이 알림톡으로 자동 발송",
   },

@@ -64,7 +64,7 @@ export default function Footer() {
               <div className="text-[11px] text-[#bbb] leading-relaxed space-y-0.5">
                 <p>사업자등록번호: 242-87-03859</p>
                 <p>통신판매번호: 2025-강원원주-01906</p>
-                <p>대표자: 김지현</p>
+                <p>대표자: 김지연</p>
                 <p>주소: 강원특별자치도 원주시 동부순환로 261, 4층 4호-에이56 (행구동)</p>
                 <p>연락처: 010-3357-0527</p>
               </div>

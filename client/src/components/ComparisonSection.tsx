@@ -4,13 +4,13 @@ import { X, Check, TrendingUp, Award, FileCheck, Users } from "lucide-react";
 const rows = [
   { item: "차트 작성", before: "원장이 직접 타이핑", after: "녹음 → AI 자동 생성" },
   { item: "다음 내원 관리", before: "직원이 기억에 의존", after: "시스템이 자동 추적" },
-  { item: "환자 리마인드", before: "누락 빈번, 수동 연락", after: "D-1 카톡 자동 생성" },
+  { item: "환자 리마인드", before: "누락 빈번, 수동 연락", after: "D-1/D+1카톡 자동 생성" },
   { item: "신입 직원 교육", before: "원장이 직접, 수 주 소요", after: "인박스 따라하면 Day 1" },
-  { item: "EMR 입력", before: "차트 보고 다시 타이핑", after: "복사 → 붙여넣기 1초" },
+  { item: "EMR 입력", before: "환자 눈맞춤 없이 타이핑, 야근", after: "복사 → 붙여넣기 1초" },
 ];
 
 const stats = [
-  { icon: TrendingUp, value: "80%↓", label: "차팅 시간 단축", color: "text-[#00B6C5]" },
+  { icon: TrendingUp, value: "88%+", label: "차팅 시간 단축", color: "text-[#00B6C5]" },
   { icon: Users, value: "Day 1", label: "신입 즉시 투입", color: "text-blue-600" },
   { icon: FileCheck, value: "3,000+", label: "누적 차트 생성", color: "text-amber-600" },
   { icon: Award, value: "장관상", label: "보건복지부 수상", color: "text-green-600" },
