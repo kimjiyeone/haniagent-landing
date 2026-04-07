@@ -233,7 +233,7 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
 
   const handleCheckin = () => {
     setPhase("checkedIn");
-    setToastMsg("✅ 김서연 체크인 완료 → 원장님 화면에 환자가 나타났습니다");
+    setToastMsg("김서연 체크인 완료 → 원장님 화면에 환자가 나타났습니다");
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
     setTimeout(() => setPhase("newBtn"), 2000);
@@ -258,7 +258,7 @@ function StepCheckin({ onNext }: { onNext: () => void }) {
 
   const handleRegister = () => {
     setPhase("newDone");
-    setToastMsg("✅ 박민수 Lite 환자카드 생성 + 체크인 완료");
+    setToastMsg("박민수 Lite 환자카드 생성 + 체크인 완료");
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
     setTimeout(onNext, 1800);
@@ -535,7 +535,7 @@ function StepTaskTypes({ onPrev, onNext }: { onPrev: () => void; onNext: () => v
                   AI가 원장님의 <span className="font-bold">진료 차트를 분석</span>해서 환자마다 다른 내용의 카톡 메시지를 자동으로 만들어줍니다.
                 </p>
                 <p className="text-[12px] text-[#888] mt-2">
-                  🚀 추후 자동 발송 기능이 추가될 예정입니다. 현재는 복사 후 카카오톡 앱에서 직접 발송해주세요.
+                  추후 자동 발송 기능이 추가될 예정입니다. 현재는 복사 후 카카오톡 앱에서 직접 발송해주세요.
                 </p>
               </div>
 
@@ -632,7 +632,7 @@ function StepInbox({ onNext }: { onNext: () => void }) {
             {/* 원장 메모 */}
             <div className="bg-[#fafafa] border border-[#e8e8e8] rounded-lg px-3 py-2 mb-3">
               <p className="text-[11px] text-[#888]">
-                <span className="font-semibold text-[#666]">📌 원장 메모:</span> 다음 내원 시 X-ray 촬영 필요
+                <span className="font-semibold text-[#666]">원장 메모:</span> 다음 내원 시 X-ray 촬영 필요
               </p>
             </div>
             <div className="flex gap-2">
@@ -684,7 +684,7 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
   const [copied, setCopied] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
-  const kakaoMessage = "안녕하세요, 서연님 😊\n\n하니한의원 담당의 이정훈 원장입니다.\n\n오늘 치료 잘 받으셨는지 궁금합니다.\n\n아까 말씀드린 부분 중에서 한두 가지만 다시 적어드릴게요.\n\n앉아 계실 때 허리 뒤에 쿠션이나 수건을 말아서 받쳐주시면 됩니다. 요추 전만이 유지돼야 디스크 압력이 줄어요.\n\n자기 전에 핫팩을 10~15분 정도 대주시면 됩니다. 혈류 순환에 도움이 됩니다.\n\n📅 3월 17일 (월) 오전 10시에 뵙겠습니다.\n\n다음에 오실 때도 최선을 다해 진료하겠습니다. 그때 뵙겠습니다!\n\n불편한 점 생기시면 언제든 편하게 연락 주세요 😊\n\n이정훈 원장 드림";
+  const kakaoMessage = "안녕하세요, 서연님\n\n하니한의원 담당의 이정훈 원장입니다.\n\n오늘 치료 잘 받으셨는지 모르겠네요.\n\n아까 말씀드린 부분 중에서 한두 가지만 다시 말씀드릴게요.\n\n앉아 계실 때 허리 뒤에 쿠션이나 수건을 말아서 받쳐주시면 됩니다. 요추 전만이 유지돼야 디스크 압력이 줄어요.\n\n자기 전에 핫팩을 10~15분 정도 대주시면 됩니다. 혈류 순환에 도움이 됩니다.\n\n3월 17일 (월) 오전 10시에 뵙겠습니다.\n\n다음에 오실 때도 최선을 다해 진료하겠습니다. 그때 뵙겠습니다!\n\n불편한 점 생기시면 언제든 편하게 연락 주세요.\n\n이정훈 원장 드림";
 
   const handleCopy = () => {
     setCopied(true);
@@ -752,14 +752,14 @@ function StepKakaoCopy({ onNext }: { onNext: () => void }) {
           </div>
           <div className="bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3">
             <p className="text-[12px] text-[#00B6C5] leading-relaxed">
-              <span className="font-bold">🚀 자동 발송 기능이 추후 추가될 예정입니다.</span>
+              <span className="font-bold">자동 발송 기능이 추후 추가될 예정입니다.</span>
               <span className="text-[#888]"> 현재는 복사 후 카카오톡 앱에서 직접 발송해주세요.</span>
             </p>
           </div>
         </div>
       </div>
 
-      <Toast message="✅ 복사 완료! 카카오톡 앱에서 환자에게 붙여넣기로 보내주세요" show={showToast} />
+      <Toast message="복사 완료! 카카오톡 앱에서 환자에게 붙여넣기로 보내주세요" show={showToast} />
     </motion.div>
   );
 }
@@ -871,7 +871,7 @@ function StepEMR({ onNext }: { onNext: () => void }) {
       </div>
 
       <Toast
-        message={phase === "copied" ? "✅ 차트 복사 완료 → EMR에 붙여넣기 해주세요" : "✅ EMR 복붙 완료!"}
+        message={phase === "copied" ? "차트 복사 완료 → EMR에 붙여넣기 해주세요" : "EMR 복붙 완료!"}
         show={showToast}
       />
     </motion.div>
@@ -886,7 +886,7 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
     { step: "3", label: "인박스에서 태스크 확인", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
     { step: "4", label: "카톡 내용 복사 → 카톡 앱에서 발송", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
     { step: "5", label: "EMR 복사 → EMR에 붙여넣기 → 완료", role: "직접", color: "bg-[#e8f7f8] text-[#00B6C5]" },
-    { step: "🔄", label: "다음 환자 체크인 → 반복", role: "루프", color: "bg-green-50 text-green-600" },
+    { step: "↻", label: "다음 환자 체크인 → 반복", role: "루프", color: "bg-green-50 text-green-600" },
   ];
 
   return (
@@ -913,7 +913,7 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
 
         {/* Daily flow summary */}
         <div className="bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-5 text-left mb-5">
-          <p className="text-[13px] font-bold text-[#333] mb-3">📋 실장님의 하루 루틴</p>
+          <p className="text-[13px] font-bold text-[#333] mb-3">실장님의 하루 루틴</p>
           <div className="space-y-2.5">
             {dailyFlow.map((item, i) => (
               <motion.div
@@ -946,13 +946,13 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
         {/* Tips */}
         <div className="bg-[#fff8e6] border border-[#f5e6b8] rounded-xl p-3 mb-6 text-left space-y-1.5">
           <p className="text-[12px] text-[#b8860b]">
-            💡 빨간 테두리 태스크 = 기한 지남. 우선 처리하세요!
+            빨간 테두리 태스크 = 기한 지남. 우선 처리하세요!
           </p>
           <p className="text-[12px] text-[#b8860b]">
-            💡 카톡 자동 발송 기능이 추후 추가될 예정입니다.
+            카톡 자동 발송 기능이 추후 추가될 예정입니다.
           </p>
           <p className="text-[12px] text-[#b8860b]">
-            💡 원장 메모가 있으면 환자 안내 시 참고하세요.
+            원장 메모가 있으면 환자 안내 시 참고하세요.
           </p>
         </div>
 

@@ -1,18 +1,25 @@
 import { motion } from "framer-motion";
+import { FileText, RefreshCw, PhoneOff } from "lucide-react";
 
 const problems = [
   {
-    emoji: "📋",
+    icon: FileText,
+    iconColor: "text-[#00B6C5]",
+    iconBg: "bg-[#e8f7f8]",
     title: "차트 작성에 매일 1시간",
     desc: "진료 끝나고 기억에 의존해 차트를 쓰면 정확도가 떨어지고, 시간은 늘어납니다.",
   },
   {
-    emoji: "🔄",
+    icon: RefreshCw,
+    iconColor: "text-amber-600",
+    iconBg: "bg-amber-50",
     title: "직원이 바뀌면 리셋",
     desc: "새 직원 교육에 원장 시간 소모. 그동안 환자 관리 누락이 발생합니다.",
   },
   {
-    emoji: "📞",
+    icon: PhoneOff,
+    iconColor: "text-rose-500",
+    iconBg: "bg-rose-50",
     title: "리마인드 누락 → 환자 이탈",
     desc: "\"다음 주에 오세요\" 했는데 아무도 안 챙기면, 환자는 그냥 안 옵니다.",
   },
@@ -44,7 +51,9 @@ export default function ProblemSection() {
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className="bg-white rounded-xl p-6 border border-[#eee]"
             >
-              <div className="text-2xl mb-3">{p.emoji}</div>
+              <div className={`w-10 h-10 rounded-lg ${p.iconBg} flex items-center justify-center mb-3`}>
+                <p.icon size={20} className={p.iconColor} />
+              </div>
               <h3 className="text-[15px] font-bold text-[#111] mb-2">{p.title}</h3>
               <p className="text-[13px] text-[#777] leading-relaxed">{p.desc}</p>
             </motion.div>

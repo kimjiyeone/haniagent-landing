@@ -300,7 +300,7 @@ function StepPatientList({ onNext }: { onNext: () => void }) {
                   녹음
                 </motion.button>
                 <button className="flex items-center gap-1 h-9 px-3 bg-[#f0f0f0] text-[#ccc] rounded-lg text-[13px] cursor-not-allowed opacity-40">
-                  🔁
+                  <RefreshCw size={14} />
                 </button>
               </div>
             </div>
@@ -324,7 +324,7 @@ function StepPatientList({ onNext }: { onNext: () => void }) {
                   녹음
                 </button>
                 <button className="flex items-center gap-1 h-9 px-3 bg-[#f0f0f0] text-[#999] rounded-lg text-[13px]">
-                  🔁
+                  <RefreshCw size={14} />
                 </button>
               </div>
             </div>
@@ -538,7 +538,7 @@ function StepSOAPAndDate({ onNext }: { onNext: () => void }) {
                 <div className="flex items-center gap-2">
                   {(s as any).hasPhrase && (
                     <button className="flex items-center gap-1 text-[10px] font-semibold text-purple-500 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded-md hover:bg-purple-100 transition-colors">
-                      📝 관용구
+                      관용구
                     </button>
                   )}
                   <button
@@ -606,7 +606,7 @@ function StepSOAPAndDate({ onNext }: { onNext: () => void }) {
           className="bg-[#fafafa] border border-[#e8e8e8] rounded-xl p-3 mb-5"
         >
           <p className="text-[12px] font-semibold text-[#555] mb-2 flex items-center gap-1.5">
-            📌 실장 참고 메모 <span className="text-[10px] font-normal text-[#bbb]">(선택)</span>
+            실장 참고 메모 <span className="text-[10px] font-normal text-[#bbb]">(선택)</span>
           </p>
           <input
             type="text"
@@ -624,7 +624,7 @@ function StepSOAPAndDate({ onNext }: { onNext: () => void }) {
           className="bg-[#f0fafb] border border-[#d5eef0] rounded-xl p-3 mb-5"
         >
           <p className="text-[12px] font-semibold text-[#00B6C5] mb-2 flex items-center gap-1.5">
-            🌿 생활코칭 메모 <span className="text-[10px] font-normal text-[#bbb]">(카톡에 반영됨)</span>
+            생활코칭 메모 <span className="text-[10px] font-normal text-[#bbb]">(카톡에 반영됨)</span>
           </p>
           <div className="bg-white border border-[#e8e8e8] rounded-lg px-3 py-2.5">
             <p className="text-[12px] text-[#555] leading-relaxed">앉아있을 때 요추 쿠션 받치기, 자기 전 핫팩 10~15분</p>
@@ -666,7 +666,7 @@ function StepSOAPAndDate({ onNext }: { onNext: () => void }) {
         {!confirmed && <BounceArrow text="확정 버튼을 눌러보세요" />}
       </div>
 
-      <Toast message="✅ 실장님에게 태스크가 전달되었습니다 + EMR 대기열에 등장" show={showToast} />
+      <Toast message="실장님에게 태스크가 전달되었습니다 + EMR 대기열에 등장" show={showToast} />
     </motion.div>
   );
 }
@@ -744,7 +744,7 @@ function StepRepeat({ onNext }: { onNext: () => void }) {
                   {repeated ? (
                     <><CheckCircle2 size={14} /> 완료</>
                   ) : (
-                    <>🔁 리핏</>
+                    <><RefreshCw size={14} /> 리핏</>
                   )}
                 </motion.button>
               </div>
@@ -765,7 +765,7 @@ function StepRepeat({ onNext }: { onNext: () => void }) {
         </div>
       </div>
 
-      <Toast message="🔁 리핏 처리 완료 → 실장 EMR 탭에 태스크 자동 생성" show={showToast} />
+      <Toast message="리핏 처리 완료 → 실장 EMR 탭에 태스크 자동 생성" show={showToast} />
     </motion.div>
   );
 }
@@ -796,7 +796,7 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
 
         {/* Checklist */}
         <div className="bg-[#f8fafb] border border-[#e8e8e8] rounded-xl p-5 text-left mb-6 space-y-3">
-          <p className="text-[13px] font-bold text-[#333] mb-2">📋 원장님 체크리스트</p>
+          <p className="text-[13px] font-bold text-[#333] mb-2">원장님 체크리스트</p>
           {[
             { icon: Mic, text: "녹음 시작/종료 — 화면 전환 절대 금지" },
             { icon: Edit3, text: "SOAP 차트 확인 → 필요시 수정 → 확정" },
@@ -816,7 +816,7 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
         {/* Tip */}
         <div className="bg-[#fff8e6] border border-[#f5e6b8] rounded-xl p-3 mb-6">
           <p className="text-[12px] text-[#b8860b]">
-            💡 하루 끝에 미확정 차트가 있으면 알림이 옵니다. 꼭 확정해주세요!
+            하루 끝에 미확정 차트가 있으면 알림이 옵니다. 꼭 확정해주세요!
           </p>
         </div>
 

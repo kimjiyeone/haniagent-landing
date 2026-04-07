@@ -34,7 +34,7 @@ function MockupRecording() {
         <div className="flex items-center justify-center gap-6 mb-4">
           <div className="flex flex-col items-center">
             <div className="w-11 h-11 rounded-full bg-[#e8f7f8] flex items-center justify-center border-2 border-[#00B6C5]/30">
-              <span className="text-[16px]">👨‍⚕️</span>
+              <Mic size={16} className="text-[#00B6C5]" />
             </div>
             <span className="text-[9px] font-bold text-[#555] mt-1">원장</span>
           </div>
@@ -51,7 +51,7 @@ function MockupRecording() {
           </div>
           <div className="flex flex-col items-center">
             <div className="w-11 h-11 rounded-full bg-amber-50 flex items-center justify-center border-2 border-amber-200/50">
-              <span className="text-[16px]">🧑</span>
+              <Volume2 size={16} className="text-amber-500" />
             </div>
             <span className="text-[9px] font-bold text-[#555] mt-1">환자</span>
           </div>
@@ -169,15 +169,15 @@ function MockupKakao() {
       sender: "OO한의원",
       content: (
         <p className="text-[11px] text-[#333] leading-relaxed">
-          안녕하세요, 서연님 😊<br /><br />
+          안녕하세요, 서연님<br /><br />
           OO한의원 담당의 <b>이OO 원장</b>입니다.<br />
           오늘 치료 잘 받으셨는지 모르겠네요.<br /><br />
           아까 말씀드린 부분 중에서 한두 가지만 다시 말씀드릴게요.<br /><br />
           <b>핫팩은 하루 2~3번, 15분 정도</b> 해주시면 됩니다. 혈류 순환이 좋아져서 회복이 빨라집니다.<br /><br />
           무거운 물건은 당분간 피해주시고, 꼭 들어야 할 때는 허리가 아니라 <b>무릎을 굽혀서</b> 들어주시면 됩니다.<br /><br />
-          📅 <b>3월 24일(월) 14:00</b>에 예약 잡혀 있습니다.<br /><br />
+          <b>3월 24일(월) 14:00</b>에 예약 잡혀 있습니다.<br /><br />
           다음에 오실 때도 최선을 다해 진료하겠습니다. 그때 뵙겠습니다!<br />
-          불편한 점 생기시면 언제든 편하게 연락 주세요 😊<br /><br />
+          불편한 점 생기시면 언제든 편하게 연락 주세요.<br /><br />
           이OO 원장 드림
         </p>
       ),
@@ -187,12 +187,12 @@ function MockupKakao() {
       sender: "OO한의원",
       content: (
         <p className="text-[11px] text-[#333] leading-relaxed">
-          안녕하세요, 서연님 😊<br /><br />
+          안녕하세요, 서연님<br /><br />
           OO한의원 담당의 <b>이OO 원장</b>입니다.<br />
           오늘 치료 잘 받으셨는지 모르겠네요.<br /><br />
           아까 말씀드린 부분 중에서 한두 가지만 다시 적어드릴게요.<br /><br />
           <b>핫팩은 하루 2~3번, 15분 정도</b> 해주시면 됩니다. 혈류 순환이 좋아져서 회복이 빨라집니다.<br /><br />
-          📅 <b>3월 24일(월) 14:00</b>에 예약 잡혀 있습니다.<br /><br />
+          <b>3월 24일(월) 14:00</b>에 예약 잡혀 있습니다.<br /><br />
           이OO 원장 드림
         </p>
       ),
@@ -202,14 +202,14 @@ function MockupKakao() {
       sender: "OO한의원",
       content: (
         <p className="text-[11px] text-[#333] leading-relaxed">
-          안녕하세요, 서연님 😊<br /><br />
+          안녕하세요, 서연님<br /><br />
           OO한의원 담당의 <b>이OO 원장</b>입니다.<br />
           어제 내원 예정이셨는데 못 오셨더라고요. 별일 없으신지 걱정이 돼서 연락드렸어요.<br /><br />
           요즘 허리 쪽 통증이 심해지지는 않으셨을지 걱정이 됩니다.<br /><br />
-          말씀드렸던 핫팩, 틈틈이 해주고 계시면 좋겠습니다 🙂<br /><br />
+          말씀드렸던 핫팩, 틈틈이 해주고 계시면 좋겠습니다.<br /><br />
           불편하신 부분이 있으시면 참지 마시고 편하게 오셔도 됩니다.<br />
           예약 없이 오셔도 괜찮습니다.<br /><br />
-          이OO 원장 드림 🙏
+          이OO 원장 드림
         </p>
       ),
     },
@@ -437,12 +437,12 @@ function MockupAIFeedback() {
         </div>
         <div className="space-y-2">
           {[
-            { label: "환자 유형", value: "꼼꼼한 정보 탐색형", icon: "🔍" },
-            { label: "소통 팁", value: "치료 근거와 경과를 수치로 설명하면 효과적", icon: "💡" },
-            { label: "주의사항", value: "치료 기간에 대한 명확한 안내 필요", icon: "⚠️" },
+            { label: "환자 유형", value: "꼼꼼한 정보 탐색형", icon: "" },
+            { label: "소통 팁", value: "치료 근거와 경과를 수치로 설명하면 효과적", icon: "" },
+            { label: "주의사항", value: "치료 기간에 대한 명확한 안내 필요", icon: "" },
           ].map((item) => (
             <div key={item.label} className="flex items-start gap-2 bg-[#f8fafb] rounded-lg p-2.5">
-              <span className="text-[12px] shrink-0">{item.icon}</span>
+              <span className="text-[10px] font-bold text-[#00B6C5] shrink-0">{item.label.charAt(0)}</span>
               <div>
                 <p className="text-[10px] text-[#999] mb-0.5">{item.label}</p>
                 <p className="text-[11px] text-[#555] font-medium">{item.value}</p>
