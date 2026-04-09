@@ -178,7 +178,9 @@ export default function UpdateRoadmapSection() {
           className="mt-10 text-center"
         >
           <a
-            href="mailto:contact@hanitek.kr?subject=하니에이전트 기능 제안"
+            href="https://www.hanitek.kr"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#00B6C5] hover:text-[#009aa8] transition-colors"
           >
             <MessageCircle size={16} />

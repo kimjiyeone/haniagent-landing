@@ -36,7 +36,7 @@ export default function Footer() {
               <h4 className="text-[12px] font-bold text-[#111] mb-3 uppercase tracking-wider">지원</h4>
               <ul className="space-y-2">
                 {[
-                  { label: "문의하기", href: "mailto:contact@hanitek.kr" },
+                  { label: "문의하기", href: "https://www.hanitek.kr", ext: true },
                   { label: "회사 소개", href: "https://www.hanitek.kr", ext: true },
                   { label: "개인정보처리방침", href: "#" },
                   { label: "이용약관", href: "#" },

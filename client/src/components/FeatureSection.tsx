@@ -643,7 +643,7 @@ export default function FeatureSection() {
           className="mt-16 text-center"
         >
           <a
-            href="https://www.haniagent.kr/auth/login"
+            href="https://www.haniagent.kr/main"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#111] hover:bg-[#333] text-white font-semibold rounded-xl text-[14px] transition-colors shadow-[0_2px_12px_rgba(0,0,0,0.1)]"

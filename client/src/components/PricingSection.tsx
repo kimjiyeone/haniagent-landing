@@ -44,7 +44,7 @@ const plans: Plan[] = [
     ],
     cta: "무료 체험 시작하기",
     ctaStyle: "border-2 border-[#e0e0e0] text-[#333] hover:border-[#bbb] bg-white hover:bg-[#fafafa]",
-    href: "https://www.haniagent.kr/auth/login",
+    href: "https://www.haniagent.kr/main",
     highlight: false,
   },
   {
@@ -67,7 +67,7 @@ const plans: Plan[] = [
     ],
     cta: "도입 상담 받기",
     ctaStyle: "border-2 border-[#111] text-[#111] hover:bg-[#111] hover:text-white bg-white",
-    href: "mailto:contact@hanitek.kr?subject=하니에이전트 Basic(방문진료) 플랜 문의",
+    href: "https://www.hanitek.kr",
     highlight: false,
   },
   {
@@ -91,7 +91,7 @@ const plans: Plan[] = [
     ],
     cta: "1:1 맞춤 상담 받기",
     ctaStyle: "bg-[#111] text-white hover:bg-[#333]",
-    href: "mailto:contact@hanitek.kr?subject=하니에이전트 Pro 플랜 문의",
+    href: "https://www.hanitek.kr",
     highlight: true,
   },
 ];
@@ -194,7 +194,9 @@ export default function PricingSection() {
               다지점 · 대형 한의원은 <b className="text-[#111]">Enterprise</b> 플랜을 문의해주세요
             </span>
             <a
-              href="mailto:contact@hanitek.kr"
+              href="https://www.hanitek.kr"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[13px] font-semibold text-[#00B6C5] hover:underline whitespace-nowrap"
             >
               문의하기 →

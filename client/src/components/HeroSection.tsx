@@ -349,13 +349,14 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
   const isPrimary = variant === "primary";
   return (
     <a
-      href="https://www.haniagent.kr/auth/login"
-      target="_blank"
-      rel="noopener noreferrer"
+      href={isPrimary ? "https://www.haniagent.kr/main" : "#"}
+      target={isPrimary ? "_blank" : undefined}
+      rel={isPrimary ? "noopener noreferrer" : undefined}
+      onClick={isPrimary ? undefined : (e: React.MouseEvent) => { e.preventDefault(); }}
       className={`inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-5 sm:px-6 font-semibold rounded-xl text-[14px] sm:text-[15px] transition-all w-full sm:w-auto ${
         isPrimary
           ? "bg-[#111] hover:bg-[#333] text-white shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
-          : "bg-white border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#333]"
+          : "bg-white border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#333] opacity-60 cursor-default"
       }`}
     >
       {isPrimary ? (
@@ -367,6 +368,7 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
         <>
           <Monitor size={18} />
           <span>Windows 앱 다운로드</span>
+          <span className="text-[10px] ml-1 bg-[#f0f0f0] text-[#999] px-1.5 py-0.5 rounded">준비중</span>
         </>
       )}
     </a>
@@ -390,17 +392,17 @@ export default function HeroSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto px-4 sm:px-0"
         >
-          <h1 className="text-[26px] sm:text-[36px] md:text-[48px] lg:text-[52px] font-extrabold text-[#111] leading-[1.15] tracking-tight">
-            진료에만 집중할 수 있도록,
+          <h1 className="text-[24px] sm:text-[34px] md:text-[44px] lg:text-[48px] font-extrabold text-[#111] leading-[1.2] tracking-tight">
+            진료보다 운영에 더 많은 시간을
             <br />
-            <span className="text-[#00B6C5]">가장 똑똑한 AI 에이전트</span>
+            쓰고 계시진 않나요?
           </h1>
           <p className="mt-4 sm:mt-5 text-[14px] sm:text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-md sm:max-w-lg mx-auto">
             녹음 한 번이면 SOAP 차트 작성부터 환자/직원 관리,
             <br className="hidden sm:block" />
             데이터 기반 경영전략까지.
             <br />
-            사람의존에서 시스템 경영으로 바꿔보세요.
+            사람의존에서 <span className="text-[#00B6C5] font-bold">시스템 경영</span>으로 바꿔보세요.
           </p>
 
           {/* CTA Buttons */}

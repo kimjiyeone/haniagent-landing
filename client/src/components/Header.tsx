@@ -9,7 +9,7 @@ const navItems = [
   { label: "가격", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
   { label: "사용법", href: "/tutorial" },
-  { label: "앱 다운로드", href: "https://www.haniagent.kr/auth/login", external: true },
+  { label: "앱 다운로드", href: "#", external: false },
 ];
 
 export default function Header() {
@@ -48,7 +48,7 @@ export default function Header() {
 
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://www.haniagent.kr/auth/login"
+            href="https://www.haniagent.kr/main"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[14px] font-medium text-[#555] hover:text-[#111] transition-colors"
@@ -57,7 +57,7 @@ export default function Header() {
           </a>
           <Button
             className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none"
-            onClick={() => window.open("mailto:contact@hanitek.kr?subject=하니에이전트 도입 문의", "_blank")}
+            onClick={() => window.open("https://www.hanitek.kr", "_blank")}
           >
             도입 문의
           </Button>
@@ -95,7 +95,7 @@ export default function Header() {
               <div className="mt-3 pt-3 border-t border-[#f0f0f0] flex flex-col gap-2">
                 <Button
                   className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg"
-                  onClick={() => window.open("mailto:contact@hanitek.kr?subject=하니에이전트 도입 문의", "_blank")}
+                  onClick={() => window.open("https://www.hanitek.kr", "_blank")}
                 >
                   도입 문의
                 </Button>
