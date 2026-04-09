@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useContactModal } from "@/contexts/ContactModalContext";
-import { Phone, Mail, Copy, Check } from "lucide-react";
+import { Phone, Mail, Copy, Check, FileText, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactModal() {
@@ -41,8 +41,26 @@ export default function ContactModal() {
           </DialogHeader>
         </div>
 
-        {/* 연락처 카드 */}
+        {/* 연락 방법 카드 */}
         <div className="px-6 pb-6 space-y-3">
+          {/* 도입 폼 작성 — 가장 상단, 강조 */}
+          <a
+            href="https://www.hanitek.kr/enterprise"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 p-4 rounded-xl border-2 border-[#00B6C5]/30 bg-[#f0fafb] hover:border-[#00B6C5]/60 hover:bg-[#e8f7f8] transition-all group"
+          >
+            <div className="w-11 h-11 rounded-full bg-[#00B6C5] flex items-center justify-center shrink-0 group-hover:bg-[#009aa8] transition-colors">
+              <FileText size={18} className="text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[12px] text-[#00B6C5] font-semibold">맞춤 컨설팅 신청</p>
+              <p className="text-[15px] font-bold text-[#111]">도입 폼 작성하기</p>
+              <p className="text-[11px] text-[#888] mt-0.5">2~3분 소요 · 원내 상황에 맞는 무료 컨설팅</p>
+            </div>
+            <ArrowRight size={16} className="text-[#00B6C5] shrink-0 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+
           {/* 전화번호 */}
           <a
             href="tel:010-3357-0527"
