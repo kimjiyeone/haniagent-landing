@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Monitor, ArrowRight } from "lucide-react";
 import { useContactModal } from "@/contexts/ContactModalContext";
 
 export default function CTASection() {
@@ -30,16 +31,18 @@ export default function CTASection() {
               href="https://www.haniagent.kr/main"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-12 px-7 bg-[#111] hover:bg-[#333] text-white font-semibold rounded-xl text-[15px] transition-colors"
+              className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-[#111] hover:bg-[#333] text-white font-semibold rounded-xl text-[15px] transition-colors shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
             >
+              <Monitor size={18} />
               무료로 시작하기
             </a>
             <button
               type="button"
               onClick={openContactModal}
-              className="inline-flex items-center justify-center h-12 px-6 border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#555] font-medium rounded-xl text-[15px] transition-colors bg-white"
+              className="inline-flex items-center justify-center gap-2 h-12 px-6 border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#555] font-medium rounded-xl text-[15px] transition-colors bg-white"
             >
               도입 문의하기
+              <ArrowRight size={16} />
             </button>
           </div>
 

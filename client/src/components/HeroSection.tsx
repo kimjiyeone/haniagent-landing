@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, FileText, CheckCircle2, MessageSquare, ArrowRight, Volume2, Radio, Copy, Send } from "lucide-react";
+import { Mic, FileText, CheckCircle2, MessageSquare, ArrowRight, Monitor, Volume2, Radio, Copy, Send } from "lucide-react";
 import { useState, useEffect } from "react";
 
 /* ─── 한의원 로고 + 이름 (2줄, 반대 방향) ─── */
@@ -359,7 +359,17 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
           : "bg-white border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#333] opacity-60 cursor-default"
       }`}
     >
-      {isPrimary ? "무료로 시작하기" : "Windows 앱 다운로드"}
+      {isPrimary ? (
+        <>
+          <ArrowRight size={18} />
+          <span>무료로 시작하기</span>
+        </>
+      ) : (
+        <>
+          <Monitor size={18} />
+          <span>Windows 앱 다운로드</span>
+        </>
+      )}
     </a>
   );
 }

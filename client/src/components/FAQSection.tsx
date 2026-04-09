@@ -62,6 +62,9 @@ export default function FAQSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-10"
         >
+          <p className="text-[13px] text-[#00B6C5] font-semibold mb-3 tracking-wide uppercase">
+            FAQ
+          </p>
           <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold text-[#111] tracking-tight">
             자주 묻는 질문
           </h2>
