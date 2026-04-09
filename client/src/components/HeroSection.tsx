@@ -391,10 +391,10 @@ export default function HeroSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto px-4 sm:px-0"
         >
-          <h1 className="text-[24px] sm:text-[34px] md:text-[44px] lg:text-[48px] font-extrabold text-[#111] leading-[1.2] tracking-tight">
-            진료보다 운영에 더 많은 시간을
+          <h1 className="text-[24px] sm:text-[34px] md:text-[44px] lg:text-[48px] font-extrabold text-[#000000] leading-[1.2] tracking-tight">
+            진료보다 운영에
             <br />
-            쓰고 계시진 않나요?
+            더 많은 시간을 쓰고 계시진 않나요?
           </h1>
           <p className="mt-4 sm:mt-5 text-[14px] sm:text-[15px] md:text-[17px] text-[#666] leading-relaxed max-w-md sm:max-w-lg mx-auto">
             녹음 한 번이면 SOAP 차트 작성부터 환자/직원 관리,

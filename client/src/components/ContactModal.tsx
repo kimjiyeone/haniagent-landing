@@ -107,7 +107,7 @@ export default function ContactModal() {
         {/* 하단 안내 */}
         <div className="px-6 py-4 bg-[#fafafa] border-t border-[#f0f0f0]">
           <p className="text-[12px] text-[#999] text-center leading-relaxed">
-            평일 10:00 ~ 18:00 응대 가능 · 이메일은 24시간 접수
+            평일 9:00 ~ 20:00 응대 가능 · 이메일은 24시간 접수
           </p>
         </div>
       </DialogContent>
