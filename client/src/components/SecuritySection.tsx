@@ -1,38 +1,22 @@
 import { motion } from "framer-motion";
-import { Shield, Lock, Server, Eye, Fingerprint, FileCheck, ShieldCheck } from "lucide-react";
 
 /*
- * SecuritySection — 사업계획서 보안 상세 기반
- * 블랙 디자인, hanitek.kr/tiro 스타일
+ * SecuritySection — 보안 섹션 (간결 버전)
+ * 아이콘 제거, 텍스트 중심
  */
 
 const items = [
-  { icon: Lock, title: "TLS 1.3 + AES-256", desc: "전송 중·저장 시 모든 데이터를 군사급 암호화로 보호합니다." },
-  { icon: Eye, title: "역할 기반 접근 통제 (RBAC)", desc: "원장/실장 권한을 분리하여 데이터 접근을 최소화합니다." },
-  { icon: Server, title: "클리닉 간 완벽한 데이터 격리", desc: "각 한의원 데이터가 완전히 분리된 아키텍처로 운영됩니다." },
-  { icon: Shield, title: "음성 원본 즉시 폐기", desc: "SOAP 차트 생성 후 녹음 원본은 저장하지 않고 즉시 삭제합니다." },
-  { icon: Fingerprint, title: "개인별 완전 암호화", desc: "환자 개인정보는 개별 암호화 키로 보호됩니다." },
-  { icon: FileCheck, title: "정기 보안 감사", desc: "정기적인 보안 감사와 취약점 점검을 통해 시스템 안전성을 유지합니다." },
-];
-
-const badges = [
-  "특허 출원 완료",
-  "Google Firebase (ISO 27001, HIPAA)",
-
+  { title: "TLS 1.3 + AES-256", desc: "전송 중·저장 시 모든 데이터를 군사급 암호화로 보호합니다." },
+  { title: "역할 기반 접근 통제", desc: "원장/실장 권한을 분리하여 데이터 접근을 최소화합니다." },
+  { title: "클리닉 간 데이터 격리", desc: "각 한의원 데이터가 완전히 분리된 아키텍처로 운영됩니다." },
+  { title: "음성 원본 즉시 폐기", desc: "SOAP 차트 생성 후 녹음 원본은 저장하지 않고 즉시 삭제합니다." },
+  { title: "개인별 완전 암호화", desc: "환자 개인정보는 개별 암호화 키로 보호됩니다." },
+  { title: "정기 보안 감사", desc: "정기적인 보안 감사와 취약점 점검을 통해 안전성을 유지합니다." },
 ];
 
 export default function SecuritySection() {
   return (
     <section className="py-16 md:py-24 bg-[#0a0a0a] text-white relative overflow-hidden">
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-        backgroundSize: "40px 40px",
-      }} />
-
-      {/* Glow accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00B6C5] opacity-[0.04] rounded-full blur-[120px]" />
-
       <div className="container relative">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -41,10 +25,6 @@ export default function SecuritySection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-5">
-            <ShieldCheck size={14} className="text-[#00B6C5]" />
-            <span className="text-[12px] font-semibold text-[#00B6C5] tracking-wide uppercase">Security & Privacy</span>
-          </div>
           <h2 className="text-[24px] sm:text-[28px] md:text-[36px] font-extrabold tracking-tight leading-tight">
             안심하고 기록하세요.
             <br />
@@ -55,7 +35,7 @@ export default function SecuritySection() {
           </p>
         </motion.div>
 
-        {/* 3x2 Grid */}
+        {/* 3x2 Grid - 아이콘 없이 텍스트만 */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
           {items.map((item, i) => (
             <motion.div
@@ -64,31 +44,24 @@ export default function SecuritySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 hover:bg-white/[0.06] transition-colors"
+              className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#00B6C5]/10 flex items-center justify-center mb-3">
-                <item.icon size={18} className="text-[#00B6C5]" />
-              </div>
-              <h3 className="text-[14px] font-bold text-white mb-1">{item.title}</h3>
+              <h3 className="text-[14px] font-bold text-white mb-2">{item.title}</h3>
               <p className="text-[12px] text-[#777] leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Trust badges */}
+        {/* Trust badges - 간결하게 */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="mt-10 flex items-center justify-center gap-4 md:gap-6 flex-wrap"
+          className="mt-8 flex items-center justify-center gap-6 flex-wrap"
         >
-          {badges.map((badge) => (
-            <div key={badge} className="flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-full px-3.5 py-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#00B6C5]" />
-              <span className="text-[11px] text-[#999] font-medium">{badge}</span>
-            </div>
-          ))}
+          <span className="text-[12px] text-[#666]">특허 출원 완료</span>
+          <span className="text-[12px] text-[#666]">Google Firebase (ISO 27001, HIPAA)</span>
         </motion.div>
       </div>
     </section>

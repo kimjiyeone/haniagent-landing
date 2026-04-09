@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { Check, X, ArrowRight, Sparkles, Monitor } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { useContactModal } from "@/contexts/ContactModalContext";
 
 /*
  * PricingSection — 3열: 무료체험(2주) / Basic 방문진료 / Pro 올인원
- * 사업계획서 기반: Clinic Plan 월 12~55만원, Enterprise 300만원~
  */
 
 interface PlanFeature {
@@ -113,9 +112,6 @@ export default function PricingSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <p className="text-[13px] text-[#00B6C5] font-semibold mb-3 tracking-wide uppercase">
-            Pricing
-          </p>
           <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold text-[#111] tracking-tight">
             우리 한의원에 맞는 플랜을 선택하세요
           </h2>
@@ -132,7 +128,7 @@ export default function PricingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className={`relative rounded-2xl p-6 flex flex-col ${
+              className={`relative rounded-xl p-6 flex flex-col ${
                 plan.highlight
                   ? "bg-white border-2 border-[#111] shadow-[0_8px_32px_rgba(0,0,0,0.08)] md:-mt-4 md:pb-8"
                   : "bg-white border border-[#e8e8e8]"
@@ -141,7 +137,6 @@ export default function PricingSection() {
               {/* Badge */}
               {plan.badge && (
                 <span className={`inline-flex items-center self-start text-[11px] font-bold px-2.5 py-1 rounded-full mb-3 ${plan.badgeStyle}`}>
-                  {plan.badge === "추천" && <Sparkles size={10} className="mr-1" />}
                   {plan.badge}
                 </span>
               )}
@@ -161,20 +156,18 @@ export default function PricingSection() {
                 <button
                   type="button"
                   onClick={openContactModal}
-                  className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${plan.ctaStyle}`}
+                  className={`flex items-center justify-center w-full py-3 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${plan.ctaStyle}`}
                 >
                   {plan.cta}
-                  <ArrowRight size={14} />
                 </button>
               ) : (
                 <a
                   href={plan.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[14px] font-semibold transition-all ${plan.ctaStyle}`}
+                  className={`flex items-center justify-center w-full py-3 rounded-xl text-[14px] font-semibold transition-all ${plan.ctaStyle}`}
                 >
                   {plan.cta}
-                  <ArrowRight size={14} />
                 </a>
               )}
 
