@@ -391,8 +391,8 @@ export default function HeroSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto px-4 sm:px-0"
         >
-          <h1 className="text-[24px] sm:text-[34px] md:text-[44px] lg:text-[48px] font-extrabold text-[#000000] leading-[1.2] tracking-tight">
-            진료보다 운영에
+          <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[44px] font-extrabold text-[#000000] leading-[1.25] tracking-tight">
+            <span className="text-[#00B6C5]">진료보다 운영에</span>
             <br />
             더 많은 시간을 쓰고 계시진 않나요?
           </h1>
