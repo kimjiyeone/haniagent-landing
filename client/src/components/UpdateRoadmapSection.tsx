@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MessageCircle, Zap, RefreshCw, ArrowRight, Rocket, Calendar, Sparkles } from "lucide-react";
+import { useContactModal } from "@/contexts/ContactModalContext";
 
 /*
  * UpdateRoadmapSection
@@ -33,7 +34,6 @@ const roadmapItems = [
     label: "진행 중",
     labelColor: "bg-[#00B6C5] text-white",
     title: "환자유형별 AI 피드백 고도화",
-    comingSoon: true,
     desc: "상담 기반 환자 유형 분류 및 유형별 맞춤 대응 전략 피드백",
   },
   {
@@ -41,7 +41,6 @@ const roadmapItems = [
     label: "진행 중",
     labelColor: "bg-[#00B6C5] text-white",
     title: "실장 상담 차팅",
-    comingSoon: true,
     desc: "실장 상담 내용도 음성 녹음 → 자동 차팅으로 기록·관리",
   },
   {
@@ -68,6 +67,8 @@ const roadmapItems = [
 ];
 
 export default function UpdateRoadmapSection() {
+  const { open: openContactModal } = useContactModal();
+
   return (
     <section className="py-16 md:py-24">
       <div className="container">
@@ -158,9 +159,6 @@ export default function UpdateRoadmapSection() {
                       {item.label}
                     </span>
                     <h4 className="text-[14px] font-bold text-[#111]">{item.title}</h4>
-                    {item.comingSoon && (
-                      <span className="text-[9px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">Coming Soon</span>
-                    )}
                   </div>
                   <p className="text-[12px] text-[#888] leading-relaxed">{item.desc}</p>
                 </div>
@@ -177,16 +175,15 @@ export default function UpdateRoadmapSection() {
           transition={{ duration: 0.4, delay: 0.3 }}
           className="mt-10 text-center"
         >
-          <a
-            href="https://www.hanitek.kr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#00B6C5] hover:text-[#009aa8] transition-colors"
+          <button
+            type="button"
+            onClick={openContactModal}
+            className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#00B6C5] hover:text-[#009aa8] transition-colors cursor-pointer"
           >
             <MessageCircle size={16} />
             기능 제안하기
             <ArrowRight size={14} />
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>

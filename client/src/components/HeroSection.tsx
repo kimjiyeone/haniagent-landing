@@ -368,7 +368,6 @@ export function AppDownloadButton({ variant = "primary" }: { variant?: "primary"
         <>
           <Monitor size={18} />
           <span>Windows 앱 다운로드</span>
-          <span className="text-[10px] ml-1 bg-[#f0f0f0] text-[#999] px-1.5 py-0.5 rounded">준비중</span>
         </>
       )}
     </a>
