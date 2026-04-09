@@ -1,6 +1,9 @@
 import Logo from "./Logo";
+import { useContactModal } from "@/contexts/ContactModalContext";
 
 export default function Footer() {
+  const { open: openContactModal } = useContactModal();
+
   return (
     <footer className="border-t border-[#eee]">
       <div className="container py-10 md:py-12">
@@ -35,22 +38,35 @@ export default function Footer() {
             <div>
               <h4 className="text-[12px] font-bold text-[#111] mb-3 uppercase tracking-wider">지원</h4>
               <ul className="space-y-2">
-                {[
-                  { label: "문의하기", href: "https://www.hanitek.kr", ext: true },
-                  { label: "회사 소개", href: "https://www.hanitek.kr", ext: true },
-                  { label: "개인정보처리방침", href: "#" },
-                  { label: "이용약관", href: "#" },
-                ].map((l) => (
-                  <li key={l.label}>
-                    <a
-                      href={l.href}
-                      {...(l.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      className="text-[13px] text-[#888] hover:text-[#111] transition-colors"
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <button
+                    type="button"
+                    onClick={openContactModal}
+                    className="text-[13px] text-[#888] hover:text-[#111] transition-colors cursor-pointer"
+                  >
+                    문의하기
+                  </button>
+                </li>
+                <li>
+                  <a
+                    href="https://www.hanitek.kr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[13px] text-[#888] hover:text-[#111] transition-colors"
+                  >
+                    회사 소개
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-[13px] text-[#888] hover:text-[#111] transition-colors">
+                    개인정보처리방침
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-[13px] text-[#888] hover:text-[#111] transition-colors">
+                    이용약관
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Monitor, ArrowRight } from "lucide-react";
+import { useContactModal } from "@/contexts/ContactModalContext";
 
 export default function CTASection() {
+  const { open: openContactModal } = useContactModal();
+
   return (
     <section className="py-16 md:py-24">
       <div className="container">
@@ -33,15 +36,14 @@ export default function CTASection() {
               <Monitor size={18} />
               무료로 시작하기
             </a>
-            <a
-              href="https://www.hanitek.kr"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={openContactModal}
               className="inline-flex items-center justify-center gap-2 h-12 px-6 border-2 border-[#e0e0e0] hover:border-[#bbb] text-[#555] font-medium rounded-xl text-[15px] transition-colors bg-white"
             >
               도입 문의하기
               <ArrowRight size={16} />
-            </a>
+            </button>
           </div>
 
           <p className="mt-5 text-[12px] text-[#bbb]">
