@@ -11,8 +11,8 @@ import DoctorTutorial from "./pages/DoctorTutorial";
 import StaffTutorial from "./pages/StaffTutorial";
 import TutorialHub from "./pages/TutorialHub";
 import FullFlowTutorial from "./pages/FullFlowTutorial";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
