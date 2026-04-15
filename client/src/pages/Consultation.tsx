@@ -109,23 +109,22 @@ export default function Consultation() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold text-[#111]">방문 상담 + 온보딩</p>
-                  <p className="text-sm text-gray-400">소요시간 30분</p>
+                  <p className="font-semibold text-[#111]">방문 상담</p>
+                  <p className="text-sm text-gray-400">소요시간 10분</p>
                 </div>
               </div>
             </div>
 
             {/* 미팅 아젠다 */}
             <div className="mt-10">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">미팅 아젠다</h3>
+              <h3 className="text-base font-bold text-[#111] mb-4">미팅 아젠다</h3>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#00B6C5] flex items-center justify-center shrink-0 mt-0.5">
                     <Check size={12} className="text-white" />
                   </div>
                   <p className="text-[15px] text-[#333] leading-relaxed">
-                    하니에이전트 제품 시연<br />
-                    <span className="text-gray-400 text-sm">차팅 → SOAP → 카톡 CRM 자동화</span>
+                    하니에이전트에 대한 자세한 설명
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
@@ -133,7 +132,7 @@ export default function Consultation() {
                     <Check size={12} className="text-white" />
                   </div>
                   <p className="text-[15px] text-[#333] leading-relaxed">
-                    우리 한의원 맞춤 운영 전략 논의
+                    우리 한의원의 경영 목표에 맞는 맞춤형 전략 논의
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
@@ -150,13 +149,25 @@ export default function Consultation() {
             {/* 고객사 로고 영역 */}
             <div className="mt-12 pt-8 border-t border-gray-100">
               <p className="text-xs text-gray-400 mb-4">도입 한의원</p>
-              <div className="flex flex-wrap gap-6">
-                {["미소한의원", "연세한의원", "청담한의원", "강남한의원"].map((name) => (
+              <div className="flex flex-wrap items-center gap-5">
+                {[
+                  { name: "청원한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/0_edZryrad2Zm3qPaULcBn03_1773911281178_na1fn_L2hvbWUvdWJ1bnR1L2NoZW9uZ3dvbl9sb2dv_d166eaa0.png" },
+                  { name: "운정중앙한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/1_p7gW1fHPaZqOqB6Y1kznjz_1773911268195_na1fn_L2hvbWUvdWJ1bnR1L2xvZ28_bb813000.webp" },
+                  { name: "위례하늘애한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/2_vh6lyxEHaJlJePbC4ZoSDw_1773911265524_na1fn_L2hvbWUvdWJ1bnR1L2xvZ28_4eb1fa82.png" },
+                  { name: "경희아양한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/3_54vGt0h6ziDodkO0SGa1ad_1773911290265_na1fn_L2hvbWUvdWJ1bnR1L2xvZ29zL2t5dW5naGVlX2F5YW5nX2xvZ28_a043b974.webp" },
+                  { name: "이든한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/edeun_logo_751a06ef.jpeg" },
+                  { name: "본아한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/6_91Uvbf1EikDoAzuRHnRL0u_1773911261683_na1fn_L2hvbWUvdWJ1bnR1L2Rvd25sb2Fkcy9ib25haGFuaV9sb2dv_35db1364.webp" },
+                ].map((clinic) => (
                   <div
-                    key={name}
-                    className="px-4 py-2 bg-gray-50 rounded-lg text-sm text-gray-400 font-medium"
+                    key={clinic.name}
+                    className="flex items-center gap-2"
+                    title={clinic.name}
                   >
-                    {name}
+                    <img
+                      src={clinic.logo}
+                      alt={clinic.name}
+                      className="h-8 w-auto max-w-[120px] object-contain grayscale opacity-60"
+                    />
                   </div>
                 ))}
               </div>
