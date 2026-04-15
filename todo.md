@@ -4,3 +4,4 @@
 - [ ] zip 파일을 최종 결과물에 맞게 업데이트
 - [x] 사용법(/tutorial) 페이지 UI/UX 개선
 - [x] 체크포인트 저장 후 GitHub 동기화
+- [x] 공용 튜토리얼(FullFlowTutorial) 코어루프에 체크인을 첫 번째 단계로 추가

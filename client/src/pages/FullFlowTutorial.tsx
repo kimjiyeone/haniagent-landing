@@ -109,6 +109,7 @@ function Step2({ onPrev, onNext }: { onPrev: () => void; onNext: () => void }) {
   const [activeNode, setActiveNode] = useState(0);
 
   const nodes = [
+    { label: "체크인", desc: "환자가 도착하면 실장님이 이름을 검색해 탭 한 번으로 체크인합니다. 신규 환자는 이름+전화번호만 입력하면 됩니다.", role: "실장" },
     { label: "녹음", desc: "원장님이 진료 중 녹음 버튼을 누릅니다. AI가 실시간으로 음성을 인식합니다.", role: "원장" },
     { label: "AI 차트 생성", desc: "녹음이 끝나면 AI가 자동으로 SOAP 차트를 작성합니다. 원장님이 확인하고 수정할 수 있습니다.", role: "자동" },
     { label: "확정", desc: "원장님이 차트를 확정하면, 실장님 인박스에 태스크가 자동 생성됩니다.", role: "원장" },
