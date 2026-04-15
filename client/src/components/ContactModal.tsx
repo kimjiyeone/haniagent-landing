@@ -8,11 +8,13 @@ import {
 import { useContactModal } from "@/contexts/ContactModalContext";
 import { Phone, Mail, Copy, Check, FileText, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useLocation } from "wouter";
 
 export default function ContactModal() {
   const { isOpen, close } = useContactModal();
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [, setLocation] = useLocation();
 
   const handleCopy = (text: string, type: "phone" | "email") => {
     navigator.clipboard.writeText(text).then(() => {
@@ -44,11 +46,13 @@ export default function ContactModal() {
         {/* 연락 방법 카드 */}
         <div className="px-6 pb-6 space-y-3">
           {/* 도입 폼 작성 — 가장 상단, 강조 */}
-          <a
-            href="https://www.hanitek.kr/enterprise"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-4 p-4 rounded-xl border-2 border-[#00B6C5]/30 bg-[#f0fafb] hover:border-[#00B6C5]/60 hover:bg-[#e8f7f8] transition-all group"
+          <button
+            type="button"
+            onClick={() => {
+              close();
+              setLocation("/consultation");
+            }}
+            className="w-full flex items-center gap-4 p-4 rounded-xl border-2 border-[#00B6C5]/30 bg-[#f0fafb] hover:border-[#00B6C5]/60 hover:bg-[#e8f7f8] transition-all group text-left"
           >
             <div className="w-11 h-11 rounded-full bg-[#00B6C5] flex items-center justify-center shrink-0 group-hover:bg-[#009aa8] transition-colors">
               <FileText size={18} className="text-white" />
@@ -59,7 +63,7 @@ export default function ContactModal() {
               <p className="text-[11px] text-[#888] mt-0.5">2~3분 소요 · 원내 상황에 맞는 무료 컨설팅</p>
             </div>
             <ArrowRight size={16} className="text-[#00B6C5] shrink-0 group-hover:translate-x-0.5 transition-transform" />
-          </a>
+          </button>
 
           {/* 전화번호 */}
           <a

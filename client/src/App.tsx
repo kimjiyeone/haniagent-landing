@@ -11,6 +11,7 @@ import DoctorTutorial from "./pages/DoctorTutorial";
 import StaffTutorial from "./pages/StaffTutorial";
 import TutorialHub from "./pages/TutorialHub";
 import FullFlowTutorial from "./pages/FullFlowTutorial";
+import Consultation from "./pages/Consultation";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -20,6 +21,7 @@ function Router() {
       <Route path={"/tutorial/flow"} component={FullFlowTutorial} />
       <Route path={"/tutorial/doctor"} component={DoctorTutorial} />
       <Route path={"/tutorial/staff"} component={StaffTutorial} />
+      <Route path={"/consultation"} component={Consultation} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

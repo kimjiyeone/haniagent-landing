@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, InsertConsultation, users, consultations } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,19 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+/** 도입 상담 신청 저장 */
+export async function createConsultation(data: InsertConsultation) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+  await db.insert(consultations).values(data);
+  return true;
+}
+
+/** 도입 상담 신청 목록 조회 */
+export async function getConsultations() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(consultations).orderBy(desc(consultations.createdAt));
+}
