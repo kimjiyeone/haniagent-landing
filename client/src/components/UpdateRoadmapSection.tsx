@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MessageCircle, Zap, RefreshCw, ArrowRight, Rocket, Calendar, Sparkles } from "lucide-react";
-import { useContactModal } from "@/contexts/ContactModalContext";
+import { Link } from "wouter";
 
 /*
  * UpdateRoadmapSection
@@ -67,7 +67,6 @@ const roadmapItems = [
 ];
 
 export default function UpdateRoadmapSection() {
-  const { open: openContactModal } = useContactModal();
 
   return (
     <section className="py-16 md:py-24">
@@ -175,15 +174,14 @@ export default function UpdateRoadmapSection() {
           transition={{ duration: 0.4, delay: 0.3 }}
           className="mt-10 text-center"
         >
-          <button
-            type="button"
-            onClick={openContactModal}
-            className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#00B6C5] hover:text-[#009aa8] transition-colors cursor-pointer"
+          <Link
+            href="/consultation"
+            className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#00B6C5] hover:text-[#009aa8] transition-colors"
           >
             <MessageCircle size={16} />
             기능 제안하기
             <ArrowRight size={14} />
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

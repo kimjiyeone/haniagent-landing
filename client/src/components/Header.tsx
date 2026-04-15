@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
-import { useContactModal } from "@/contexts/ContactModalContext";
+import { Link } from "wouter";
 
 const navItems = [
   { label: "기능", href: "#features" },
@@ -16,7 +16,6 @@ const navItems = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { open: openContactModal } = useContactModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -57,12 +56,13 @@ export default function Header() {
           >
             로그인
           </a>
-          <Button
-            className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none"
-            onClick={openContactModal}
-          >
-            도입 문의
-          </Button>
+          <Link href="/consultation">
+            <Button
+              className="bg-[#111] hover:bg-[#333] text-white font-semibold px-5 h-9 rounded-lg text-[13px] shadow-none"
+            >
+              도입 문의
+            </Button>
+          </Link>
         </div>
 
         <button
@@ -95,15 +95,14 @@ export default function Header() {
                 </a>
               ))}
               <div className="mt-3 pt-3 border-t border-[#f0f0f0] flex flex-col gap-2">
-                <Button
-                  className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    openContactModal();
-                  }}
-                >
-                  도입 문의
-                </Button>
+                <Link href="/consultation">
+                  <Button
+                    className="bg-[#111] hover:bg-[#333] text-white font-semibold rounded-lg w-full"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    도입 문의
+                  </Button>
+                </Link>
               </div>
             </nav>
           </motion.div>

@@ -3,9 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
-import ContactModal from "./components/ContactModal";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { ContactModalProvider } from "./contexts/ContactModalContext";
 import Home from "./pages/Home";
 import DoctorTutorial from "./pages/DoctorTutorial";
 import StaffTutorial from "./pages/StaffTutorial";
@@ -32,13 +30,10 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
-        <ContactModalProvider>
-          <TooltipProvider>
-            <Toaster />
-            <ContactModal />
-            <Router />
-          </TooltipProvider>
-        </ContactModalProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

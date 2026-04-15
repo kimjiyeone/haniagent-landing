@@ -1,9 +1,7 @@
 import Logo from "./Logo";
-import { useContactModal } from "@/contexts/ContactModalContext";
+import { Link } from "wouter";
 
 export default function Footer() {
-  const { open: openContactModal } = useContactModal();
-
   return (
     <footer className="border-t border-[#eee]">
       <div className="container py-10 md:py-12">
@@ -39,13 +37,12 @@ export default function Footer() {
               <h4 className="text-[12px] font-bold text-[#111] mb-3 uppercase tracking-wider">지원</h4>
               <ul className="space-y-2">
                 <li>
-                  <button
-                    type="button"
-                    onClick={openContactModal}
-                    className="text-[13px] text-[#888] hover:text-[#111] transition-colors cursor-pointer"
+                  <Link
+                    href="/consultation"
+                    className="text-[13px] text-[#888] hover:text-[#111] transition-colors"
                   >
-                    문의하기
-                  </button>
+                    도입 문의
+                  </Link>
                 </li>
                 <li>
                   <a

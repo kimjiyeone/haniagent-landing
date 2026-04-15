@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Check, X, ArrowRight, Sparkles, Monitor } from "lucide-react";
-import { useContactModal } from "@/contexts/ContactModalContext";
+import { Link } from "wouter";
 
 /*
  * PricingSection — 3열: 무료체험(2주) / Basic 방문진료 / Pro 올인원
@@ -24,7 +24,7 @@ interface Plan {
   ctaStyle: string;
   href: string;
   highlight: boolean;
-  isContactModal?: boolean;
+  isConsultation?: boolean;
 }
 
 const plans: Plan[] = [
@@ -69,9 +69,9 @@ const plans: Plan[] = [
     ],
     cta: "도입 상담 받기",
     ctaStyle: "border-2 border-[#111] text-[#111] hover:bg-[#111] hover:text-white bg-white",
-    href: "#",
+    href: "/consultation",
     highlight: false,
-    isContactModal: true,
+    isConsultation: true,
   },
   {
     name: "Pro",
@@ -94,15 +94,13 @@ const plans: Plan[] = [
     ],
     cta: "1:1 맞춤 상담 받기",
     ctaStyle: "bg-[#111] text-white hover:bg-[#333]",
-    href: "#",
+    href: "/consultation",
     highlight: true,
-    isContactModal: true,
+    isConsultation: true,
   },
 ];
 
 export default function PricingSection() {
-  const { open: openContactModal } = useContactModal();
-
   return (
     <section id="pricing" className="py-16 md:py-24 bg-[#fafafa]">
       <div className="container">
@@ -157,15 +155,14 @@ export default function PricingSection() {
               </div>
 
               {/* CTA */}
-              {plan.isContactModal ? (
-                <button
-                  type="button"
-                  onClick={openContactModal}
-                  className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[14px] font-semibold transition-all cursor-pointer ${plan.ctaStyle}`}
+              {plan.isConsultation ? (
+                <Link
+                  href={plan.href}
+                  className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[14px] font-semibold transition-all ${plan.ctaStyle}`}
                 >
                   {plan.cta}
                   <ArrowRight size={14} />
-                </button>
+                </Link>
               ) : (
                 <a
                   href={plan.href}
@@ -210,13 +207,12 @@ export default function PricingSection() {
             <span className="text-[13px] text-[#666]">
               다지점 · 대형 한의원은 <b className="text-[#111]">Enterprise</b> 플랜을 문의해주세요
             </span>
-            <button
-              type="button"
-              onClick={openContactModal}
-              className="text-[13px] font-semibold text-[#00B6C5] hover:underline whitespace-nowrap cursor-pointer"
+            <Link
+              href="/consultation"
+              className="text-[13px] font-semibold text-[#00B6C5] hover:underline whitespace-nowrap"
             >
               문의하기 →
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>
