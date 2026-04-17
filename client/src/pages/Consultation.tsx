@@ -146,30 +146,27 @@ export default function Consultation() {
               </div>
             </div>
 
-            {/* 고객사 로고 영역 */}
+            {/* 고객사 로고 마퀴 */}
             <div className="mt-12 pt-8 border-t border-gray-100">
               <p className="text-xs text-gray-400 mb-4">도입 한의원</p>
-              <div className="flex flex-wrap items-center gap-5">
-                {[
-                  { name: "청원한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/0_edZryrad2Zm3qPaULcBn03_1773911281178_na1fn_L2hvbWUvdWJ1bnR1L2NoZW9uZ3dvbl9sb2dv_d166eaa0.png" },
-                  { name: "운정중앙한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/1_p7gW1fHPaZqOqB6Y1kznjz_1773911268195_na1fn_L2hvbWUvdWJ1bnR1L2xvZ28_bb813000.webp" },
-                  { name: "위례하늘애한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/2_vh6lyxEHaJlJePbC4ZoSDw_1773911265524_na1fn_L2hvbWUvdWJ1bnR1L2xvZ28_4eb1fa82.png" },
-                  { name: "경희아양한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/3_54vGt0h6ziDodkO0SGa1ad_1773911290265_na1fn_L2hvbWUvdWJ1bnR1L2xvZ29zL2t5dW5naGVlX2F5YW5nX2xvZ28_a043b974.webp" },
-                  { name: "이든한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/edeun_logo_751a06ef.jpeg" },
-                  { name: "본아한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/6_91Uvbf1EikDoAzuRHnRL0u_1773911261683_na1fn_L2hvbWUvdWJ1bnR1L2Rvd25sb2Fkcy9ib25haGFuaV9sb2dv_35db1364.webp" },
-                ].map((clinic) => (
-                  <div
-                    key={clinic.name}
-                    className="flex items-center gap-2"
-                    title={clinic.name}
-                  >
-                    <img
-                      src={clinic.logo}
-                      alt={clinic.name}
-                      className="h-8 w-auto max-w-[120px] object-contain grayscale opacity-60"
-                    />
-                  </div>
-                ))}
+              <div className="relative overflow-hidden">
+                <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10" />
+                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
+                <div className="flex animate-marquee">
+                  {[...Array(8)].flatMap((_, repeat) =>
+                    [
+                      { name: "청이담한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/cheongeedam_logo_dd587ec3.png" },
+                      { name: "감동한의원 양주점", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/gamdong_logo_37d324b6.jpeg" },
+                      { name: "당봄한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/dangbom_logo_real_cdf284af.png" },
+                      { name: "친절한홍한의원", logo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663418348757/9kcbZEe8LvrJVEgTARGwC2/hong_clinic_logo_6fab9eb0.png" },
+                    ].map((clinic, i) => (
+                      <div key={`${repeat}-${i}`} className="shrink-0 mx-2 flex items-center gap-2.5 px-4 py-2.5 bg-[#fafafa] hover:bg-[#f5f5f5] rounded-xl border border-[#eee] transition-colors">
+                        <img src={clinic.logo} alt={clinic.name} className="w-7 h-7 rounded-lg object-contain bg-white" loading="lazy" />
+                        <span className="text-[13px] text-[#555] font-medium whitespace-nowrap">{clinic.name}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
               </div>
             </div>
           </div>
